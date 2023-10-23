@@ -7,6 +7,7 @@ public class Main
         System.out.println("This is java assignment");
         System.out.println("I am yukang");
         System.out.println("I am edwin");
+        System.out.println("I am shaun");
         System.out.println();
     }
 }
