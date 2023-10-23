@@ -28,4 +28,10 @@ public class Book
         this.bookReturnDate = bookReturnDate;
     }
 
+    public void setBookPrice(double bookPrice)
+    {
+        this.bookPrice = bookPrice;
+    }
+
+
 }
