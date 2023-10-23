@@ -16,6 +16,7 @@ public class Book
         setBookDetail(bookTitle, bookIsbn, author, publisher, bookBorrowedDate, bookReturnDate, bookPrice, bookAvailability);
     }
 
+    //pass book details
     public void setBookDetail(String bookTitle, String bookIsbn, String author, String publisher, String bookBorrowedDate, String bookReturnDate, double bookPrice, boolean bookAvailability)
     {
         this.bookTitle = bookTitle;
@@ -28,9 +29,10 @@ public class Book
         this.bookReturnDate = bookReturnDate;
     }
 
-    public void setBookPrice(double bookPrice)
+    //edit the availability of the book
+    public void setBookAvailability(boolean bookAvailability)
     {
-        this.bookPrice = bookPrice;
+        this.bookAvailability = bookAvailability;
     }
 
 
