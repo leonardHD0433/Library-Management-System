@@ -7,6 +7,7 @@ public class HeadLibrarian extends User
 
     public HeadLibrarian(String userName, String userId, String password, String contactNumber) //Composition
     {
+        setUserType();
         setHeadLibrarianDetails(userName, userId, password, contactNumber);
     }
 
@@ -17,5 +18,7 @@ public class HeadLibrarian extends User
         this.password = password;
         this.contactNumber = contactNumber;
     }
+
+    
 
 }
