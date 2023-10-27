@@ -5,14 +5,13 @@ public class HeadLibrarian extends User
         userType = "Head Librarian";
     }
 
-    public HeadLibrarian(String userType, String userName, String userId, String password, String contactNumber) //Composition
+    public HeadLibrarian(String userName, String userId, String password, String contactNumber) //Composition
     {
-        setHeadLibrarianDetails(userType, userName, userId, password, contactNumber);
+        setHeadLibrarianDetails(userName, userId, password, contactNumber);
     }
 
-    public void setHeadLibrarianDetails(String userType, String userName, String userId, String password, String contactNumber)
+    public void setHeadLibrarianDetails(String userName, String userId, String password, String contactNumber)
     {
-        this.userType = userType;
         this.userId = userId;
         this.userName = userName;
         this.password = password;
