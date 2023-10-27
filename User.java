@@ -21,5 +21,10 @@ public class User
         this.contactNumber = contactNumber;
     }
 
+    public void setUserType(int userTypeSelection)
+    {
+        
+    }
+
 
 }
