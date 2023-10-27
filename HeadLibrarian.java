@@ -1,7 +1,10 @@
 public class HeadLibrarian extends User 
 {
-    public void setUserValue() {}
-    
+    public void setUserType() 
+    {
+        userType = "Head Librarian";
+    }
+
     public HeadLibrarian(String userType, String userName, String userId, String password, String contactNumber) //Composition
     {
         setHeadLibrarianDetails(userType, userName, userId, password, contactNumber);

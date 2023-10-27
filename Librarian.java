@@ -1,6 +1,6 @@
 public class Librarian extends User
 {
 
-    public void setUserValue() {}
+    public void setUserType() {}
     
 }
