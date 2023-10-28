@@ -34,6 +34,4 @@ public class Book
     {
         this.bookAvailability = bookAvailability;
     }
-
-
 }
