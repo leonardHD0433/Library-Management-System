@@ -52,11 +52,8 @@ public class Main
             readUserName = reader.readLine();
             System.out.println("\nPassword: ");
             readPassword = reader.readLine();
-            System.out.println(headLibrarian);
-            
+            headLibrarian.login(readUserName, readPassword);
 
-
-            
             break;
             case 2:
                 System.out.println("Login as Librarian"); break;

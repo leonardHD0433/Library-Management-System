@@ -25,7 +25,7 @@ public class HeadLibrarian extends User
         userType = "Head Librarian";
     }
 
-    public void headLibrarianLogin(String userId, String password) 
+    public void login(String userId, String password) 
     {
         super.login(userId, password);
         if(tempUserId.equals(userId) && tempPassword.equals(password))
@@ -36,7 +36,10 @@ public class HeadLibrarian extends User
         {
             System.out.println("Invalid user Id or password. Please try again");
         }
+
     }
+
+    
 
     public String toString()
     {
