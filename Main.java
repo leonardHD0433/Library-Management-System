@@ -22,6 +22,7 @@ public class Main
     public static void main(String[] args) throws IOException, InterruptedException
     {
         HeadLibrarian headLibrarian = new HeadLibrarian();
+        Librarian librarian = new Librarian();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int loginMenuChoice = 0;
         String readString, readUserName, readPassword;
@@ -47,16 +48,25 @@ public class Main
         switch (loginMenuChoice)
         {
             case 1:
-            System.out.println("Head Librarian Login"); 
-            System.out.println("\nUsername: ");
-            readUserName = reader.readLine();
-            System.out.println("\nPassword: ");
-            readPassword = reader.readLine();
-            headLibrarian.login(readUserName, readPassword);
-
+                System.out.println("Head Librarian Login"); 
+                System.out.println("\nUsername: ");
+                readUserName = reader.readLine();
+                System.out.println("\nPassword: ");
+                readPassword = reader.readLine();
+                headLibrarian.login(readUserName, readPassword);
             break;
+
             case 2:
-                System.out.println("Login as Librarian"); break;
+                System.out.println("Login as Librarian"); 
+                System.out.println("\nUsername: ");
+                readUserName = reader.readLine();
+                System.out.println("\nPassword: ");
+                readPassword = reader.readLine();
+                librarian.login(readUserName, readPassword);
+                librarian = new Librarian(librarian.getPosition());
+                System.out.println(librarian);
+                
+                break;
             case 3:
                 System.out.println("Exit"); break;
         }

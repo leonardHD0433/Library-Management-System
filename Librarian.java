@@ -1,28 +1,40 @@
 public class Librarian extends User implements PersonalData
 {
+    private int librarianArrayPos;
+
+    public Librarian()
+    {
+        this(0);
+    }
+
     public Librarian(int i) //Composition
     {
         setUserType();
-        setLibrarianDetails(LibrarianName[i], LibrarianUserId[i], LibrarianPassword[i]);
+        setLibrarianDetails(i);
     }
 
-    public void setLibrarianDetails(String userName, String userId, String password)
+    public void setLibrarianDetails(int i)
     {
-        this.userName = userName;
-        this.userId = userId;
-        this.password = password;
+        this.userName = LibrarianName[i];
+        this.userId = LibrarianUserId[i];
+        this.password = LibrarianPassword[i];
     }
 
     public void login(String userId, String password) 
     {
         super.login(userId, password);
-        if(tempUserId.equals(userId) && tempPassword.equals(password))
+        for(int pos =0; pos < 4; pos++)
         {
-            System.out.println("Login Successful");
-        }
-        else
-        {
-            System.out.println("Invalid user Id or password. Please try again");
+            if(tempUserId.equals(LibrarianUserId[pos]) && tempPassword.equals(LibrarianPassword[pos]))
+            {
+                librarianArrayPos = pos;
+                System.out.println("Login Successful");
+                break;
+            }
+            else
+            {
+               System.out.println("Invalid user Id or password. Please try again");
+            }
         }
     }
 
@@ -64,6 +76,11 @@ public class Librarian extends User implements PersonalData
     public void setUserType() 
     {
         userType = "Librarian";
+    }
+
+    public int getPosition()
+    {
+        return librarianArrayPos;
     }
 
     public String toString()
