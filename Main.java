@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main
 {
-    public static void dispLoginMenu()
+    public static void dispHomeMenu()
     {
         System.out.println("LIBRARY MANAGEMENT SYSTEM");
         System.out.println("**************************");
@@ -21,11 +21,12 @@ public class Main
     
     public static void main(String[] args) throws IOException, InterruptedException
     {
+        HeadLibrarian headLibrarian = new HeadLibrarian();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int loginMenuChoice = 0;
-        String readString;
+        String readString, readUserName, readPassword;
         clearScreen();
-        dispLoginMenu();
+        dispHomeMenu();
 
         do 
         {
@@ -39,14 +40,24 @@ public class Main
                 System.out.println("Invalid choice. Please try again.");
                 TimeUnit.SECONDS.sleep(1);
                 clearScreen();
-                dispLoginMenu();
+                dispHomeMenu();
             }
         } while (!(readString.equals("1") || readString.equals("2") || readString.equals("3")));
 
         switch (loginMenuChoice)
         {
             case 1:
-                System.out.println("Login as Head Librarian"); break;
+            System.out.println("Head Librarian Login"); 
+            System.out.println("\nUsername: ");
+            readUserName = reader.readLine();
+            System.out.println("\nPassword: ");
+            readPassword = reader.readLine();
+            System.out.println(headLibrarian);
+            
+
+
+            
+            break;
             case 2:
                 System.out.println("Login as Librarian"); break;
             case 3:
