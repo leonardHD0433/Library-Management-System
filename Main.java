@@ -22,7 +22,7 @@ public class Main
     public static void main(String[] args) throws IOException, InterruptedException
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int LoginMenuChoice = 0;
+        int loginMenuChoice = 0;
         String readString;
         clearScreen();
         dispLoginMenu();
@@ -32,7 +32,7 @@ public class Main
             readString = reader.readLine();
             if (readString.equals("1") || readString.equals("2") || readString.equals("3"))
             {
-                LoginMenuChoice = Integer.parseInt(readString);
+                loginMenuChoice = Integer.parseInt(readString);
             }
             else
             {
@@ -43,7 +43,7 @@ public class Main
             }
         } while (!(readString.equals("1") || readString.equals("2") || readString.equals("3")));
 
-        switch (LoginMenuChoice)
+        switch (loginMenuChoice)
         {
             case 1:
                 System.out.println("Login as Head Librarian"); break;
