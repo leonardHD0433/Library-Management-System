@@ -1,6 +1,7 @@
 public class Librarian extends User implements PersonalData
 {
     private int librarianArrayPos;
+    private boolean isLoginSuccessful;
 
     public Librarian()
     {
@@ -28,14 +29,23 @@ public class Librarian extends User implements PersonalData
             if(tempUserId.equals(LibrarianUserId[pos]) && tempPassword.equals(LibrarianPassword[pos]))
             {
                 librarianArrayPos = pos;
-                System.out.println("Login Successful");
+
                 break;
             }
-            else
-            {
-               System.out.println("Invalid user Id or password. Please try again");
-            }
         }
+
+        if(tempUserId.equals(LibrarianUserId[librarianArrayPos]) && tempPassword.equals(LibrarianPassword[librarianArrayPos]))
+        {
+            isLoginSuccessful = true;
+            System.out.println("Login Successful");
+        }
+        else
+        {
+            isLoginSuccessful = false;
+            System.out.println("Invalid user Id or password. Please try again");
+        }
+
+
     }
 
     public void dispLibrarianPage()
@@ -86,5 +96,10 @@ public class Librarian extends User implements PersonalData
     public String toString()
     {
         return "Role: " + userType + "\n\nUser Name: " + userName + "\n\nUser Id: " + userId + "\n\nContact Number: " + contactNumber;
+    }
+
+    public boolean loginSuccessful()
+    {
+        return isLoginSuccessful;
     }
 }

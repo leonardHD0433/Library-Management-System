@@ -48,6 +48,8 @@ public class Main
         switch (loginMenuChoice)
         {
             case 1:
+            //Head Librarian Login Menu
+                clearScreen();
                 System.out.println("Head Librarian Login"); 
                 System.out.println("\nUsername: ");
                 readUserName = reader.readLine();
@@ -57,12 +59,18 @@ public class Main
             break;
 
             case 2:
+            //Librarian Login Menu
+                clearScreen();
                 System.out.println("Login as Librarian"); 
-                System.out.println("\nUsername: ");
-                readUserName = reader.readLine();
-                System.out.println("\nPassword: ");
-                readPassword = reader.readLine();
-                librarian.login(readUserName, readPassword);
+                do
+                {
+                    System.out.println("\nUsername: ");
+                    readUserName = reader.readLine();
+                    System.out.println("\nPassword: ");
+                    readPassword = reader.readLine();
+                    librarian.login(readUserName, readPassword);
+                }while(!librarian.loginSuccessful());
+
                 librarian = new Librarian(librarian.getPosition());
                 System.out.println(librarian);
                 
