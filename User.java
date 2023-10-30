@@ -15,19 +15,16 @@ public abstract class User
         System.out.println("Password: ");
         readPassword = reader.readLine();
 
-        do
+        if(readUserId.equals(userId) && readPassword.equals(password))
         {
-            if(readUserId.equals(userId) && readPassword.equals(password))
-            {
-                isLoginSuccessful = true;
-                System.out.println("Login Successful");
-            }
-            else
-            {
-                isLoginSuccessful = false;
-                System.out.println("Invalid user Id or password. Please try again");
-            }
-        }while(!(readUserId.equals(userId) && readPassword.equals(password)));
+            isLoginSuccessful = true;
+            System.out.println("Login Successful");
+        }
+        else
+        {
+            isLoginSuccessful = false;
+            System.out.println("Invalid user Id or password. Please try again");
+        }
     }
 
     public boolean loginSuccessful()

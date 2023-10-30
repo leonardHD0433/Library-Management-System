@@ -52,6 +52,7 @@ public class Main
                 clearScreen();
                 System.out.println("Head Librarian Login"); 
                 headLibrarian.login();
+                clearScreen();
                 System.out.println(headLibrarian);
             break;
 
@@ -61,8 +62,8 @@ public class Main
                 System.out.println("Login as Librarian"); 
                 do
                 {
-                    System.out.println("\nUsername: ");
                     librarian.login();
+                    clearScreen();
                 }while(!librarian.loginSuccessful());
 
                 System.out.println(librarian);
