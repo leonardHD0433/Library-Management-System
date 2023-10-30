@@ -51,6 +51,9 @@ public class Main
             //Head Librarian Login Menu
                 clearScreen();
                 System.out.println("Head Librarian Login"); 
+                do {
+                    
+                } while (!headLibrarian.loginSuccessful());
                 headLibrarian.login();
                 clearScreen();
                 System.out.println(headLibrarian);
@@ -71,9 +74,10 @@ public class Main
 
             case 3:
                 System.out.println("Exit");
-                
                 break;
         }
+
+        
         
     }
 }

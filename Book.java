@@ -1,6 +1,6 @@
 public class Book 
 {
-    private String bookTitle, bookIsbn, author, publisher,  bookBorrowedDate, bookReturnDate;
+    private String bookTitle, bookIsbn, author, publisher, genre, bookBorrowedDate, bookReturnDate;
     private double bookPrice;
     private boolean bookAvailability;
 
