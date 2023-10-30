@@ -25,7 +25,7 @@ public class Main
         Librarian librarian = new Librarian();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int loginMenuChoice = 0;
-        String readString, readUserName, readPassword;
+        String readString;
         clearScreen();
         dispHomeMenu();
 
@@ -51,10 +51,6 @@ public class Main
             //Head Librarian Login Menu
                 clearScreen();
                 System.out.println("Head Librarian Login"); 
-                System.out.println("\nUsername: ");
-                readUserName = reader.readLine();
-                System.out.println("\nPassword: ");
-                readPassword = reader.readLine();
                 headLibrarian.login();
                 System.out.println(headLibrarian);
             break;
@@ -66,9 +62,6 @@ public class Main
                 do
                 {
                     System.out.println("\nUsername: ");
-                    readUserName = reader.readLine();
-                    System.out.println("\nPassword: ");
-                    readPassword = reader.readLine();
                     librarian.login();
                 }while(!librarian.loginSuccessful());
 
