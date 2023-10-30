@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Librarian extends User implements PersonalData
 {
     private int librarianArrayPos;
@@ -5,47 +7,25 @@ public class Librarian extends User implements PersonalData
 
     public Librarian()
     {
-        this(0);
+        this("Teh Yu Kang", "staff@002", "iamTehYuk6488");
     }
 
-    public Librarian(int i) //Composition
+    public Librarian(String userName, String userId, String password) //Composition
     {
         setUserType();
-        setLibrarianDetails(i);
+        setLibrarianDetails(userName, userId, password);
     }
 
-    public void setLibrarianDetails(int i)
+    public void setLibrarianDetails(String userName, String userId, String password)
     {
-        this.userName = LibrarianName[i];
-        this.userId = LibrarianUserId[i];
-        this.password = LibrarianPassword[i];
+        this.userName = userName;
+        this.userId = userId;
+        this.password = password;
     }
 
-    public void login(String userId, String password) 
+    public void login() throws IOException
     {
-        super.login(userId, password);
-        for(int pos =0; pos < 4; pos++)
-        {
-            if(tempUserId.equals(LibrarianUserId[pos]) && tempPassword.equals(LibrarianPassword[pos]))
-            {
-                librarianArrayPos = pos;
-
-                break;
-            }
-        }
-
-        if(tempUserId.equals(LibrarianUserId[librarianArrayPos]) && tempPassword.equals(LibrarianPassword[librarianArrayPos]))
-        {
-            isLoginSuccessful = true;
-            System.out.println("Login Successful");
-        }
-        else
-        {
-            isLoginSuccessful = false;
-            System.out.println("Invalid user Id or password. Please try again");
-        }
-
-
+        super.login();
     }
 
     public void dispLibrarianPage()
@@ -95,11 +75,8 @@ public class Librarian extends User implements PersonalData
 
     public String toString()
     {
-        return "Role: " + userType + "\n\nUser Name: " + userName + "\n\nUser Id: " + userId + "\n\nContact Number: " + contactNumber;
+        return "Role: " + userType + "\n\nUser Name: " + userName + "\n\nUser Id: " + userId;
     }
 
-    public boolean loginSuccessful()
-    {
-        return isLoginSuccessful;
-    }
+    
 }

@@ -55,7 +55,8 @@ public class Main
                 readUserName = reader.readLine();
                 System.out.println("\nPassword: ");
                 readPassword = reader.readLine();
-                headLibrarian.login(readUserName, readPassword);
+                headLibrarian.login();
+                System.out.println(headLibrarian);
             break;
 
             case 2:
@@ -68,15 +69,16 @@ public class Main
                     readUserName = reader.readLine();
                     System.out.println("\nPassword: ");
                     readPassword = reader.readLine();
-                    librarian.login(readUserName, readPassword);
+                    librarian.login();
                 }while(!librarian.loginSuccessful());
 
-                librarian = new Librarian(librarian.getPosition());
                 System.out.println(librarian);
+                break;
+
+            case 3:
+                System.out.println("Exit");
                 
                 break;
-            case 3:
-                System.out.println("Exit"); break;
         }
         
     }

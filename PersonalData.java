@@ -1,8 +1,7 @@
 public interface PersonalData 
 {
-    public final String[] LibrarianName = {null, "Teh Yu Kang", "Liew Zhen Nam", "Shaun Darren Leong"};
-    public final String[] LibrarianUserId = {null, "staff@002", "staff@003","staff@004"};
-    public final String[] LibrarianPassword = {null, "iamTehYuk6488", "iamRay6546", "iamShaun6323"};
+    public final String[] StudentName = {"Liew Zhen Nam", "Shaun Darren Leong", "Ang Heng Sui", "Lem Yun Jia", "Tan Kah Jun"};
+    public final String[] StudentId = {"0136546","0136323", "0134832", "0136441", "0136484"};
     
     
 

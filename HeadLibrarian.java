@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class HeadLibrarian extends User 
 {
 
@@ -25,21 +27,10 @@ public class HeadLibrarian extends User
         userType = "Head Librarian";
     }
 
-    public void login(String userId, String password) 
+    public void login() throws IOException
     {
-        super.login(userId, password);
-        if(tempUserId.equals(userId) && tempPassword.equals(password))
-        {
-            System.out.println("Login Successful");
-        }
-        else
-        {
-            System.out.println("Invalid user Id or password. Please try again");
-        }
-
+        super.login();
     }
-
-    
 
     public String toString()
     {
