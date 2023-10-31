@@ -18,14 +18,24 @@ public class Main
         System.out.print("\033[H\033[2J");  
         System.out.flush();
     }
+
+    public static void createPatron()
+    {
+        Patron[] patron = new Patron[5];
+        for(int i = 0; i < patron.length; i++)
+        {
+            patron[i] = new Patron(i);
+        }
+    }
     
     public static void main(String[] args) throws IOException, InterruptedException
     {
-        HeadLibrarian headLibrarian = new HeadLibrarian();
-        Librarian librarian = new Librarian();
+        HeadLibrarian headLibrarian = new HeadLibrarian("Edwin Chua Jin Rui", "headStaff@001", "iamtheHeadLibrarianXD", "012-805-0296");
+        Librarian librarian = new Librarian("Teh Yu Kang", "staff@002", "iamTehYuk6488");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int loginMenuChoice = 0;
         String readString;
+        createPatron();
         clearScreen();
         dispHomeMenu();
 

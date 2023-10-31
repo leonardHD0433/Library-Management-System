@@ -3,12 +3,6 @@ import java.io.IOException;
 public class Librarian extends User implements PersonalData
 {
     private int librarianArrayPos;
-    private boolean isLoginSuccessful;
-
-    public Librarian()
-    {
-        this("Teh Yu Kang", "staff@002", "iamTehYuk6488");
-    }
 
     public Librarian(String userName, String userId, String password) //Composition
     {

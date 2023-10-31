@@ -1,7 +1,8 @@
 public interface PersonalData 
 {
-    public final String[] StudentName = {"Liew Zhen Nam", "Shaun Darren Leong", "Ang Heng Sui", "Lem Yun Jia", "Tan Kah Jun"};
-    public final String[] StudentId = {"0136546","0136323", "0134832", "0136441", "0136484"};
+    public final String[] PatronName = {"Liew Zhen Nam", "Shaun Darren Leong", "Ang Heng Sui", "Lem Yun Jia", "Tan Kah Jun"};
+    public final String[] PatronId = {"0136546","0136323", "0134832", "0136441", "0136484"};
+    public final String[] PatronContactNumber = {"012-7777651", "014-9892509", "012-2012573", "016-6889918", "017-8009904"};
     
     public final String[] BookTitle = {"Systems Analysis and Design, 8th Edition", "Java Software Solutions, Foundations of Program Design, 9th edition", "Entrepreneurship, 11th Edition", 
                                        "ISE Foundations of Financial Management, 18th Edition", 

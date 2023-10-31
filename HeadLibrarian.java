@@ -3,11 +3,6 @@ import java.io.IOException;
 public class HeadLibrarian extends User 
 {
 
-    public HeadLibrarian()
-    {
-        this("Edwin Chua Jin Rui", "headStaff@001", "iamtheHeadLibrarianXD", "012-805-0296");
-    }
-
     public HeadLibrarian(String userName, String userId, String password, String contactNumber) //Composition
     {
         setUserType();
