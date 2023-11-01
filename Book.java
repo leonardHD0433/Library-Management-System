@@ -1,30 +1,24 @@
-public class Book 
+public class Book implements Data
 {
-    private String bookTitle, bookIsbn, author, publisher, genre, bookBorrowedDate, bookReturnDate;
-    private double bookPrice;
-    private boolean bookAvailability;
-
-    //default constructor
-    public Book() 
-    {
-        this(null, null, null, null, null, null, 0.00, true);
-    }
+    private String bookTitle, bookIsbn, author, publisher, genre, bookBorrowedDate, bookReturnDate, bookAvailability;
+    private int yearPublished;
 
     //parameterized constructor
-    public Book(String bookTitle, String bookIsbn, String author, String publisher, String bookBorrowedDate, String bookReturnDate, double bookPrice, boolean bookAvailability)
+    public Book(int i, String bookBorrowedDate, String bookReturnDate, boolean bookAvailability)
     {
-        setBookDetail(bookTitle, bookIsbn, author, publisher, bookBorrowedDate, bookReturnDate, bookPrice, bookAvailability);
+        setDefaultBookDetail(i , bookBorrowedDate, bookReturnDate, bookAvailability);
     }
 
     //pass book details
-    public void setBookDetail(String bookTitle, String bookIsbn, String author, String publisher, String bookBorrowedDate, String bookReturnDate, double bookPrice, boolean bookAvailability)
+    public void setDefaultBookDetail(int i, String bookBorrowedDate, String bookReturnDate, boolean bookAvailability)
     {
-        this.bookTitle = bookTitle;
-        this.bookIsbn = bookIsbn;
-        this.author = author;
-        this.publisher = publisher;
-        this.bookPrice = bookPrice;
-        this.bookAvailability = bookAvailability;
+        this.bookTitle = BookTitle[i];
+        this.bookIsbn = Isbn[i];
+        this.author = Author[i];
+        this.publisher = Publisher[i];
+        this.yearPublished = YearPublished[i];
+        this.genre = Genre[i];
+        this.bookAvailability = "Available";
         this.bookBorrowedDate = bookBorrowedDate;
         this.bookReturnDate = bookReturnDate;
     }
@@ -32,6 +26,13 @@ public class Book
     //edit the availability of the book
     public void setBookAvailability(boolean bookAvailability)
     {
-        this.bookAvailability = bookAvailability;
+        if(bookAvailability == true)
+        {
+            this.bookAvailability = "Available";
+        }
+        else
+        {
+            this.bookAvailability = "Borrowed";
+        }
     }
 }

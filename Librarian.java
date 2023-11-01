@@ -1,12 +1,9 @@
-import java.io.IOException;
-
-public class Librarian extends User implements PersonalData
+public class Librarian extends User 
 {
-    private int librarianArrayPos;
 
     public Librarian(String userName, String userId, String password) //Composition
     {
-        setUserType();
+        getUserType();
         setLibrarianDetails(userName, userId, password);
     }
 
@@ -17,12 +14,12 @@ public class Librarian extends User implements PersonalData
         this.password = password;
     }
 
-    public void login() throws IOException
+    public String getUserType() 
     {
-        super.login();
+        return "Librarian";
     }
 
-    public void dispLibrarianPage()
+    public void dispLibrarianHomePage()
     {
         System.out.println("1. Browse Catalog");
         System.out.println("2. View Borrowed Books");
@@ -30,7 +27,7 @@ public class Librarian extends User implements PersonalData
         System.out.println("4. Logout");
     }
 
-    public void librarianPageSelection(int selection)
+    public void librarianPageSelection(int selection) throws InterruptedException
     {
         switch(selection)
         {
@@ -44,32 +41,24 @@ public class Librarian extends User implements PersonalData
                 System.out.println("View Patron");
                 break;
             case 4:
-                System.out.println("Logout");
+                logout();
                 break;
         }
     }
 
     public void dispBrowseCatalog()
     {
+        System.out.println(toString());
         System.out.println("1. Browse by Title");
         System.out.println("2. Browse by Author");
         System.out.println("3. Browse by ISBN");
         System.out.println("4. Back");
     }
 
-    public void setUserType() 
-    {
-        userType = "Librarian";
-    }
-
-    public int getPosition()
-    {
-        return librarianArrayPos;
-    }
 
     public String toString()
     {
-        return "Role: " + userType + "\n\nUser Name: " + userName + "\n\nUser Id: " + userId;
+        return "Role: " + userType + "\nUser Name: " + userName + "\nUser Id: " + userId;
     }
 
     

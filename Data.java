@@ -1,4 +1,4 @@
-public interface PersonalData 
+public interface Data 
 {
     public final String[] PatronName = {"Liew Zhen Nam", "Shaun Darren Leong", "Ang Heng Sui", "Lem Yun Jia", "Tan Kah Jun"};
     public final String[] PatronId = {"0136546","0136323", "0134832", "0136441", "0136484"};
@@ -26,7 +26,10 @@ public interface PersonalData
 
     public final int[] YearPublished = {2021, 2017, 2019, 2022, 2017, 2020, 2016, 2020, 2023, 2023};
 
+    //method
 
+    public void setDefaultBookDetail(int i, String bookBorrowedDate, String bookReturnDate, boolean bookAvailability);
+    
 
     
 }

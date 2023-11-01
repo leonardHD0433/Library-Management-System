@@ -1,11 +1,9 @@
-import java.io.IOException;
-
 public class HeadLibrarian extends User 
 {
 
     public HeadLibrarian(String userName, String userId, String password, String contactNumber) //Composition
     {
-        setUserType();
+        getUserType();
         setHeadLibrarianDetails(userName, userId, password, contactNumber);
     }
 
@@ -17,19 +15,34 @@ public class HeadLibrarian extends User
         this.contactNumber = contactNumber;
     }
 
-    public void setUserType() 
+    public String getUserType() 
     {
-        userType = "Head Librarian";
+        return "Head Librarian";
     }
 
-    public void login() throws IOException
+    public void dispHeadLibrarianHomePage()
     {
-        super.login();
+        System.out.println("1. Manage Catalog");
+        
+        System.out.println("2. Logout");
+    }
+
+    public void headLibrarianPageSelection(int selection) throws InterruptedException
+    {
+        switch(selection)
+        {
+            case 1:
+                System.out.println("Manage Catalog");
+                break;
+            case 2:
+                logout();
+                break;
+        }
     }
 
     public String toString()
     {
-        return "Role: " + userType + "\n\nUser Name: " + userName + "\n\nUser Id: " + userId + "\n\nContact Number: " + contactNumber;
+        return "Role: " + userType + "\nUser Name: " + userName + "\nUser Id: " + userId + "\nContact Number: " + contactNumber;
     }
 
     

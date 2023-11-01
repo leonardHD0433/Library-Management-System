@@ -1,4 +1,4 @@
-public class Patron implements PersonalData
+public class Patron implements Data
 {
     protected String patronName, patronId, contactNumber;
 
