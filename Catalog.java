@@ -1,13 +1,9 @@
 import java.util.*;
 
-public class Catalog 
+public class Catalog
 {
-    ArrayList <Book> catalog = new ArrayList <Book>();
-
-    public Catalog()
-    {
-        addBook();
-    }
+    
+    protected ArrayList <Book> catalog = new ArrayList <Book>();   
 
     public void addBook()
     {

@@ -1,39 +1,41 @@
 import java.io.*;
+import java.util.concurrent.*;
 
-public abstract class User 
+public abstract class User extends Utilities
 {
-    protected String userType, userName, userId, password, contactNumber, readUserId, readPassword;
+    protected String userType, userName, userId, password, readUserId, readPassword;
     boolean isLoginSuccessful;
 
     public abstract String getUserType();
+    public abstract void dispHomePage();
 
-    public void login() throws IOException
+    public void login() throws IOException, InterruptedException
     {
-        do 
-        {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("User ID: ");
-            readUserId = reader.readLine();
-            System.out.println("Password: ");
-            readPassword = reader.readLine();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("User ID: ");
+        readUserId = reader.readLine();
+        System.out.println("Password: ");
+        readPassword = reader.readLine();
 
-            if(readUserId.equals(userId) && readPassword.equals(password))
-            {
-                isLoginSuccessful = true;
-                System.out.println("Login Successful");
-            }
-            else
-            {
-                isLoginSuccessful = false;
-                System.out.println("Invalid user Id or password. Please try again");
-            }
-        } while (isLoginSuccessful);
-        
+        if(readUserId.equals(userId) && readPassword.equals(password))
+        {
+            isLoginSuccessful = true;
+            System.out.println("Login Successful");
+            TimeUnit.MILLISECONDS.sleep(500);
+            clearScreen();
+        }
+        else
+        {
+            isLoginSuccessful = false;
+            System.out.println("Invalid user Id or password. Please try again");
+            TimeUnit.MILLISECONDS.sleep(500);
+            clearScreen();
+        }
     }
 
-    public void logout() throws InterruptedException
+    public void logout()
     {
-        Utilities.terminateSession();
+        isLoginSuccessful = false;
     }
 
     public boolean loginSuccessful()
