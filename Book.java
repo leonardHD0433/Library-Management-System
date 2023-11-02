@@ -36,8 +36,8 @@ public class Book extends Catalog
 
     public void setDefaultDetail(int i)
     {
-        this.bookTitle = BOOK_TITLE[i];
-        this.bookIsbn = ISBN[i];
+        bookTitle = BOOK_TITLE[i];
+        bookIsbn = ISBN[i];
         this.author = AUTHOR[i];
         this.publisher = PUBLISHER[i];
         this.yearPublished = YEAR_PUBLISHED[i];

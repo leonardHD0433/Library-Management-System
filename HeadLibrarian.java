@@ -31,19 +31,6 @@ public class HeadLibrarian extends User
         System.out.println("2. Logout");
     }
 
-    public void mainPageSelection(String selection) throws InterruptedException
-    {
-        switch(selection)
-        {
-            case "1":
-                dispManageCatalog();
-                break;
-            case "2":
-                logout();
-                break;
-        }
-    }
-
     public void dispManageCatalog()
     {
         System.out.println(toString() + "\n\n\n\n");
