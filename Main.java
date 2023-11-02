@@ -28,111 +28,117 @@ public class Main
             patron[i] = new Patron(i);
         }
         
-        do 
+        while(!(librarian.isLoginSuccessful || headLibrarian.isLoginSuccessful))
         {
-            Utilities.clearScreen();
-            dispHomeMenu();
-            loginMenuChoice = reader.readLine();
-            switch (loginMenuChoice)
-            {
-                case "1":
-                //Head Librarian Login Menu
-                    Utilities.clearScreen();
-                    System.out.println("Head Librarian Login"); 
-                    headLibrarian.login();
-                    
-                    if(!headLibrarian.isLoginSuccessful)
-                    {
-                        loginMenuChoice = " ";
-                    }
-                    Utilities.clearScreen();
-                    break;
-
-                case "2":
-                //Librarian Login Menu
-                    Utilities.clearScreen();
-                    System.out.println("Librarian Login"); 
-                    librarian.login();
-                    
-                    if(!librarian.isLoginSuccessful)
-                    {
-                        loginMenuChoice = " ";
-                    }
-                    Utilities.clearScreen();
-                    break;
-
-                case "3":
-                    System.out.println("Exit");
-                    Utilities.terminateSession();
-                    break;
-
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    TimeUnit.MILLISECONDS.sleep(500);
-                    Utilities.clearScreen();
-                    dispHomeMenu();
-                    break;
-            }
-        } while ((!(loginMenuChoice.equals("1") || loginMenuChoice.equals("2") || loginMenuChoice.equals("3"))));
-
-        if(loginMenuChoice.equals("1"))
-        {     
             do 
             {
-                headLibrarian.dispHomePage();
-                selection = reader.readLine();
-                switch (selection) 
+                Utilities.clearScreen();
+                dispHomeMenu();
+                loginMenuChoice = reader.readLine();
+                switch (loginMenuChoice)
                 {
                     case "1":
-                        do 
+                    //Head Librarian Login Menu
+                        Utilities.clearScreen();
+                        System.out.println("Head Librarian Login"); 
+                        headLibrarian.login();
+                        
+                        if(!headLibrarian.isLoginSuccessful)
                         {
-                            headLibrarian.dispManageCatalog();
+                            loginMenuChoice = " ";
+                        }
+                        Utilities.clearScreen();
+                        break;
 
-                                switch(reader.readLine())
-                                {
-                                    case "1":
-                                        
-                                        break;
-
-                                    case "2":
-                                        
-                                        break;
-
-                                    case "3":
-                                        
-                                        break;
-
-                                    case "4":
-                                        back = true;
-                                        break;
-
-                                    default: 
-                                        System.out.println("Invalid choice. Please try again.");
-                                        TimeUnit.MILLISECONDS.sleep(500);
-                                        Utilities.clearScreen();
-                                        break;
-                                }           
-                        }while(!back);
-        
                     case "2":
-                        headLibrarian.logout();
+                    //Librarian Login Menu
+                        Utilities.clearScreen();
+                        System.out.println("Librarian Login"); 
+                        librarian.login();
+                        
+                        if(!librarian.isLoginSuccessful)
+                        {
+                            loginMenuChoice = " ";
+                        }
+                        Utilities.clearScreen();
+                        break;
+
+                    case "3":
+                        System.out.println("Exit");
+                        Utilities.terminateSession();
                         break;
 
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         TimeUnit.MILLISECONDS.sleep(500);
                         Utilities.clearScreen();
+                        dispHomeMenu();
                         break;
                 }
-            } while (headLibrarian.loginSuccessful());
+            } while ((!(loginMenuChoice.equals("1") || loginMenuChoice.equals("2") || loginMenuChoice.equals("3"))));
 
-        }
-        
+            if(loginMenuChoice.equals("1"))
+            {     
+                do 
+                {
+                    Utilities.clearScreen();
+                    headLibrarian.dispHomePage();
+                    selection = reader.readLine();
+                    switch (selection) 
+                    {
+                        case "1":
+                            do 
+                            {
+                                Utilities.clearScreen();
+                                headLibrarian.dispManageCatalog();
 
-        if(loginMenuChoice.equals("2"))
-        {
+                                    switch(reader.readLine())
+                                    {
+                                        case "1":
+                                            
+                                            break;
+
+                                        case "2":
+                                            
+                                            break;
+
+                                        case "3":
+                                            
+                                            break;
+
+                                        case "4":
+                                            back = true;
+                                            break;
+
+                                        default: 
+                                            System.out.println("Invalid choice. Please try again.");
+                                            TimeUnit.MILLISECONDS.sleep(500);
+                                            Utilities.clearScreen();
+                                            break;
+                                    }           
+                            }while(!back);
+                            break;
+            
+                        case "2":
+                            headLibrarian.logout();
+                            break;
+
+                        default:
+                            System.out.println("Invalid choice. Please try again.");
+                            TimeUnit.MILLISECONDS.sleep(500);
+                            Utilities.clearScreen();
+                            break;
+                    }
+                } while (headLibrarian.loginSuccessful());
+
+            }
+            
+
+            if(loginMenuChoice.equals("2"))
+            {
             do
             {
+                Utilities.clearScreen();
                 librarian.dispHomePage();
                 selection = reader.readLine();
                 switch (selection) 
@@ -141,9 +147,10 @@ public class Main
                         Utilities.clearScreen();
                         do 
                         {
+                            Utilities.clearScreen();
                             librarian.dispBrowseCatalog();
                             selection = reader.readLine();
-                            switch(reader.readLine())
+                            switch(selection)
                             {
                                 case "1":
                                     
@@ -158,6 +165,10 @@ public class Main
                                     break;
 
                                 case "4":
+                                        
+                                    break;
+
+                                case "5":
                                     back = true;
                                     break;
 
@@ -168,10 +179,14 @@ public class Main
                                     break;
                             }
                         }while(!back);
-                    break;
+                        break;
 
-                    case "2":
-                        headLibrarian.logout();
+                    case "2": break;
+
+                    case "3": break;
+
+                    case "4":
+                        librarian.logout();
                         break;
 
                     default:
@@ -182,6 +197,6 @@ public class Main
                 }
             }while(librarian.loginSuccessful());
         }
-             
+        }
     }
 }

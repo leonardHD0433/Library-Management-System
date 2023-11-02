@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Catalog
 {
-    
     protected ArrayList <Book> catalog = new ArrayList <Book>();   
 
     public void addBook()
