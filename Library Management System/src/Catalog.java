@@ -28,15 +28,25 @@ public class Catalog
     }
 
     // Method to display all books in the catalog in ascending order of book title
-    public void viewAll() {
+    public void viewAll() 
+    {
         sortCatalog();
-        System.out.println("No\tGenre\tBook Title\tAuthor\tPublisher");
-        for (int i = 0; i < books.size(); i++) {
-            System.out.print((i + 1) + "\t");
-            System.out.print(books.get(i).getGenre() + "\t");
-            System.out.print(books.get(i).getBookTitle() + "\t");
-            System.out.print(books.get(i).getAuthor() + "\t");
-            System.out.print(books.get(i).getPublisher() + "\n");
+        Utilities.clearScreen();
+        System.out.println("CATALOG");
+        System.out.println("==============================================================================================================================================================");
+        System.out.println("No.");
+        for (int i = 0; i < books.size(); i++) 
+        { 
+            System.out.println("==============================================================================================================================================================");
+            System.out.println(" " + (i + 1));
+            System.out.println("==============================================================================================================================================================");
+            System.out.println("Book Tile: " + books.get(i).getBookTitle());
+            System.out.println("Genre: " + books.get(i).getGenre());
+            System.out.println("Author: " + books.get(i).getAuthor());
+            System.out.println("Publisher: " + books.get(i).getPublisher());
+            System.out.println("Year Published: " + books.get(i).getYearPublished());
+            System.out.println("==============================================================================================================================================================\n");
         }
     }
+
 }
