@@ -1,0 +1,5 @@
+https://www.geeksforgeeks.org/timeunit-class-in-java-with-examples/
+https://stackoverflow.com/questions/2663419/sleep-from-main-thread-is-throwing-interruptedexception
+https://www.javatpoint.com/how-to-clear-screen-in-java
+https://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property 
+https://www.javatpoint.com/how-to-sort-arraylist-in-java
