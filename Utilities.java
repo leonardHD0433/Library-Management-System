@@ -1,8 +1,9 @@
+import java.io.*;
 import java.util.concurrent.*;
 
 public class Utilities 
 {
-
+    public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static void clearScreen()
     {
         System.out.print("\033[H\033[2J");  

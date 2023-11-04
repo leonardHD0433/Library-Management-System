@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Main  
 {
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static String selection;
     static boolean back = false;
     static String loginMenuChoice = null;
@@ -34,7 +33,7 @@ public class Main
             {
                 Utilities.clearScreen();
                 dispHomeMenu();
-                loginMenuChoice = reader.readLine();
+                loginMenuChoice = Utilities.reader.readLine();
                 switch (loginMenuChoice)
                 {
                     case "1":
@@ -83,7 +82,7 @@ public class Main
                 {
                     Utilities.clearScreen();
                     headLibrarian.dispHomePage();
-                    selection = reader.readLine();
+                    selection = Utilities.reader.readLine();
                     switch (selection) 
                     {
                         case "1":
@@ -91,8 +90,8 @@ public class Main
                             {
                                 Utilities.clearScreen();
                                 headLibrarian.dispManageCatalog();
-
-                                    switch(reader.readLine())
+                                    selection = Utilities.reader.readLine();
+                                    switch(selection)
                                     {
                                         case "1":
                                             
@@ -130,7 +129,6 @@ public class Main
                             break;
                     }
                 } while (headLibrarian.loginSuccessful());
-
             }
             
 
@@ -140,7 +138,7 @@ public class Main
             {
                 Utilities.clearScreen();
                 librarian.dispHomePage();
-                selection = reader.readLine();
+                selection = Utilities.reader.readLine();
                 switch (selection) 
                 {
                     case "1":
@@ -149,7 +147,7 @@ public class Main
                         {
                             Utilities.clearScreen();
                             librarian.dispBrowseCatalog();
-                            selection = reader.readLine();
+                            selection = Utilities.reader.readLine();
                             switch(selection)
                             {
                                 case "1":

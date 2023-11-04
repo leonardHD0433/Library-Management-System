@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.concurrent.*;
 
@@ -11,11 +12,10 @@ public abstract class User extends Utilities
 
     public void login() throws IOException, InterruptedException
     {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("User ID: ");
-        readUserId = reader.readLine();
+        readUserId = Utilities.reader.readLine();
         System.out.println("Password: ");
-        readPassword = reader.readLine();
+        readPassword = Utilities.reader.readLine();
 
         if(readUserId.equals(userId) && readPassword.equals(password))
         {
