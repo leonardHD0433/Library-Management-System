@@ -4,3 +4,4 @@ https://www.javatpoint.com/how-to-clear-screen-in-java
 https://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property 
 https://www.javatpoint.com/how-to-sort-arraylist-in-java
 https://www.javatpoint.com/java-string-valueof
+https://www.geeksforgeeks.org/arraylist-contains-java/

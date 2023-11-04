@@ -106,14 +106,17 @@ public class Main
                             {
                                 case "1":
                                     catalog.viewAll();
+                                    TimeUnit.MINUTES.sleep(5);
                                     break;
 
                                 case "2":
-                                    catalog.searchByTitle();
+                                    catalog.searchByGenre();
+                                    TimeUnit.MINUTES.sleep(5);
                                     break;
 
                                 case "3":
-                                    
+                                    catalog.searchByGenre();
+                                    TimeUnit.MINUTES.sleep(5);
                                     break;
 
                                 case "4":
