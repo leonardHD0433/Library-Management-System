@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Main  
 {
+    static HeadLibrarian headLibrarian = new HeadLibrarian("Edwin Chua Jin Rui", "headStaff@001", "iamtheHeadLibrarianXD", "012-805-0296");
+    static Librarian librarian = new Librarian("Teh Yu Kang", "staff@002", "iamTehYuk6488");
     static String selection;
     static boolean back = false;
     static String loginMenuChoice = null;
@@ -19,62 +21,13 @@ public class Main
     
     public static void main(String[] args) throws IOException, InterruptedException
     {
-        HeadLibrarian headLibrarian = new HeadLibrarian("Edwin Chua Jin Rui", "headStaff@001", "iamtheHeadLibrarianXD", "012-805-0296");
-        Librarian librarian = new Librarian("Teh Yu Kang", "staff@002", "iamTehYuk6488");
         Patron[] patron = new Patron[5];
         for(int i = 0; i < patron.length; i++)
         {
             patron[i] = new Patron(i);
         }
-        
-        while(!(librarian.isLoginSuccessful || headLibrarian.isLoginSuccessful))
-        {
-            do 
-            {
-                Utilities.clearScreen();
-                dispHomeMenu();
-                loginMenuChoice = Utilities.reader.readLine();
-                switch (loginMenuChoice)
-                {
-                    case "1":
-                    //Head Librarian Login Menu
-                        Utilities.clearScreen();
-                        System.out.println("Head Librarian Login"); 
-                        headLibrarian.login();
-                        
-                        if(!headLibrarian.isLoginSuccessful)
-                        {
-                            loginMenuChoice = " ";
-                        }
-                        Utilities.clearScreen();
-                        break;
 
-                    case "2":
-                    //Librarian Login Menu
-                        Utilities.clearScreen();
-                        System.out.println("Librarian Login"); 
-                        librarian.login();
-                        
-                        if(!librarian.isLoginSuccessful)
-                        {
-                            loginMenuChoice = " ";
-                        }
-                        Utilities.clearScreen();
-                        break;
-
-                    case "3":
-                        System.out.println("Exit");
-                        Utilities.terminateSession();
-                        break;
-
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
-                        TimeUnit.MILLISECONDS.sleep(500);
-                        Utilities.clearScreen();
-                        dispHomeMenu();
-                        break;
-                }
-            } while ((!(loginMenuChoice.equals("1") || loginMenuChoice.equals("2") || loginMenuChoice.equals("3"))));
+        loginMenu();
 
             if(loginMenuChoice.equals("1"))
             {     
@@ -194,7 +147,60 @@ public class Main
                         break;
                 }
             }while(librarian.loginSuccessful());
+            }
         }
+    
+
+    public static void loginMenu() throws IOException, InterruptedException
+    {
+        while(!(librarian.isLoginSuccessful || headLibrarian.isLoginSuccessful))
+        {
+            do 
+            {
+                Utilities.clearScreen();
+                dispHomeMenu();
+                loginMenuChoice = Utilities.reader.readLine();
+                switch (loginMenuChoice)
+                {
+                    case "1":
+                    //Head Librarian Login Menu
+                        Utilities.clearScreen();
+                        System.out.println("Head Librarian Login"); 
+                        headLibrarian.login();
+                        
+                        if(!headLibrarian.isLoginSuccessful)
+                        {
+                            loginMenuChoice = " ";
+                        }
+                        Utilities.clearScreen();
+                        break;
+
+                    case "2":
+                    //Librarian Login Menu
+                        Utilities.clearScreen();
+                        System.out.println("Librarian Login"); 
+                        librarian.login();
+                        
+                        if(!librarian.isLoginSuccessful)
+                        {
+                            loginMenuChoice = " ";
+                        }
+                        Utilities.clearScreen();
+                        break;
+
+                    case "3":
+                        System.out.println("Exit");
+                        Utilities.terminateSession();
+                        break;
+
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        Utilities.clearScreen();
+                        dispHomeMenu();
+                        break;
+                }
+            } while ((!(loginMenuChoice.equals("1") || loginMenuChoice.equals("2") || loginMenuChoice.equals("3"))));
         }
     }
 }

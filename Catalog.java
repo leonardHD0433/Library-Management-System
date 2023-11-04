@@ -2,14 +2,21 @@ import java.util.*;
 
 public class Catalog
 {
-    protected ArrayList <Book> catalog = new ArrayList <Book>();   
-
-    public void addBook()
+    private ArrayList<Book> books = new ArrayList<Book>();
+    
+    public void initialiseCatalog()
     {
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 10; i++)
         {
-            catalog.add(new Book(i, " ", " ", true));
+            books.add(new Book(i));
         }
     }
-    
+
+    // Method to display all books in the catalog
+    public void displayBooks() {
+        for (int i = 0; i < books.size(); i++) 
+        {
+            System.out.println(books.get(i));
+        }
+    }
 }
