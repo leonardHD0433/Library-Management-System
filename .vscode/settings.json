@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "Library Management System/lib/lens-cli-2.7.1.jar"
+    ]
+}
