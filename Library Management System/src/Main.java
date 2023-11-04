@@ -6,6 +6,7 @@ public class Main
 {
     static HeadLibrarian headLibrarian = new HeadLibrarian("Edwin Chua Jin Rui", "headStaff@001", "iamtheHeadLibrarianXD", "012-805-0296");
     static Librarian librarian = new Librarian("Teh Yu Kang", "staff@002", "iamTehYuk6488");
+    static Catalog catalog = new Catalog();
     static String selection;
     static boolean back = false;
     static String loginMenuChoice = null;
@@ -104,11 +105,11 @@ public class Main
                             switch(selection)
                             {
                                 case "1":
-                                    
+                                    catalog.viewAll();
                                     break;
 
                                 case "2":
-                                    
+                                    catalog.searchByTitle();
                                     break;
 
                                 case "3":
@@ -116,10 +117,14 @@ public class Main
                                     break;
 
                                 case "4":
-                                        
+                                    
                                     break;
 
                                 case "5":
+                                    catalog.searchByAuthor();   
+                                    break;
+
+                                case "6":
                                     back = true;
                                     break;
 

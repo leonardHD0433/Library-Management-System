@@ -32,9 +32,10 @@ public class Librarian extends User
         System.out.println(toString() + "\n\n\n\n");
         System.out.println("1. View All");
         System.out.println("2. Browse by Title");
-        System.out.println("3. Browse by Author");
-        System.out.println("4. Browse by ISBN");
-        System.out.println("5. Back");
+        System.out.println("3. Browse by Genre");
+        System.out.println("4. Browse by Author");
+        System.out.println("5. Browse by ISBN");
+        System.out.println("6. Back");
     }
 
     public String toString()
