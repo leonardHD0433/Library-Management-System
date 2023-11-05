@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "Library Management System/lib/lens-cli-2.7.1.jar"
+        "Library Management System/lib/lens-cli-2.7.1.jar",
+        "c:\\Users\\User\\Downloads\\Java-Cli-Table-Builder-1.1.0.jar"
     ]
 }
