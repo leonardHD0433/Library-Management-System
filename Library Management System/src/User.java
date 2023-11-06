@@ -2,7 +2,7 @@
 import java.io.*;
 import java.util.concurrent.*;
 
-public abstract class User extends Utilities
+public abstract class User extends UtilitiesForSystem
 {
     protected String userType, userName, userId, password, readUserId, readPassword;
     boolean isLoginSuccessful;
@@ -13,9 +13,9 @@ public abstract class User extends Utilities
     public void login() throws IOException, InterruptedException
     {
         System.out.println("User ID: ");
-        readUserId = Utilities.reader.readLine();
+        readUserId = UtilitiesForSystem.reader.readLine();
         System.out.println("Password: ");
-        readPassword = Utilities.reader.readLine();
+        readPassword = UtilitiesForSystem.reader.readLine();
 
         if(readUserId.equals(userId) && readPassword.equals(password))
         {

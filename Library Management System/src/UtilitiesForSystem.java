@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.concurrent.*;
 
-public class Utilities 
+public class UtilitiesForSystem 
 {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static void clearScreen()
@@ -15,5 +15,17 @@ public class Utilities
         System.out.println("Terminating session...");
         TimeUnit.MILLISECONDS.sleep(500);
         System.exit(0);
+    }
+
+    public static boolean allCharacterAreDigits(String str)
+    {
+        for(int i = 0; i < str.length(); i++)
+        {
+            if(!Character.isDigit(str.charAt(i)))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

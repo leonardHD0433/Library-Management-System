@@ -33,17 +33,17 @@ public class Main
         {     
             do 
             {
-                Utilities.clearScreen();
+                UtilitiesForSystem.clearScreen();
                 headLibrarian.dispHomePage();
-                selection = Utilities.reader.readLine();
+                selection = UtilitiesForSystem.reader.readLine();
                 switch (selection) 
                 {
                     case "1":
                         do 
                         {
-                            Utilities.clearScreen();
+                            UtilitiesForSystem.clearScreen();
                             headLibrarian.dispManageCatalog();
-                                selection = Utilities.reader.readLine();
+                                selection = UtilitiesForSystem.reader.readLine();
                                 switch(selection)
                                 {
                                     case "1":
@@ -65,7 +65,7 @@ public class Main
                                     default: 
                                         System.out.println("Invalid choice. Please try again.");
                                         TimeUnit.MILLISECONDS.sleep(500);
-                                        Utilities.clearScreen();
+                                        UtilitiesForSystem.clearScreen();
                                         break;
                                 }           
                         }while(!back);
@@ -78,7 +78,7 @@ public class Main
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         TimeUnit.MILLISECONDS.sleep(500);
-                        Utilities.clearScreen();
+                        UtilitiesForSystem.clearScreen();
                         break;
                 }
             } while (headLibrarian.loginSuccessful());
@@ -89,18 +89,18 @@ public class Main
         {
             do
             {
-                Utilities.clearScreen();
+                UtilitiesForSystem.clearScreen();
                 librarian.dispHomePage();
-                selection = Utilities.reader.readLine();
+                selection = UtilitiesForSystem.reader.readLine();
                 switch (selection) 
                 {
                     case "1":
-                        Utilities.clearScreen();
+                        UtilitiesForSystem.clearScreen();
                         do 
                         {
-                            Utilities.clearScreen();
+                            UtilitiesForSystem.clearScreen();
                             librarian.dispBrowseCatalog();
-                            selection = Utilities.reader.readLine();
+                            selection = UtilitiesForSystem.reader.readLine();
                             browseCatalog(selection);
                         }while(!back);
                         break;
@@ -116,7 +116,7 @@ public class Main
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         TimeUnit.MILLISECONDS.sleep(500);
-                        Utilities.clearScreen();
+                        UtilitiesForSystem.clearScreen();
                         break;
                 }
             }while(librarian.loginSuccessful());
@@ -130,14 +130,14 @@ public class Main
         {
             do 
             {
-                Utilities.clearScreen();
+                UtilitiesForSystem.clearScreen();
                 dispHomeMenu();
-                loginMenuChoice = Utilities.reader.readLine();
+                loginMenuChoice = UtilitiesForSystem.reader.readLine();
                 switch (loginMenuChoice)
                 {
                     case "1":
                     //Head Librarian Login Menu
-                        Utilities.clearScreen();
+                        UtilitiesForSystem.clearScreen();
                         System.out.println("Head Librarian Login"); 
                         headLibrarian.login();
                         
@@ -145,12 +145,12 @@ public class Main
                         {
                             loginMenuChoice = " ";
                         }
-                        Utilities.clearScreen();
+                        UtilitiesForSystem.clearScreen();
                         break;
 
                     case "2":
                     //Librarian Login Menu
-                        Utilities.clearScreen();
+                        UtilitiesForSystem.clearScreen();
                         System.out.println("Librarian Login"); 
                         librarian.login();
                         
@@ -158,18 +158,18 @@ public class Main
                         {
                             loginMenuChoice = " ";
                         }
-                        Utilities.clearScreen();
+                        UtilitiesForSystem.clearScreen();
                         break;
 
                     case "3":
                         System.out.println("Exit");
-                        Utilities.terminateSession();
+                        UtilitiesForSystem.terminateSession();
                         break;
 
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         TimeUnit.MILLISECONDS.sleep(500);
-                        Utilities.clearScreen();
+                        UtilitiesForSystem.clearScreen();
                         dispHomeMenu();
                         break;
                 }
@@ -183,31 +183,40 @@ public class Main
         {
             case "1":
                 catalog.viewAll();
+                TimeUnit.MINUTES.sleep(5);
                 break;
 
             case "2":
                 catalog.searchByGenre();
+                TimeUnit.MINUTES.sleep(5);
                 break;
 
             case "3":
-                catalog.searchByGenre();
+                catalog.searchByTitle();
+                TimeUnit.MINUTES.sleep(5);
                 break;
 
             case "4":
+                catalog.searchByAuthor(); 
                 break;
 
             case "5":
-                catalog.searchByAuthor();   
+                catalog.searchByPublisher();
+                TimeUnit.MINUTES.sleep(5);  
                 break;
 
             case "6":
+                
+                break;
+
+            case "7":
                 back = true;
                 break;
 
             default: 
                 System.out.println("Invalid choice. Please try again.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                Utilities.clearScreen();
+                UtilitiesForSystem.clearScreen();
                 break;
         }
     }

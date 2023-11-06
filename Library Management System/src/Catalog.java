@@ -41,7 +41,7 @@ public class Catalog
     public void viewAll() 
     {
         sortCatalog();
-        Utilities.clearScreen();
+        UtilitiesForSystem.clearScreen();
         System.out.println("CATALOG");
         System.out.println("==============================================================================================================================================================");
         System.out.println("No.");
@@ -67,12 +67,12 @@ public class Catalog
         bookPos.clear();
         do
         {
-            Utilities.clearScreen();
+            UtilitiesForSystem.clearScreen();
             System.out.println("==================");       
             System.out.println("SEARCH BY TITLE");
             System.out.println("==================");
             System.out.print("\n\nEnter Title: ");
-            title = Utilities.reader.readLine();
+            title = UtilitiesForSystem.reader.readLine();
             System.out.println("SEARCH RESULTS");
             System.out.println("==============================================================================================================================================================");
             System.out.println("No.");
@@ -101,14 +101,14 @@ public class Catalog
         String author;
         searchResultNo = 1;
         bookPos.clear();
-        Utilities.clearScreen();
+        UtilitiesForSystem.clearScreen();
         do
         {
             System.out.println("==================");
             System.out.println("SEARCH BY AUTHOR"); 
             System.out.println("==================");
             System.out.print("\n\nEnter Author: ");
-            author = Utilities.reader.readLine();
+            author = UtilitiesForSystem.reader.readLine();
             System.out.println("SEARCH RESULTS");
             System.out.println("==============================================================================================================================================================");
             System.out.println("No.");
@@ -162,7 +162,7 @@ public class Catalog
         do{
             do 
             {
-                Utilities.clearScreen();
+                UtilitiesForSystem.clearScreen();
                 System.out.println("==================");
                 System.out.println("SEARCH BY GENRE"); 
                 System.out.println("==================");
@@ -171,7 +171,7 @@ public class Catalog
                     System.out.println((i + 1) + ". " + genre.get(i));
                 }
                 System.out.print("\n\nChoose Genre: ");
-                chooseGenre = Utilities.reader.readLine();
+                chooseGenre = UtilitiesForSystem.reader.readLine();
                 is_digit = chooseGenre.chars().allMatch( Character::isDigit );
                 if(!is_digit)
                 {
@@ -223,14 +223,14 @@ public class Catalog
         String publisher;
         searchResultNo = 1;
         bookPos.clear();
-        Utilities.clearScreen();
+        UtilitiesForSystem.clearScreen();
         do
         {
             System.out.println("==================");
             System.out.println("SEARCH BY PUBLISHER"); 
             System.out.println("==================");
             System.out.print("\n\nEnter Publisher: ");
-            publisher = Utilities.reader.readLine();
+            publisher = UtilitiesForSystem.reader.readLine();
             System.out.println("SEARCH RESULTS");
             System.out.println("==============================================================================================================================================================");
             System.out.println("No.");
@@ -252,6 +252,59 @@ public class Catalog
             }
         }while(!found);
     }
+    
+    //Method to search for a book by ISBN
+    public void searchByISBN() throws IOException
+    {
+        String isbn = null;
+        searchResultNo = 1;
+        bookPos.clear();
+        UtilitiesForSystem.clearScreen();
+        do
+        {
+            while (isbn.equals(null)) 
+            {
+                UtilitiesForSystem.clearScreen();
+                System.out.println("==================");
+                System.out.println("SEARCH BY ISBN"); 
+                System.out.println("==================");
+                System.out.print("\n\nEnter ISBN (ISBN-13 format): ");
+                isbn = UtilitiesForSystem.reader.readLine();
+                if ((isbn.length() == 13 && isbn.startsWith("978") && UtilitiesForSystem.allCharacterAreDigits(isbn)) || (isbn.length() == 14 && isbn.startsWith("978-") && UtilitiesForSystem.allCharacterAreDigits(isbn.replace("-", ""))))
+                {
+                    if((isbn.length() == 13 && isbn.startsWith("978")))
+                    {
+                        isbn = isbn.substring(0, 3) + "-" + isbn.substring(3, 13);
+                    }
+                }
+                else
+                {
+                    System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
+                }
+            }
+            
+            System.out.println("SEARCH RESULTS");
+            System.out.println("==============================================================================================================================================================");
+            System.out.println("No.");
+            for (int i = 0; i < books.size(); i++) 
+            {
+                if (books.get(i).getIsbn().contains(isbn)) 
+                {
+                    dispSearchResult(i);
+                }
+                else if(i == (books.size()) && (searchResultNo == 1))
+                {
+                    found = false;
+                } 
+            }
+
+            if(!found)
+            {
+                System.out.println("Book not found.");
+            }
+        }while(!found);
+    }
+    
     //search result after the respective filters
     public void dispSearchResult(int i)
     {

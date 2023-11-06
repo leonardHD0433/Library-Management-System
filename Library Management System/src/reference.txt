@@ -6,3 +6,5 @@ https://www.javatpoint.com/how-to-sort-arraylist-in-java
 https://www.javatpoint.com/java-string-valueof
 https://www.geeksforgeeks.org/arraylist-contains-java/
 https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java
+https://www.javatpoint.com/java-string-startswith
+https://www.w3schools.com/jsref/jsref_substring.asp

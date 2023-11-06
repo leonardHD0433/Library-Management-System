@@ -34,8 +34,9 @@ public class Librarian extends User
         System.out.println("2. Browse by Genre");
         System.out.println("3. Browse by Title");
         System.out.println("4. Browse by Author");
-        System.out.println("5. Browse by ISBN");
-        System.out.println("6. Back");
+        System.out.println("5. Browse by Publisher");
+        System.out.println("6. Browse by ISBN");
+        System.out.println("7. Back");
     }
 
     public String toString()
