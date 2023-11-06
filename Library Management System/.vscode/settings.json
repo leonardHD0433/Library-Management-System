@@ -2,6 +2,8 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "java/java/Library Management System/lib/commons-lang3-3.13.0.jar",
+        "java/java/Library Management System/lib/taglibs-standard-impl-1.2.5.jar"
     ]
 }
