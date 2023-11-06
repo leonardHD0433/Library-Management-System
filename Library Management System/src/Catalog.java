@@ -13,6 +13,8 @@ public class Catalog
         initialiseCatalog();
         sortCatalog();
     }
+
+    // Method to initialise the catalog with 10 books
     public void initialiseCatalog()
     {
         for(int i = 0; i < 10; i++)
@@ -61,6 +63,7 @@ public class Catalog
     public void searchByTitle() throws IOException
     {
         String title;
+        searchResultNo = 1;
         bookPos.clear();
         do
         {
@@ -75,12 +78,11 @@ public class Catalog
             System.out.println("No.");
             for (int i = 0; i < books.size(); i++) 
             {
-                searchResultNo = 1;
                 if (books.get(i).getBookTitle().contains(title)) 
                 {
                     dispSearchResult(i);
                 }
-                else
+                else if (i == (books.size()) && (searchResultNo == 1))
                 {
                     found = false;
                 }
@@ -97,6 +99,7 @@ public class Catalog
     public void searchByAuthor() throws IOException
     {
         String author;
+        searchResultNo = 1;
         bookPos.clear();
         Utilities.clearScreen();
         do
@@ -111,12 +114,11 @@ public class Catalog
             System.out.println("No.");
             for (int i = 0; i < books.size(); i++) 
             {
-                searchResultNo = 1;
                 if (books.get(i).getAuthor().contains(author)) 
                 {
                     dispSearchResult(i);
                 }
-                else
+                else if(i == books.size() && (searchResultNo == 1))
                 {
                     found = false;
                 } 
@@ -133,7 +135,8 @@ public class Catalog
     public void searchByGenre() throws IOException
     {
         String chooseGenre;
-        int index = 0, j =1;
+        int index = 0;
+        searchResultNo = 1;
         boolean is_digit;
         ArrayList <String> genre = new ArrayList<String>();
         for(int i = 0; i < books.size(); i++)
@@ -196,12 +199,11 @@ public class Catalog
                 System.out.println("No.");
                 for (int i = 0; i < books.size(); i++) 
                 {
-                    searchResultNo = 1;
                     if (books.get(i).getGenre().equals(genre.get(index))) 
                     {
                         dispSearchResult(i);
                     }
-                    else if (i == (books.size()) && !(books.get(i).getGenre().equals(genre.get(index))))
+                    else if (i == (books.size()) && (searchResultNo == 1))
                     {
                         found = false;
                     } 
@@ -215,13 +217,47 @@ public class Catalog
         }while(!found);
     }
 
+    // Method to search for a book by publisher
+    public void searchByPublisher() throws IOException
+    {
+        String publisher;
+        searchResultNo = 1;
+        bookPos.clear();
+        Utilities.clearScreen();
+        do
+        {
+            System.out.println("==================");
+            System.out.println("SEARCH BY PUBLISHER"); 
+            System.out.println("==================");
+            System.out.print("\n\nEnter Publisher: ");
+            publisher = Utilities.reader.readLine();
+            System.out.println("SEARCH RESULTS");
+            System.out.println("==============================================================================================================================================================");
+            System.out.println("No.");
+            for (int i = 0; i < books.size(); i++) 
+            {
+                if (books.get(i).getPublisher().contains(publisher)) 
+                {
+                    dispSearchResult(i);
+                }
+                else if(i == (books.size()) && (searchResultNo == 1))
+                {
+                    found = false;
+                } 
+            }
+
+            if(!found)
+            {
+                System.out.println("Book not found.");
+            }
+        }while(!found);
+    }
+    //search result after the respective filters
     public void dispSearchResult(int i)
     {
         found = true;
-        System.out.println(searchResultNo);
         System.out.println("==============================================================================================================================================================");
         System.out.println(" " + (searchResultNo));
-        System.out.println("==============================================================================================================================================================");
         System.out.println("==============================================================================================================================================================");
         System.out.println("Book Tile: " + books.get(i).getBookTitle());
         System.out.println("Genre: " + books.get(i).getGenre());
