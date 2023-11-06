@@ -78,7 +78,7 @@ public class Catalog
             System.out.println("No.");
             for (int i = 0; i < books.size(); i++) 
             {
-                if (books.get(i).getBookTitle().contains(title)) 
+                if (books.get(i).getBookTitle().toLowerCase().contains(title.toLowerCase())) 
                 {
                     dispSearchResult(i);
                 }
@@ -101,9 +101,9 @@ public class Catalog
         String author;
         searchResultNo = 1;
         bookPos.clear();
-        UtilitiesForSystem.clearScreen();
         do
         {
+            UtilitiesForSystem.clearScreen();
             System.out.println("==================");
             System.out.println("SEARCH BY AUTHOR"); 
             System.out.println("==================");
@@ -114,7 +114,7 @@ public class Catalog
             System.out.println("No.");
             for (int i = 0; i < books.size(); i++) 
             {
-                if (books.get(i).getAuthor().contains(author)) 
+                if ((books.get(i).getAuthor().toLowerCase().contains(author.toLowerCase()))) 
                 {
                     dispSearchResult(i);
                 }
@@ -172,7 +172,7 @@ public class Catalog
                 }
                 System.out.print("\n\nChoose Genre: ");
                 chooseGenre = UtilitiesForSystem.reader.readLine();
-                is_digit = chooseGenre.chars().allMatch( Character::isDigit );
+                is_digit = chooseGenre.chars().allMatch(Character::isDigit);
                 if(!is_digit)
                 {
                     System.out.println("Please enter a digit.");
@@ -192,7 +192,7 @@ public class Catalog
                 }
             } while (!is_digit);
 
-            if(is_digit && (index < genre.size() && index > 0))
+            if(is_digit && (index < genre.size() && index >= 0))
             {
                 System.out.println("SEARCH RESULTS");
                 System.out.println("==============================================================================================================================================================");
@@ -236,7 +236,7 @@ public class Catalog
             System.out.println("No.");
             for (int i = 0; i < books.size(); i++) 
             {
-                if (books.get(i).getPublisher().contains(publisher)) 
+                if (books.get(i).getPublisher().toLowerCase().contains(publisher.toLowerCase())) 
                 {
                     dispSearchResult(i);
                 }
@@ -312,7 +312,7 @@ public class Catalog
         System.out.println("==============================================================================================================================================================");
         System.out.println(" " + (searchResultNo));
         System.out.println("==============================================================================================================================================================");
-        System.out.println("Book Tile: " + books.get(i).getBookTitle());
+        System.out.println("Book Title: " + books.get(i).getBookTitle());
         System.out.println("Genre: " + books.get(i).getGenre());
         System.out.println("Author: " + books.get(i).getAuthor());
         System.out.println("Publisher: " + books.get(i).getPublisher());

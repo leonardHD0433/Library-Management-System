@@ -198,6 +198,7 @@ public class Main
 
             case "4":
                 catalog.searchByAuthor(); 
+                TimeUnit.MINUTES.sleep(5);
                 break;
 
             case "5":
