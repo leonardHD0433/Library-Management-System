@@ -3,32 +3,15 @@ import java.util.concurrent.*;
 
 public class HeadLibrarian extends User 
 {
-    private String contactNumber;
 
-    public HeadLibrarian(String userName, String userId, String password, String contactNumber) //Composition
+    public HeadLibrarian(String userType, String userName, String userId, String password) //Composition
     {
-        getUserType();
-        setHeadLibrarianDetails(userName, userId, password, contactNumber);
-    }
-
-    public void setHeadLibrarianDetails(String userName, String userId, String password, String contactNumber)
-    {
-        this.userName = userName;
-        this.userId = userId;
-        this.password = password;
-        this.contactNumber = contactNumber;
+        super(userType, userName, userId, password);
     }
 
     public String getUserType() 
     {
         return "Head Librarian";
-    }
-
-    public void dispHomePage()
-    {
-        System.out.println(toString() + "\n\n\n\n");
-        System.out.println("1. Manage Catalog");
-        System.out.println("2. Logout");
     }
 
     public void dispManageCatalog()
@@ -40,10 +23,6 @@ public class HeadLibrarian extends User
         System.out.println("4. Back");
     }
 
-    public String toString()
-    {
-        return "Role: " + getUserType() + "\nUser Name: " + userName + "\nUser Id: " + userId + "\nContact Number: " + contactNumber;
-    }
 
     
 

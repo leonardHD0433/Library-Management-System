@@ -10,7 +10,7 @@ public class Main
     static boolean back = false;
     static String loginMenuChoice = null;
 
-    public static void dispHomeMenu()
+    public static void dispLoginMenu()
     {
         System.out.println("LIBRARY MANAGEMENT SYSTEM");
         System.out.println("==========================");

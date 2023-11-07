@@ -1,32 +1,44 @@
 import java.io.IOException;
 import java.util.*;
 
-public class Catalog
+public class Catalog implements BookData, PatronData
 {
-    private ArrayList<Book> books = new ArrayList<Book>();
-    ArrayList <Integer> bookPos = new ArrayList<Integer>();
+    private ArrayList<Book> bookList;
+    private Patron[] patronList = new Patron[5];
+    ArrayList <Integer> bookPos;
     boolean found;
     private int searchResultNo;
     
     public Catalog()
     {
-        initialiseCatalog();
-        sortCatalog();
-    }
-
-    // Method to initialise the catalog with 10 books
-    public void initialiseCatalog()
-    {
-        for(int i = 0; i < 10; i++)
+        bookList = new ArrayList<Book>();
+        bookPos = new ArrayList<Integer>();
+        for (int i = 0; i < patronList.length; i++)
         {
-            books.add(new Book(i));
+            setPatronList(i);
         }
+
+        for (int i = 0; i < BOOK_TITLE.length; i++)
+        {
+            setBookList(i);
+        }
+        sortBookList();
     }
 
-    //sort Catalog by book title in ascending order
-    public void sortCatalog()
+    public void setBookList(int i)
     {
-        Collections.sort(books, 
+        bookList.add(new Book(BOOK_TITLE[i], BOOK_TITLE[i], AUTHOR[i], PUBLISHER[i], YEAR_PUBLISHED[i], GENRE[i], BOOK_AVAILABILITY[0]));
+    }
+
+    public void setPatronList(int i)
+    {
+        patronList[i] = new Patron(PATRON_NAME[i], PATRON_ID[i], PATRON_CONTACT_NO[i]);
+    }
+    
+    //sort Catalog by book title in ascending order
+    public void sortBookList()
+    {
+        Collections.sort(bookList, 
         new Comparator <Book>() 
         {
             public int compare(Book book1, Book book2) 
@@ -40,21 +52,21 @@ public class Catalog
     // Method to display all books in the catalog in ascending order of book title
     public void viewAll() 
     {
-        sortCatalog();
+        sortBookList();
         UtilitiesForSystem.clearScreen();
         System.out.println("CATALOG");
         System.out.println("==============================================================================================================================================================");
         System.out.println("No.");
-        for (int i = 0; i < books.size(); i++) 
+        for (int i = 0; i < bookList.size(); i++) 
         { 
             System.out.println("==============================================================================================================================================================");
             System.out.println(" " + (i + 1));
             System.out.println("==============================================================================================================================================================");
-            System.out.println("Book Tile: " + books.get(i).getBookTitle());
-            System.out.println("Genre: " + books.get(i).getGenre());
-            System.out.println("Author: " + books.get(i).getAuthor());
-            System.out.println("Publisher: " + books.get(i).getPublisher());
-            System.out.println("Year Published: " + books.get(i).getYearPublished());
+            System.out.println("Book Tile: " + bookList.get(i).getBookTitle());
+            System.out.println("Genre: " + bookList.get(i).getGenre());
+            System.out.println("Author: " + bookList.get(i).getAuthor());
+            System.out.println("Publisher: " + bookList.get(i).getPublisher());
+            System.out.println("Year Published: " + bookList.get(i).getYearPublished());
             System.out.println("==============================================================================================================================================================\n");
         }
     }
@@ -76,13 +88,13 @@ public class Catalog
             System.out.println("SEARCH RESULTS");
             System.out.println("==============================================================================================================================================================");
             System.out.println("No.");
-            for (int i = 0; i < books.size(); i++) 
+            for (int i = 0; i < bookList.size(); i++) 
             {
-                if (books.get(i).getBookTitle().toLowerCase().contains(title.toLowerCase())) 
+                if (bookList.get(i).getBookTitle().toLowerCase().contains(title.toLowerCase())) 
                 {
                     dispSearchResult(i);
                 }
-                else if (i == (books.size()) && (searchResultNo == 1))
+                else if (i == (bookList.size()) && (searchResultNo == 1))
                 {
                     found = false;
                 }
@@ -112,13 +124,13 @@ public class Catalog
             System.out.println("SEARCH RESULTS");
             System.out.println("==============================================================================================================================================================");
             System.out.println("No.");
-            for (int i = 0; i < books.size(); i++) 
+            for (int i = 0; i < bookList.size(); i++) 
             {
-                if ((books.get(i).getAuthor().toLowerCase().contains(author.toLowerCase()))) 
+                if ((bookList.get(i).getAuthor().toLowerCase().contains(author.toLowerCase()))) 
                 {
                     dispSearchResult(i);
                 }
-                else if(i == books.size() && (searchResultNo == 1))
+                else if(i == bookList.size() && (searchResultNo == 1))
                 {
                     found = false;
                 } 
@@ -139,11 +151,11 @@ public class Catalog
         searchResultNo = 1;
         boolean is_digit;
         ArrayList <String> genre = new ArrayList<String>();
-        for(int i = 0; i < books.size(); i++)
+        for(int i = 0; i < bookList.size(); i++)
         {
-            if(!genre.contains(books.get(i).getGenre()))
+            if(!genre.contains(bookList.get(i).getGenre()))
             {
-                genre.add(books.get(i).getGenre());
+                genre.add(bookList.get(i).getGenre());
             }
         }
 
@@ -197,13 +209,13 @@ public class Catalog
                 System.out.println("SEARCH RESULTS");
                 System.out.println("==============================================================================================================================================================");
                 System.out.println("No.");
-                for (int i = 0; i < books.size(); i++) 
+                for (int i = 0; i < bookList.size(); i++) 
                 {
-                    if (books.get(i).getGenre().equals(genre.get(index))) 
+                    if (bookList.get(i).getGenre().equals(genre.get(index))) 
                     {
                         dispSearchResult(i);
                     }
-                    else if (i == (books.size()) && (searchResultNo == 1))
+                    else if (i == (bookList.size()) && (searchResultNo == 1))
                     {
                         found = false;
                     } 
@@ -234,13 +246,13 @@ public class Catalog
             System.out.println("SEARCH RESULTS");
             System.out.println("==============================================================================================================================================================");
             System.out.println("No.");
-            for (int i = 0; i < books.size(); i++) 
+            for (int i = 0; i < bookList.size(); i++) 
             {
-                if (books.get(i).getPublisher().toLowerCase().contains(publisher.toLowerCase())) 
+                if (bookList.get(i).getPublisher().toLowerCase().contains(publisher.toLowerCase())) 
                 {
                     dispSearchResult(i);
                 }
-                else if(i == (books.size()) && (searchResultNo == 1))
+                else if(i == (bookList.size()) && (searchResultNo == 1))
                 {
                     found = false;
                 } 
@@ -286,13 +298,13 @@ public class Catalog
             System.out.println("SEARCH RESULTS");
             System.out.println("==============================================================================================================================================================");
             System.out.println("No.");
-            for (int i = 0; i < books.size(); i++) 
+            for (int i = 0; i < bookList.size(); i++) 
             {
-                if (books.get(i).getIsbn().contains(isbn)) 
+                if (bookList.get(i).getIsbn().contains(isbn)) 
                 {
                     dispSearchResult(i);
                 }
-                else if(i == (books.size()) && (searchResultNo == 1))
+                else if(i == (bookList.size()) && (searchResultNo == 1))
                 {
                     found = false;
                 } 
@@ -312,11 +324,11 @@ public class Catalog
         System.out.println("==============================================================================================================================================================");
         System.out.println(" " + (searchResultNo));
         System.out.println("==============================================================================================================================================================");
-        System.out.println("Book Title: " + books.get(i).getBookTitle());
-        System.out.println("Genre: " + books.get(i).getGenre());
-        System.out.println("Author: " + books.get(i).getAuthor());
-        System.out.println("Publisher: " + books.get(i).getPublisher());
-        System.out.println("Year Published: " + books.get(i).getYearPublished());
+        System.out.println("Book Title: " + bookList.get(i).getBookTitle());
+        System.out.println("Genre: " + bookList.get(i).getGenre());
+        System.out.println("Author: " + bookList.get(i).getAuthor());
+        System.out.println("Publisher: " + bookList.get(i).getPublisher());
+        System.out.println("Year Published: " + bookList.get(i).getYearPublished());
         System.out.println("==============================================================================================================================================================\n");
         bookPos.add(i);
         searchResultNo++;

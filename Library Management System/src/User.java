@@ -4,11 +4,23 @@ import java.util.concurrent.*;
 
 public abstract class User extends UtilitiesForSystem
 {
+    Catalog catalog;
     protected String userType, userName, userId, password, readUserId, readPassword;
     boolean isLoginSuccessful;
 
-    public abstract String getUserType();
-    public abstract void dispHomePage();
+    public User(String loginMenuSelection, String userName, String userId, String password) //Composition
+    {
+        catalog = new Catalog();
+        setUserDetails(userType, userName, userId, password);
+    }
+
+    public void setUserDetails(String userType, String userName, String userId, String password)
+    {
+        this.userType = userType;
+        this.userName = userName;
+        this.userId = userId;
+        this.password = password;
+    }
 
     public void login() throws IOException, InterruptedException
     {
@@ -43,5 +55,14 @@ public abstract class User extends UtilitiesForSystem
         return isLoginSuccessful;
     }
 
-    
+    public String getUserType()
+    {
+        return userType;
+    }
+
+
+    public String toString()
+    {
+        return  "User Id: " + userId + "\nUser Name: " + userName  + "\nRole: " + userType;
+    }
 }

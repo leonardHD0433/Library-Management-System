@@ -1,17 +1,17 @@
-public class Patron implements PatronData
+public class Patron
 {
     protected String patronName, patronId, contactNumber;
 
-    public Patron(int i)
+    public Patron(String patronName, String patronId, String contactNumber)
     {
-        setPatronDetail(i);
+        setPatronDetail(patronName, patronId, contactNumber);
     }
 
-    public void setPatronDetail(int i)
+    public void setPatronDetail(String patronName, String patronId, String contactNumber)
     {
-        patronName = PATRON_NAME[i];
-        patronId = PATRON_ID[i];
-        this.contactNumber = PATRON_CONTACT_NO[i];
+        this.patronName = patronName;
+        this.patronId = patronId;
+        this.contactNumber = contactNumber;
     }
 
     public String toString()
