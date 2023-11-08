@@ -5,6 +5,7 @@ public class Catalog implements BookData, PatronData
 {
     private ArrayList<Book> bookList;
     private Patron[] patronList = new Patron[5];
+    ArrayList <String> genreTypes_inCatalog;
     private ArrayList <Integer> bookPos_forFilteredList;
     private boolean found;
     private int searchResultNo; //number of books found after filter
@@ -12,7 +13,8 @@ public class Catalog implements BookData, PatronData
     public Catalog()
     {
         bookList = new ArrayList<Book>();
-        bookPos = new ArrayList<Integer>();
+        bookPos_forFilteredList = new ArrayList<Integer>();
+        genreTypes_inCatalog = new ArrayList<String>();
         for (int i = 0; i < patronList.length; i++)
         {
             setPatronList(i);
@@ -47,6 +49,43 @@ public class Catalog implements BookData, PatronData
             }
         }
         );
+    }
+
+    //sort genre list in ascending order
+    public void sortGenreTypes_inCatalog()
+    {
+        Collections.sort(genreTypes_inCatalog, 
+        new Comparator <String>() 
+        {
+            public int compare(String genre1, String genre2) 
+            {
+                return genre1.compareTo(genre2);
+            }
+        }
+        );
+    }
+
+    //add new genres to genreTypes_inCatalog 
+    public void addToGenreTypes_inCatalogSize(int i)
+    {
+        genreTypes_inCatalog.add(getBookGenre(i));
+    }
+
+    public boolean checkCatalogForGenre(int i)
+    {
+        return genreTypes_inCatalog.contains(getBookGenre(i));
+    }
+
+    //get genreTypes_inCatalog size
+    public int getGenreTypes_inCatalogSize()
+    {
+        return genreTypes_inCatalog.size();
+    }
+
+    //get genreTypes_inCatalog element
+    public String getGenreTypes_inCatalog(int i)
+    {
+        return genreTypes_inCatalog.get(i);
     }
 
     public void clearBookPos()
@@ -133,96 +172,6 @@ public class Catalog implements BookData, PatronData
         return bookList.get(i).getAvailability();
     }
 
-    // Method to search for a book by genre
-    public void searchByGenre() throws IOException
-    {
-        String chooseGenre;
-        int index = 0;
-        searchResultNo = 1;
-        boolean is_digit;
-        ArrayList <String> genre = new ArrayList<String>();
-        for(int i = 0; i < bookList.size(); i++)
-        {
-            if(!genre.contains(bookList.get(i).getGenre()))
-            {
-                genre.add(bookList.get(i).getGenre());
-            }
-        }
-
-        Collections.sort(genre, 
-        new Comparator <String>() 
-        {
-            public int compare(String genre1, String genre2) 
-            {
-                return genre1.compareTo(genre2);
-            }
-        }
-        );
-
-        bookPos.clear();
-        
-        do{
-            do 
-            {
-                UtilitiesForSystem.clearScreen();
-                System.out.println("==================");
-                System.out.println("SEARCH BY GENRE"); 
-                System.out.println("==================");
-                for(int i = 0; i < genre.size(); i++)
-                {
-                    System.out.println((i + 1) + ". " + genre.get(i));
-                }
-                System.out.print("\n\nChoose Genre: ");
-                chooseGenre = UtilitiesForSystem.reader.readLine();
-                is_digit = chooseGenre.chars().allMatch(Character::isDigit);
-                if(!is_digit)
-                {
-                    System.out.println("Please enter a digit.");
-                }
-                else
-                {
-                    index = Integer.parseInt(chooseGenre) - 1;
-                }
-                
-                if (index > genre.size() || index < 0)
-                {
-                    System.out.println("Invalid choice. Please try again.");
-                }
-                else
-                {
-                    break;
-                }
-            } while (!is_digit);
-
-            if(is_digit && (index < genre.size() && index >= 0))
-            {
-                System.out.println("SEARCH RESULTS");
-                System.out.println("==============================================================================================================================================================");
-                System.out.println("No.");
-                for (int i = 0; i < bookList.size(); i++) 
-                {
-                    if (bookList.get(i).getGenre().equals(genre.get(index))) 
-                    {
-                        dispSearchResult(i);
-                    }
-                    else if (i == (bookList.size()) && (searchResultNo == 1))
-                    {
-                        found = false;
-                    } 
-                }  
-            }
-
-            if(!found)
-            {
-                System.out.println("Book not found.");
-            }
-        }while(!found);
-    }
-
-    
-    
-    
-    
     public void getBook(int i)
     {
         System.out.println("Book Title: " + bookList.get(i).getBookTitle());

@@ -6,7 +6,7 @@ public class Session
     private HeadLibrarian headLibrarian;
     private Librarian librarian;
     private String loginPageSelection, homePageSelection, manageCatalogSelection, browseCatalogSelection;
-    private boolean exit = false, backToLoginPage, backToHomePage;
+    private boolean exit = false, backToLoginPage, backToHomePage, isLoginSuccessful;
 
     public Session()
     {
@@ -32,9 +32,12 @@ public class Session
             dispLoginPage();
             setLoginPageSelection();
             loginPageSelection(getLoginPageSelection());
-        } while (!(getLoginPageSelection() == "1" || getLoginPageSelection() == "2" || getLoginPageSelection() == "3"));
+        } while (!((getLoginPageSelection() == "1" || getLoginPageSelection() == "2") && isLoginSuccessful) &&  !(getLoginPageSelection() == "3"));
 
-        homePage();
+        if(isLoginSuccessful)
+        {
+            homePage();
+        }
     }
 
     // Home Page State
@@ -56,18 +59,20 @@ public class Session
         switch (selection) 
         {
             case "1":
-                headLibrarian.login();
+                isLoginSuccessful = headLibrarian.login();
                 break;
         
             case "2": 
-                librarian.login();
+                isLoginSuccessful = librarian.login();
                 break;
 
             case "3":
+                isLoginSuccessful = false;
                 exit = true;
                 break;
 
             default:
+                isLoginSuccessful = false;
                 UtilitiesForSystem.selectionErrorMsg();
                 break;
         }
