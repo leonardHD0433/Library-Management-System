@@ -17,6 +17,13 @@ public class UtilitiesForSystem
         System.exit(0);
     }
 
+    public static void selectionErrorMsg() throws InterruptedException
+    {
+        System.out.println("Invalid Selection. Try again.");
+        TimeUnit.MILLISECONDS.sleep(500);
+        clearScreen();
+    }
+
     public static boolean allCharacterAreDigits(String str)
     {
         for(int i = 0; i < str.length(); i++)

@@ -74,6 +74,11 @@ public class Book
         return yearPublished;
     }
 
+    public String getAvailability()
+    {
+        return bookAvailability;
+    }
+
     public String toString()
     {
         return "Book Title: " + bookTitle + "\nISBN: " + bookIsbn + "\nGenre: " + genre + "\nAuthor: " + author + "\nPublisher: " + publisher + "\nYear Published: " + yearPublished + "\nAvailability: " + bookAvailability;

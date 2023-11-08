@@ -6,7 +6,7 @@ public class Session
     private HeadLibrarian headLibrarian;
     private Librarian librarian;
     private String loginPageSelection, homePageSelection, manageCatalogSelection, browseCatalogSelection;
-    private boolean exit = false, backToLoginPage = false, backToHomePage = false;
+    private boolean exit = false, backToLoginPage, backToHomePage;
 
     public Session()
     {
@@ -14,32 +14,43 @@ public class Session
         librarian = new Librarian("LIBRARIAN", "Teh Yu Kang", "staff@002", "iamTehYuk6488");
     }
 
-    public void loginPage() throws IOException, InterruptedException
+    // Method to start session
+    public void startSession() throws IOException, InterruptedException
     {
         do
         {
-            do 
-            {
-                dispLoginPage();
-                setLoginPageSelection();
-                loginPageSelection(getLoginPageSelection());
-            } while (!(getLoginPageSelection() == "1" || getLoginPageSelection() == "2" || getLoginPageSelection() == "3"));
-
-            homePage();
+            loginPage();
         }while(!exit);
     }
 
+    // Login State
+    public void loginPage() throws IOException, InterruptedException
+    {
+        backToLoginPage = false;
+        do 
+        {
+            dispLoginPage();
+            setLoginPageSelection();
+            loginPageSelection(getLoginPageSelection());
+        } while (!(getLoginPageSelection() == "1" || getLoginPageSelection() == "2" || getLoginPageSelection() == "3"));
+
+        homePage();
+    }
+
+    // Home Page State
     public void homePage() throws IOException, InterruptedException
     {
         do 
         {
+            backToHomePage = false;
             UtilitiesForSystem.clearScreen();
             dispHomePage();
             setHomePageSelection();
             homePageSelection(getHomePageSelection());
-        } while (!(getHomePageSelection() == "1" || getHomePageSelection() == "2" || getHomePageSelection() == "3" || getHomePageSelection() == "4"));
+        } while (!backToLoginPage);
     }
 
+    // Login Page Selection Methods
     public void loginPageSelection(String selection) throws IOException, InterruptedException
     {
         switch (selection) 
@@ -57,23 +68,24 @@ public class Session
                 break;
 
             default:
-                System.out.println("Invalid Selection. Try again.");
-                TimeUnit.MILLISECONDS.sleep(500);
-                UtilitiesForSystem.clearScreen();
+                UtilitiesForSystem.selectionErrorMsg();
                 break;
         }
     }
 
+    // Setter for the Login Page Selection
     public void setLoginPageSelection() throws IOException
     {
         loginPageSelection = UtilitiesForSystem.reader.readLine();
     }
 
+    // Getter for the Login Page Selection
     public String getLoginPageSelection()
     {
         return loginPageSelection;
     }
 
+    // Home Page Selection Methods
     public void homePageSelection(String selection) throws InterruptedException
     {
         switch (getLoginPageSelection()) 
@@ -86,13 +98,11 @@ public class Session
                         break;
                 
                     case "2":
-                        headLibrarian.logout();
+                        backToLoginPage = true;
                         break;
 
                     default:
-                        System.out.println("Invalid Selection. Try again.");
-                        TimeUnit.MILLISECONDS.sleep(500);
-                        UtilitiesForSystem.clearScreen();
+                        UtilitiesForSystem.selectionErrorMsg();
                         break;
                 }
                 break;
@@ -104,34 +114,81 @@ public class Session
                         librarian.browseCatalog();
                         break;
                 
-                    case "2": break;
+                    case "2": 
+                        librarian.viewPatron();
+                        break;
 
-                    case "3": break;
-
-                    case "4":
-                        librarian.logout();
+                    case "3":
+                        backToLoginPage = true;
                         break;
 
                     default:
-                        System.out.println("Invalid Selection. Try again.");
-                        TimeUnit.MILLISECONDS.sleep(500);
-                        UtilitiesForSystem.clearScreen();
+                        UtilitiesForSystem.selectionErrorMsg();
                         break;
                 }
                 break;
         }
     }
 
+    // Setter for the Home Page Selection
     public void setHomePageSelection() throws IOException
     {
         homePageSelection = UtilitiesForSystem.reader.readLine();
     }
 
+    // Getter for the Home Page Selection
     public String getHomePageSelection()
     {
         return homePageSelection;
     }
 
+    // Browse Catalog Selection Methods
+    public void browseCatalogSelection(String selection) throws IOException, InterruptedException
+    {
+        switch (selection) {
+            case "1":
+                
+                break;
+
+            case "2":
+                    
+                break;
+
+            case "3":
+                
+                break;
+        
+            case "4":
+                
+                break;
+
+            case "5":
+                
+                break;  
+
+            case "6":
+                backToHomePage = true;
+                break;
+        
+            default:
+                UtilitiesForSystem.selectionErrorMsg();
+                break;
+        }
+    }
+
+    // Setter for the Browse Catalog Selection
+    public void setBrowseCatalogSelection() throws IOException
+    {
+        browseCatalogSelection = UtilitiesForSystem.reader.readLine();
+    }
+
+    // Getter for the Browse Catalog Selection
+    public String getBrowseCatalogSelection()
+    {
+        return browseCatalogSelection;
+    }
+
+    // Display Login Page
     public void dispLoginPage()
     {
         System.out.println("LIBRARY MANAGEMENT SYSTEM");
@@ -141,6 +198,7 @@ public class Session
         System.out.println("3. Exit\n");
     }
 
+    // Display Home Page
     public void dispHomePage()
     {
         switch (getLoginPageSelection()) 
@@ -154,9 +212,8 @@ public class Session
             default:
                 System.out.println(librarian.toString() + "\n\n\n\n");
                 System.out.println("1. Browse Catalog");
-                System.out.println("2. View Borrowed Books");
-                System.out.println("3. View Patron");
-                System.out.println("4. Logout");
+                System.out.println("2. View Patron");
+                System.out.println("3. Logout");
                 break;
         }
     }

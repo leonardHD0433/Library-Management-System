@@ -5,9 +5,9 @@ public class Catalog implements BookData, PatronData
 {
     private ArrayList<Book> bookList;
     private Patron[] patronList = new Patron[5];
-    ArrayList <Integer> bookPos;
-    boolean found;
-    private int searchResultNo;
+    private ArrayList <Integer> bookPos_forFilteredList;
+    private boolean found;
+    private int searchResultNo; //number of books found after filter
     
     public Catalog()
     {
@@ -49,98 +49,88 @@ public class Catalog implements BookData, PatronData
         );
     }
 
-    // Method to display all books in the catalog in ascending order of book title
-    public void viewAll() 
+    public void clearBookPos()
     {
-        sortBookList();
-        UtilitiesForSystem.clearScreen();
-        System.out.println("CATALOG");
-        System.out.println("==============================================================================================================================================================");
-        System.out.println("No.");
-        for (int i = 0; i < bookList.size(); i++) 
-        { 
-            System.out.println("==============================================================================================================================================================");
-            System.out.println(" " + (i + 1));
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("Book Tile: " + bookList.get(i).getBookTitle());
-            System.out.println("Genre: " + bookList.get(i).getGenre());
-            System.out.println("Author: " + bookList.get(i).getAuthor());
-            System.out.println("Publisher: " + bookList.get(i).getPublisher());
-            System.out.println("Year Published: " + bookList.get(i).getYearPublished());
-            System.out.println("==============================================================================================================================================================\n");
-        }
+        bookPos_forFilteredList.clear();
     }
 
-    // Method to search for a book by title
-    public void searchByTitle() throws IOException
+    public void setBookPos(int i)
     {
-        String title;
-        searchResultNo = 1;
-        bookPos.clear();
-        do
-        {
-            UtilitiesForSystem.clearScreen();
-            System.out.println("==================");       
-            System.out.println("SEARCH BY TITLE");
-            System.out.println("==================");
-            System.out.print("\n\nEnter Title: ");
-            title = UtilitiesForSystem.reader.readLine();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
-            for (int i = 0; i < bookList.size(); i++) 
-            {
-                if (bookList.get(i).getBookTitle().toLowerCase().contains(title.toLowerCase())) 
-                {
-                    dispSearchResult(i);
-                }
-                else if (i == (bookList.size()) && (searchResultNo == 1))
-                {
-                    found = false;
-                }
-
-                if(!found)
-                {
-                    System.out.println("Book not found.");
-                }
-            }
-        }while(!found);
+        bookPos_forFilteredList.add(i);
     }
 
-    // Method to search for a book by author
-    public void searchByAuthor() throws IOException
+    public int getBookPos(int i)
     {
-        String author;
-        searchResultNo = 1;
-        bookPos.clear();
-        do
-        {
-            UtilitiesForSystem.clearScreen();
-            System.out.println("==================");
-            System.out.println("SEARCH BY AUTHOR"); 
-            System.out.println("==================");
-            System.out.print("\n\nEnter Author: ");
-            author = UtilitiesForSystem.reader.readLine();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
-            for (int i = 0; i < bookList.size(); i++) 
-            {
-                if ((bookList.get(i).getAuthor().toLowerCase().contains(author.toLowerCase()))) 
-                {
-                    dispSearchResult(i);
-                }
-                else if(i == bookList.size() && (searchResultNo == 1))
-                {
-                    found = false;
-                } 
-            }
+        return bookPos_forFilteredList.get(i);
+    }
 
-            if(!found)
-            {
-                System.out.println("Book not found.");
-            }
-        }while(!found);
+    public void resetSearchResultNo()
+    {
+        searchResultNo = 0;
+    }
+
+    public void incrementSearchResultNo()
+    {
+        searchResultNo++;
+    }
+
+    //Method to get the no of Search Results
+    public int getSearchResultNo()
+    {
+        return searchResultNo;
+    }
+
+    //Check the catalog whether the book exist
+    public boolean isBookFound()
+    {
+        return found;
+    }
+
+    // Book Found
+    public void foundBook()
+    {
+        found = true;
+    }
+
+    // Book NOT Found
+    public void not_foundBook()
+    {
+        found = false;
+    }
+
+    public String getBookListIsbn(int i)
+    {
+        return bookList.get(i).getIsbn();
+    }
+
+    public String getBookListTitle(int i)
+    {
+        return bookList.get(i).getBookTitle();
+    }
+
+    public String getBookGenre(int i)
+    {
+        return bookList.get(i).getGenre();
+    }
+
+    public String getBookListAuthor(int i)
+    {
+        return bookList.get(i).getAuthor();
+    }
+
+    public String getBookListPublisher(int i)
+    {
+        return bookList.get(i).getPublisher();
+    }
+
+    public int getBookListYearPublished(int i)
+    {
+        return bookList.get(i).getYearPublished();
+    }
+
+    public String getBookListAvailability(int i)
+    {
+        return bookList.get(i).getAvailability();
     }
 
     // Method to search for a book by genre
@@ -229,100 +219,30 @@ public class Catalog implements BookData, PatronData
         }while(!found);
     }
 
-    // Method to search for a book by publisher
-    public void searchByPublisher() throws IOException
-    {
-        String publisher;
-        searchResultNo = 1;
-        bookPos.clear();
-        UtilitiesForSystem.clearScreen();
-        do
-        {
-            System.out.println("==================");
-            System.out.println("SEARCH BY PUBLISHER"); 
-            System.out.println("==================");
-            System.out.print("\n\nEnter Publisher: ");
-            publisher = UtilitiesForSystem.reader.readLine();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
-            for (int i = 0; i < bookList.size(); i++) 
-            {
-                if (bookList.get(i).getPublisher().toLowerCase().contains(publisher.toLowerCase())) 
-                {
-                    dispSearchResult(i);
-                }
-                else if(i == (bookList.size()) && (searchResultNo == 1))
-                {
-                    found = false;
-                } 
-            }
-
-            if(!found)
-            {
-                System.out.println("Book not found.");
-            }
-        }while(!found);
-    }
     
-    //Method to search for a book by ISBN
-    public void searchByISBN() throws IOException
-    {
-        String isbn = null;
-        searchResultNo = 1;
-        bookPos.clear();
-        UtilitiesForSystem.clearScreen();
-        do
-        {
-            while (isbn.equals(null)) 
-            {
-                UtilitiesForSystem.clearScreen();
-                System.out.println("==================");
-                System.out.println("SEARCH BY ISBN"); 
-                System.out.println("==================");
-                System.out.print("\n\nEnter ISBN (ISBN-13 format): ");
-                isbn = UtilitiesForSystem.reader.readLine();
-                if ((isbn.length() == 13 && isbn.startsWith("978") && UtilitiesForSystem.allCharacterAreDigits(isbn)) || (isbn.length() == 14 && isbn.startsWith("978-") && UtilitiesForSystem.allCharacterAreDigits(isbn.replace("-", ""))))
-                {
-                    if((isbn.length() == 13 && isbn.startsWith("978")))
-                    {
-                        isbn = isbn.substring(0, 3) + "-" + isbn.substring(3, 13);
-                    }
-                }
-                else
-                {
-                    System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
-                }
-            }
-            
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
-            for (int i = 0; i < bookList.size(); i++) 
-            {
-                if (bookList.get(i).getIsbn().contains(isbn)) 
-                {
-                    dispSearchResult(i);
-                }
-                else if(i == (bookList.size()) && (searchResultNo == 1))
-                {
-                    found = false;
-                } 
-            }
-
-            if(!found)
-            {
-                System.out.println("Book not found.");
-            }
-        }while(!found);
-    }
     
+    
+    
+    public void getBook(int i)
+    {
+        System.out.println("Book Title: " + bookList.get(i).getBookTitle());
+        System.out.println("Genre: " + bookList.get(i).getGenre());
+        System.out.println("Author: " + bookList.get(i).getAuthor());
+        System.out.println("Publisher: " + bookList.get(i).getPublisher());
+        System.out.println("Year Published: " + bookList.get(i).getYearPublished());
+    }
+
+    //Method to get size of book list
+    public int getBookListSize()
+    {
+        return bookList.size();
+    }
+
     //search result after the respective filters
     public void dispSearchResult(int i)
     {
-        found = true;
         System.out.println("==============================================================================================================================================================");
-        System.out.println(" " + (searchResultNo));
+        System.out.println(" " + (searchResultNo + 1));
         System.out.println("==============================================================================================================================================================");
         System.out.println("Book Title: " + bookList.get(i).getBookTitle());
         System.out.println("Genre: " + bookList.get(i).getGenre());
@@ -330,7 +250,5 @@ public class Catalog implements BookData, PatronData
         System.out.println("Publisher: " + bookList.get(i).getPublisher());
         System.out.println("Year Published: " + bookList.get(i).getYearPublished());
         System.out.println("==============================================================================================================================================================\n");
-        bookPos.add(i);
-        searchResultNo++;
     }
 }

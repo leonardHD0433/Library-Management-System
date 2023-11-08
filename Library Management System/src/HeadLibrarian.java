@@ -9,19 +9,11 @@ public class HeadLibrarian extends User
         super(userType, userName, userId, password);
     }
 
-    public String getUserType() 
+    public void manageCatalog()
     {
-        return "Head Librarian";
+
     }
 
-    public void dispManageCatalog()
-    {
-        System.out.println(toString() + "\n\n\n\n");
-        System.out.println("1. Add Book");
-        System.out.println("2. Edit Book");
-        System.out.println("3. Remove Book");
-        System.out.println("4. Back");
-    }
 
 
     
