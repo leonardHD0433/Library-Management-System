@@ -19,6 +19,7 @@ public class Session
     {
         do
         {
+            UtilitiesForSystem.clearScreen();
             loginPage();
         }while(!exit);
     }
@@ -32,11 +33,14 @@ public class Session
             dispLoginPage();
             setLoginPageSelection();
             loginPageSelection(getLoginPageSelection());
-        } while (!((getLoginPageSelection() == "1" || getLoginPageSelection() == "2") && isLoginSuccessful) &&  !(getLoginPageSelection() == "3"));
+        } while (!((getLoginPageSelection().equals("1") || getLoginPageSelection().equals("2")) && isLoginSuccessful) &&  !(getLoginPageSelection().equals("3")));
 
         if(isLoginSuccessful)
         {
-            homePage();
+            do
+            {
+                homePage();
+            }while(!backToLoginPage); 
         }
     }
 
@@ -59,10 +63,18 @@ public class Session
         switch (selection) 
         {
             case "1":
+                UtilitiesForSystem.clearScreen();
+                System.out.println("========================");
+                System.out.println("| HEAD LIBRARIAN LOGIN |");
+                System.out.println("========================\n");
                 isLoginSuccessful = headLibrarian.login();
                 break;
         
             case "2": 
+                UtilitiesForSystem.clearScreen();
+                System.out.println("========================");
+                System.out.println("|    LIBRARIAN LOGIN   |");
+                System.out.println("========================\n");
                 isLoginSuccessful = librarian.login();
                 break;
 
@@ -91,47 +103,46 @@ public class Session
     }
 
     // Home Page Selection Methods
-    public void homePageSelection(String selection) throws InterruptedException
+    public void homePageSelection(String selection) throws InterruptedException, IOException
     {
-        switch (getLoginPageSelection()) 
+        if(getLoginPageSelection().equals("1")) 
         {
-            case "1":
-                switch (selection) 
-                {
-                    case "1":
-                        headLibrarian.manageCatalog();
-                        break;
-                
-                    case "2":
-                        backToLoginPage = true;
-                        break;
+            switch (selection) 
+            {
+                case "1":
+                    headLibrarian.manageCatalog();
+                    break;
+            
+                case "2":
+                    backToLoginPage = true;
+                    break;
 
-                    default:
-                        UtilitiesForSystem.selectionErrorMsg();
-                        break;
-                }
-                break;
-        
-            default:
-                switch (selection) 
-                {
-                    case "1":
-                        librarian.browseCatalog();
-                        break;
-                
-                    case "2": 
-                        librarian.viewPatron();
-                        break;
+                default:
+                    UtilitiesForSystem.selectionErrorMsg();
+                    break;
+            }
+        }
+        else
+        {
+            switch (selection) 
+            {
+                case "1":
+                    setBrowseCatalogSelection();
+                    backToHomePage = librarian.browseCatalog(getBrowseCatalogSelection());
+                    break;
+            
+                case "2": 
+                    librarian.viewPatron();
+                    break;
 
-                    case "3":
-                        backToLoginPage = true;
-                        break;
+                case "3":
+                    backToLoginPage = true;
+                    break;
 
-                    default:
-                        UtilitiesForSystem.selectionErrorMsg();
-                        break;
-                }
-                break;
+                default:
+                    UtilitiesForSystem.selectionErrorMsg();
+                    break;
+            }
         }
     }
 
@@ -145,40 +156,6 @@ public class Session
     public String getHomePageSelection()
     {
         return homePageSelection;
-    }
-
-    // Browse Catalog Selection Methods
-    public void browseCatalogSelection(String selection) throws IOException, InterruptedException
-    {
-        switch (selection) {
-            case "1":
-                
-                break;
-
-            case "2":
-                    
-                break;
-
-            case "3":
-                
-                break;
-        
-            case "4":
-                
-                break;
-
-            case "5":
-                
-                break;  
-
-            case "6":
-                backToHomePage = true;
-                break;
-        
-            default:
-                UtilitiesForSystem.selectionErrorMsg();
-                break;
-        }
     }
 
     // Setter for the Browse Catalog Selection
@@ -201,6 +178,7 @@ public class Session
         System.out.println("1. Login as Head Librarian");
         System.out.println("2. Login as Librarian");
         System.out.println("3. Exit\n");
+        System.out.print("Selection: ");
     }
 
     // Display Home Page
@@ -209,13 +187,13 @@ public class Session
         switch (getLoginPageSelection()) 
         {
             case "1":
-                System.out.println(headLibrarian.toString() + "\n\n\n\n");
+                System.out.println(headLibrarian + "\n\n\n\n");
                 System.out.println("1. Manage Catalog");
                 System.out.println("2. Logout");
                 break;
         
             default:
-                System.out.println(librarian.toString() + "\n\n\n\n");
+                System.out.println(librarian + "\n\n\n\n");
                 System.out.println("1. Browse Catalog");
                 System.out.println("2. View Patron");
                 System.out.println("3. Logout");

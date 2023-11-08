@@ -2,13 +2,13 @@
 import java.io.*;
 import java.util.concurrent.*;
 
-public abstract class User extends UtilitiesForSystem
+public class User extends UtilitiesForSystem
 {
     Catalog catalog;
     protected String userType, userName, userId, password, readUserId, readPassword;
     
 
-    public User(String loginMenuSelection, String userName, String userId, String password) //Composition
+    public User(String userType, String userName, String userId, String password) //Composition
     {
         catalog = new Catalog();
         setUserDetails(userType, userName, userId, password);
@@ -24,9 +24,9 @@ public abstract class User extends UtilitiesForSystem
 
     public boolean login() throws IOException, InterruptedException
     {
-        System.out.println("User ID: ");
+        System.out.println("\n\nUser ID: ");
         readUserId = UtilitiesForSystem.reader.readLine();
-        System.out.println("Password: ");
+        System.out.println("\nPassword: ");
         readPassword = UtilitiesForSystem.reader.readLine();
 
         if(readUserId.equals(userId) && readPassword.equals(password))
@@ -50,9 +50,44 @@ public abstract class User extends UtilitiesForSystem
         return userType;
     }
 
-    public void browseCatalog()
+    //literally browse the catalog
+    public boolean browseCatalog(String selection) throws IOException, InterruptedException
     {
+        switch (selection) 
+        {
+            case "1":
+                viewAll();
+                return true;
 
+            case "2":
+                searchByGenre();
+                return true;
+
+            case "3":
+                searchByTitle();
+                return true;
+
+            case "4":
+                searchByAuthor();
+                return true;
+
+            case "5":
+                searchByPublisher();
+                return true;
+
+            case "6":
+                searchByISBN();
+                return true;
+
+            case "7":
+                return false;
+
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                TimeUnit.MILLISECONDS.sleep(500);
+                clearScreen();
+                return true;
+        }
     }
 
     public String toString()
