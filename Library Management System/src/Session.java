@@ -6,6 +6,7 @@ public class Session
     private HeadLibrarian headLibrarian;
     private Librarian librarian;
     private String loginPageSelection, homePageSelection, manageCatalogSelection, browseCatalogSelection;
+    private boolean exit = false, backToLoginPage = false, backToHomePage = false;
 
     public Session()
     {
@@ -15,22 +16,28 @@ public class Session
 
     public void loginPage() throws IOException, InterruptedException
     {
+        do
+        {
+            do 
+            {
+                dispLoginPage();
+                setLoginPageSelection();
+                loginPageSelection(getLoginPageSelection());
+            } while (!(getLoginPageSelection() == "1" || getLoginPageSelection() == "2" || getLoginPageSelection() == "3"));
+
+            homePage();
+        }while(!exit);
+    }
+
+    public void homePage() throws IOException, InterruptedException
+    {
         do 
         {
-            dispLoginPage();
-            setLoginPageSelection();
-            loginPageSelection(getLoginPageSelection());
-        } while (!(getLoginPageSelection() == "1" || getLoginPageSelection() == "2" || getLoginPageSelection() == "3"));
-    }
-
-    public void setLoginPageSelection() throws IOException
-    {
-        loginPageSelection = UtilitiesForSystem.reader.readLine();
-    }
-
-    public String getLoginPageSelection()
-    {
-        return loginPageSelection;
+            UtilitiesForSystem.clearScreen();
+            dispHomePage();
+            setHomePageSelection();
+            homePageSelection(getHomePageSelection());
+        } while (!(getHomePageSelection() == "1" || getHomePageSelection() == "2" || getHomePageSelection() == "3" || getHomePageSelection() == "4"));
     }
 
     public void loginPageSelection(String selection) throws IOException, InterruptedException
@@ -46,13 +53,71 @@ public class Session
                 break;
 
             case "3":
-                System.exit(0);
+                exit = true;
                 break;
 
             default:
                 System.out.println("Invalid Selection. Try again.");
                 TimeUnit.MILLISECONDS.sleep(500);
                 UtilitiesForSystem.clearScreen();
+                break;
+        }
+    }
+
+    public void setLoginPageSelection() throws IOException
+    {
+        loginPageSelection = UtilitiesForSystem.reader.readLine();
+    }
+
+    public String getLoginPageSelection()
+    {
+        return loginPageSelection;
+    }
+
+    public void homePageSelection(String selection) throws InterruptedException
+    {
+        switch (getLoginPageSelection()) 
+        {
+            case "1":
+                switch (selection) 
+                {
+                    case "1":
+                        headLibrarian.manageCatalog();
+                        break;
+                
+                    case "2":
+                        headLibrarian.logout();
+                        break;
+
+                    default:
+                        System.out.println("Invalid Selection. Try again.");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        UtilitiesForSystem.clearScreen();
+                        break;
+                }
+                break;
+        
+            default:
+                switch (selection) 
+                {
+                    case "1":
+                        librarian.browseCatalog();
+                        break;
+                
+                    case "2": break;
+
+                    case "3": break;
+
+                    case "4":
+                        librarian.logout();
+                        break;
+
+                    default:
+                        System.out.println("Invalid Selection. Try again.");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        UtilitiesForSystem.clearScreen();
+                        break;
+                }
                 break;
         }
     }

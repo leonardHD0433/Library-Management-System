@@ -60,7 +60,11 @@ public abstract class User extends UtilitiesForSystem
         return userType;
     }
 
+    public void browseCatalog()
+    {
 
+    }
+    
     public String toString()
     {
         return  "User Id: " + userId + "\nUser Name: " + userName  + "\nRole: " + userType;
