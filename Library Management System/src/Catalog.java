@@ -199,5 +199,5 @@ public class Catalog implements BookData, PatronData
         System.out.println("Publisher: " + bookList.get(i).getPublisher());
         System.out.println("Year Published: " + bookList.get(i).getYearPublished());
         System.out.println("==============================================================================================================================================================\n");
-    }
+    }   
 }

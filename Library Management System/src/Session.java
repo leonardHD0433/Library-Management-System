@@ -127,6 +127,7 @@ public class Session
             switch (selection) 
             {
                 case "1":
+                    dispBrowseCatalog();
                     setBrowseCatalogSelection();
                     backToHomePage = librarian.browseCatalog(getBrowseCatalogSelection());
                     break;
@@ -203,6 +204,7 @@ public class Session
 
     public void dispBrowseCatalog()
     {
+        UtilitiesForSystem.clearScreen();
         System.out.println(librarian.toString() + "\n\n\n\n");
         System.out.println("1. View All");
         System.out.println("2. Browse by Genre");

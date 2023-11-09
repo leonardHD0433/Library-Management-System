@@ -10,13 +10,6 @@ public class UtilitiesForSystem
         System.out.flush();
     }
 
-    public static void terminateSession() throws InterruptedException
-    {
-        System.out.println("Terminating session...");
-        TimeUnit.MILLISECONDS.sleep(500);
-        System.exit(0);
-    }
-
     public static void selectionErrorMsg() throws InterruptedException
     {
         System.out.println("Invalid Selection. Try again.");
