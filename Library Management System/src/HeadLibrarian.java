@@ -9,13 +9,19 @@ public class HeadLibrarian extends User
         super(userType, userName, userId, password);
     }
 
+    //provide selections to manage the catalog
     public void manageCatalog()
     {
 
     }
 
+    //add, edit, remove book methods will be here
 
+    // add book method
+
+    // edit book method
+
+    // remove book method
 
     
-
 }

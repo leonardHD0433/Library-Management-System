@@ -10,9 +10,17 @@ public class Librarian extends User
         super(userType, userName, userId, password);
     }
 
+    //To view patron details
     public void viewPatron()
     {
 
     }
 
+    //Borrow and Return Book Methods Should be Here, 
+    //these methods will be used to call the catalogs' methods that manipulate data or display 
+
+    // Method to borrow a book
+    
+
+    // Method to return a book
 }

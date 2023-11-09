@@ -50,6 +50,8 @@ public class User extends UtilitiesForSystem
         return userType;
     }
 
+    //Browse Catalog Method in Parent Class as both librarian and head librarian can browse the catalog but in different scenarios
+    
     //literally browse the catalog
     public boolean browseCatalog(String selection) throws IOException, InterruptedException
     {
@@ -358,9 +360,6 @@ public class User extends UtilitiesForSystem
             }
         }while(!catalog.isBookFound());
     }
-
-
-
 
 
 
