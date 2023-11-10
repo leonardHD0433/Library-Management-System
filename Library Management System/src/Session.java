@@ -5,7 +5,7 @@ public class Session
 {
     private HeadLibrarian headLibrarian;
     private Librarian librarian;
-    private String loginPageSelection, homePageSelection, manageCatalogSelection, browseCatalogSelection;
+    private String loginPageSelection, homePageSelection, manageCatalogSelection, browseCatalogSelection, borrow_returnSelection;
     private boolean isLoginSuccessful;
 
     public Session()
@@ -166,6 +166,33 @@ public class Session
         return browseCatalogSelection;
     }
 
+    public void setBorrowReturnSelection() throws IOException
+    {
+        borrow_returnSelection = UtilitiesForSystem.reader.readLine();
+    }
+
+    public String getBorrowReturnSelection()
+    {
+        return borrow_returnSelection;
+    }
+
+    public void borrow_returnPage()
+    {
+
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Display Login Page
     public void dispLoginPage()
     {
@@ -217,5 +244,13 @@ public class Session
         System.out.println("2. Edit Book");
         System.out.println("3. Remove Book");
         System.out.println("4. Back");
+    }
+
+    public void dispBorrowReturn()
+    {
+        System.out.println(librarian + "\n\n\n\n");
+        System.out.println("1. Borrow Book");
+        System.out.println("2. Return Book");
+        System.out.println("3. Back");
     }
 }

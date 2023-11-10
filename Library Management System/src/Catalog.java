@@ -103,6 +103,11 @@ public class Catalog implements BookData, PatronData
         return bookPos_forFilteredList.get(i);
     }
 
+    public int bookPos_forFilteredListSize()
+    {
+        return bookPos_forFilteredList.size();
+    }
+
     public void resetSearchResultNo()
     {
         searchResultNo = 0;
@@ -135,6 +140,11 @@ public class Catalog implements BookData, PatronData
     public void not_foundBook()
     {
         found = false;
+    }
+
+    public String getBookList(int i)
+    {
+        return bookList.get(i).toString();
     }
 
     public String getBookListIsbn(int i)
@@ -193,11 +203,8 @@ public class Catalog implements BookData, PatronData
         System.out.println("==============================================================================================================================================================");
         System.out.println(" " + (searchResultNo + 1));
         System.out.println("==============================================================================================================================================================");
-        System.out.println("Book Title: " + bookList.get(i).getBookTitle());
-        System.out.println("Genre: " + bookList.get(i).getGenre());
-        System.out.println("Author: " + bookList.get(i).getAuthor());
-        System.out.println("Publisher: " + bookList.get(i).getPublisher());
-        System.out.println("Year Published: " + bookList.get(i).getYearPublished());
+        getBook(i);
         System.out.println("==============================================================================================================================================================\n");
+        searchResultNo++;
     }   
 }

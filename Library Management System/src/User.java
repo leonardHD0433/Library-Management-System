@@ -88,8 +88,63 @@ public class User extends UtilitiesForSystem
         return backToHomePage;
     }
 
+    public void chooseBook(String chosenFilter) throws IOException, InterruptedException, IndexOutOfBoundsException
+    {
+        String chooseBook;
+        int chosenIndex;
+        do
+        {
+            chooseBook = UtilitiesForSystem.reader.readLine().toLowerCase();
+            if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"))
+            {
+                System.out.println("Please enter a digit.");
+                TimeUnit.MILLISECONDS.sleep(500);
+                clearScreen();
+            }
+        }while(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"));
+
+        if(chooseBook.equals("back"))
+        {
+            return;
+        }
+        else
+        {
+            chosenIndex = Integer.parseInt(chooseBook) - 1;
+            switch (chosenFilter) 
+            {
+                case "1":
+                    //choose book from original list
+                    if(chosenIndex >= 0 && chosenIndex < catalog.getBookListSize())
+                    {
+                        System.out.println("Book chosen:\n " + catalog.getBookList(chosenIndex));
+                    }
+                    else
+                    {
+                        System.out.println("Invalid choice. Please try again.");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        clearScreen();
+                    }
+                    break;
+            
+                default:
+                    //choose book from filtered list
+                    if(chosenIndex >= 0 && chosenIndex < catalog.bookPos_forFilteredListSize())
+                    {
+                        System.out.println(catalog.getBookList(catalog.getBookPos(chosenIndex)));
+                    }
+                    else
+                    {
+                        System.out.println("Invalid choice. Please try again.");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        clearScreen();
+                    }
+                    break;
+            }   
+        }
+    }
+
     // Method to display all books in the catalog in ascending order of book title
-    public void viewAll() 
+    public void viewAll() throws IOException, InterruptedException
     {
         catalog.sortBookList();
         UtilitiesForSystem.clearScreen();
@@ -104,10 +159,12 @@ public class User extends UtilitiesForSystem
             catalog.getBook(i);
             System.out.println("==============================================================================================================================================================\n");
         }
+        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+        chooseBook("1");
     }
 
     // Method to search for a book by title
-    public void searchByTitle() throws IOException
+    public void searchByTitle() throws IOException, InterruptedException
     {
         String title;
         catalog.resetSearchResultNo();
@@ -130,6 +187,7 @@ public class User extends UtilitiesForSystem
                     catalog.foundBook();
                     catalog.dispSearchResult(i);
                     catalog.setBookPos(i);
+
                 }
                 else if (i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
                 {
@@ -142,10 +200,12 @@ public class User extends UtilitiesForSystem
                 }
             }
         }while(!catalog.isBookFound());
+        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+        chooseBook("0");
     }
 
     // Method to search for a book by author
-    public void searchByAuthor() throws IOException
+    public void searchByAuthor() throws IOException, InterruptedException
     {
         String author;
         catalog.resetSearchResultNo();
@@ -180,10 +240,12 @@ public class User extends UtilitiesForSystem
                 System.out.println("Book not found.");
             }
         }while(!catalog.isBookFound());
+        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+        chooseBook("0");
     }
 
     // Method to search for a book by publisher
-    public void searchByPublisher() throws IOException
+    public void searchByPublisher() throws IOException, InterruptedException
     {
         String publisher;
         catalog.resetSearchResultNo();
@@ -218,10 +280,12 @@ public class User extends UtilitiesForSystem
                 System.out.println("Book not found.");
             }
         }while(!catalog.isBookFound());
+        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+        chooseBook("0");
     }
 
     //Method to search for a book by ISBN
-    public void searchByISBN() throws IOException
+    public void searchByISBN() throws IOException, InterruptedException
     {
         String isbn = null;
         catalog.resetSearchResultNo();
@@ -272,15 +336,19 @@ public class User extends UtilitiesForSystem
                 System.out.println("Book not found.");
             }
         }while(!catalog.isBookFound());
+        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+        chooseBook("0");
     }
 
     // Method to search for a book by genre
-    public void searchByGenre() throws IOException
+    public void searchByGenre() throws IOException, InterruptedException
     {
         String chooseGenre;
         int index = 0;
-        catalog.clearBookPos();
         boolean is_digit;
+        catalog.clearBookPos();
+        UtilitiesForSystem.clearScreen();
+        
         for(int i = 0; i < catalog.getBookListSize(); i++)
         {
             if(!catalog.checkCatalogForGenre(i))
@@ -350,11 +418,14 @@ public class User extends UtilitiesForSystem
                 System.out.println("Book not found.");
             }
         }while(!catalog.isBookFound());
+        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+        chooseBook("0");
     }
 
     public String toString()
     {
         return  "User Id: " + userId + "\nUser Name: " + userName  + "\nRole: " + userType;
     }
+
 
 }
