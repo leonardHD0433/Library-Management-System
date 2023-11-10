@@ -85,6 +85,17 @@ public class User extends UtilitiesForSystem
                 clearScreen();
         }
 
+        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+
+        if(selection.equals("1"))
+        {
+            chooseBook(selection);
+        }
+        else
+        {
+            chooseBook("0");
+        }    
+
         return backToHomePage;
     }
 
@@ -159,8 +170,6 @@ public class User extends UtilitiesForSystem
             catalog.getBook(i);
             System.out.println("==============================================================================================================================================================\n");
         }
-        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
-        chooseBook("1");
     }
 
     // Method to search for a book by title
@@ -200,8 +209,6 @@ public class User extends UtilitiesForSystem
                 }
             }
         }while(!catalog.isBookFound());
-        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
-        chooseBook("0");
     }
 
     // Method to search for a book by author
@@ -240,8 +247,6 @@ public class User extends UtilitiesForSystem
                 System.out.println("Book not found.");
             }
         }while(!catalog.isBookFound());
-        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
-        chooseBook("0");
     }
 
     // Method to search for a book by publisher
@@ -280,8 +285,6 @@ public class User extends UtilitiesForSystem
                 System.out.println("Book not found.");
             }
         }while(!catalog.isBookFound());
-        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
-        chooseBook("0");
     }
 
     //Method to search for a book by ISBN
@@ -335,9 +338,7 @@ public class User extends UtilitiesForSystem
             {
                 System.out.println("Book not found.");
             }
-        }while(!catalog.isBookFound());
-        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
-        chooseBook("0");
+        }while(!catalog.isBookFound());     
     }
 
     // Method to search for a book by genre
@@ -418,14 +419,10 @@ public class User extends UtilitiesForSystem
                 System.out.println("Book not found.");
             }
         }while(!catalog.isBookFound());
-        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
-        chooseBook("0");
     }
 
     public String toString()
     {
         return  "User Id: " + userId + "\nUser Name: " + userName  + "\nRole: " + userType;
     }
-
-
 }

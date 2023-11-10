@@ -16,6 +16,19 @@ public class Librarian extends User
 
     }
 
+    public void bookMenuOptions(String selection) throws IOException, InterruptedException
+    {
+        if(selection.equals("1"))
+        {
+            chooseBook(selection);
+        }
+        else if(selection.equals("2") || selection.equals("3") || selection.equals("4") || selection.equals("5") || selection.equals("6"))
+        {
+            chooseBook("0");
+        }
+    }
+
+
     //Borrow and Return Book Methods Should be Here, 
     //these methods will be used to call the catalogs' methods that manipulate data or display 
 
@@ -23,4 +36,5 @@ public class Librarian extends User
     
 
     // Method to return a book
+
 }
