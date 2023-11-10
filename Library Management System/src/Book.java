@@ -10,6 +10,7 @@ public class Book
         setDefaultDetail(bookTitle, bookIsbn, author, publisher, yearPublished, genre, bookAvailability);
     }
 
+    //USE THIS to add book
     public void setDefaultDetail(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)
     {
         this.bookTitle = bookTitle;

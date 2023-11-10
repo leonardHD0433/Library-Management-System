@@ -51,50 +51,41 @@ public class User extends UtilitiesForSystem
     }
 
     //Browse Catalog Method in Parent Class as both librarian and head librarian can browse the catalog but in different scenarios
-    
+
     //literally browse the catalog
     public boolean browseCatalog(String selection) throws IOException, InterruptedException
     {
+        boolean backToHomePage = false;
         switch (selection) 
         {
             case "1":
-                viewAll();
-                return true;
+                viewAll(); break;
 
             case "2":
-                searchByGenre();
-                return true;
+                searchByGenre(); break;
 
             case "3":
-                searchByTitle();
-                return true;
+                searchByTitle(); break;
 
             case "4":
-                searchByAuthor();
-                return true;
+                searchByAuthor(); break;
 
             case "5":
-                searchByPublisher();
-                return true;
+                searchByPublisher(); break;
 
             case "6":
-                searchByISBN();
-                return true;
+                searchByISBN(); break;
 
             case "7":
-                return false;
+                backToHomePage = true; break;
 
             default:
                 System.out.println("Invalid choice. Please try again.");
                 TimeUnit.MILLISECONDS.sleep(500);
                 clearScreen();
-                return true;
         }
-    }
 
-    public String toString()
-    {
-        return  "User Id: " + userId + "\nUser Name: " + userName  + "\nRole: " + userType;
+        return backToHomePage;
     }
 
     // Method to display all books in the catalog in ascending order of book title
@@ -361,6 +352,9 @@ public class User extends UtilitiesForSystem
         }while(!catalog.isBookFound());
     }
 
-
+    public String toString()
+    {
+        return  "User Id: " + userId + "\nUser Name: " + userName  + "\nRole: " + userType;
+    }
 
 }
