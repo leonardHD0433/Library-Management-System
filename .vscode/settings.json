@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "java/java/Library Management System/lib/commons-lang3-3.13.0.jar"
+    ]
+}

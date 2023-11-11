@@ -7,8 +7,8 @@ public class Catalog implements BookData, PatronData
     private Patron[] patronList = new Patron[5];
     ArrayList <String> genreTypes_inCatalog;
     private ArrayList <Integer> bookPos_forFilteredList;
-    private boolean found;
-    private int searchResultNo; //number of books found after filter
+    private boolean found, reject_chooseBook, isBookIndexInteger;
+    private int searchResultNo, chosenBookIndex; //number of books found after filter
     
     public Catalog()
     {
@@ -87,6 +87,48 @@ public class Catalog implements BookData, PatronData
     {
         return genreTypes_inCatalog.get(i);
     }
+
+    public void setChosenBookIndex(int chosenBookIndex)
+    {
+        this.chosenBookIndex = chosenBookIndex;
+    }
+
+    public int getChosenBookIndex()
+    {
+        return chosenBookIndex;
+    }
+
+    public void setRejectChooseBook(String str)
+    {
+        if(str.equals("back"))
+        {
+            reject_chooseBook = true;
+        }
+        else
+        {
+            reject_chooseBook = false;
+        }
+    }
+
+    public boolean getRejectChooseBook()
+    {
+        return reject_chooseBook;
+    }
+
+    public void setBookIndexInteger(boolean flag)
+    {
+        isBookIndexInteger = flag;
+    }
+
+    public boolean isBookIndexInteger()
+    {
+        return isBookIndexInteger;
+    }
+    
+
+
+
+
 
     public void clearBookPos()
     {
@@ -184,11 +226,7 @@ public class Catalog implements BookData, PatronData
 
     public void getBook(int i)
     {
-        System.out.println("Book Title: " + bookList.get(i).getBookTitle());
-        System.out.println("Genre: " + bookList.get(i).getGenre());
-        System.out.println("Author: " + bookList.get(i).getAuthor());
-        System.out.println("Publisher: " + bookList.get(i).getPublisher());
-        System.out.println("Year Published: " + bookList.get(i).getYearPublished());
+        System.out.println(bookList.get(i));
     }
 
     //Method to get size of book list
@@ -205,6 +243,6 @@ public class Catalog implements BookData, PatronData
         System.out.println("==============================================================================================================================================================");
         getBook(i);
         System.out.println("==============================================================================================================================================================\n");
-        searchResultNo++;
-    }   
+    }  
+
 }

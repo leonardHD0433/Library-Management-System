@@ -85,16 +85,6 @@ public class User extends UtilitiesForSystem
                 clearScreen();
         }
 
-        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
-
-        if(selection.equals("1"))
-        {
-            chooseBook(selection);
-        }
-        else
-        {
-            chooseBook("0");
-        }    
 
         return backToHomePage;
     }
@@ -103,37 +93,39 @@ public class User extends UtilitiesForSystem
     {
         String chooseBook;
         int chosenIndex;
-        do
+
+        chooseBook = UtilitiesForSystem.reader.readLine().toLowerCase();
+        if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"))
         {
-            chooseBook = UtilitiesForSystem.reader.readLine().toLowerCase();
-            if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"))
-            {
-                System.out.println("Please enter a digit.");
-                TimeUnit.MILLISECONDS.sleep(500);
-                clearScreen();
-            }
-        }while(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"));
+            System.out.println("Please enter a digit or enter back.");
+            TimeUnit.MILLISECONDS.sleep(500);
+            clearScreen();
+        }
 
         if(chooseBook.equals("back"))
         {
+            catalog.setRejectChooseBook(chooseBook);
             return;
         }
-        else
+        else if(UtilitiesForSystem.allCharacterAreDigits(chooseBook))
         {
             chosenIndex = Integer.parseInt(chooseBook) - 1;
+            catalog.setChosenBookIndex(chosenIndex);
+            catalog.setRejectChooseBook(chooseBook);
+            catalog.setBookIndexInteger(true);
             switch (chosenFilter) 
             {
                 case "1":
                     //choose book from original list
                     if(chosenIndex >= 0 && chosenIndex < catalog.getBookListSize())
                     {
-                        System.out.println("Book chosen:\n " + catalog.getBookList(chosenIndex));
+                        System.out.println("Book chosen:\n\n" + catalog.getBookList(chosenIndex));
+                        dispOption_inBookPage(chosenIndex);
                     }
                     else
                     {
                         System.out.println("Invalid choice. Please try again.");
                         TimeUnit.MILLISECONDS.sleep(500);
-                        clearScreen();
                     }
                     break;
             
@@ -147,36 +139,71 @@ public class User extends UtilitiesForSystem
                     {
                         System.out.println("Invalid choice. Please try again.");
                         TimeUnit.MILLISECONDS.sleep(500);
-                        clearScreen();
                     }
                     break;
             }   
+        }
+        else
+        {
+            catalog.setRejectChooseBook(chooseBook);
+            catalog.setBookIndexInteger(false);
         }
     }
 
     // Method to display all books in the catalog in ascending order of book title
     public void viewAll() throws IOException, InterruptedException
     {
+        boolean flag;
         catalog.sortBookList();
-        UtilitiesForSystem.clearScreen();
-        System.out.println("CATALOG");
-        System.out.println("==============================================================================================================================================================");
-        System.out.println("No.");
-        for (int i = 0; i < catalog.getBookListSize(); i++) 
-        { 
+        do
+        {
+            UtilitiesForSystem.clearScreen();
+            System.out.println("CATALOG");
             System.out.println("==============================================================================================================================================================");
-            System.out.println(" " + (i + 1));
-            System.out.println("==============================================================================================================================================================");
-            catalog.getBook(i);
-            System.out.println("==============================================================================================================================================================\n");
-        }
+            System.out.println("No.");
+            for (int i = 0; i < catalog.getBookListSize(); i++) 
+            { 
+                System.out.println("==============================================================================================================================================================");
+                System.out.println(" " + (i + 1));
+                System.out.println("==============================================================================================================================================================");
+                catalog.getBook(i);
+                System.out.println("==============================================================================================================================================================\n");
+                catalog.foundBook();
+            }
+
+            if(catalog.isBookFound())
+            {
+                System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+                chooseBook("1");
+                if(catalog.getRejectChooseBook() == true)
+                {
+                    flag = true;
+                }
+                else
+                {
+                    if(catalog.isBookIndexInteger() == true)
+                    {
+                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                    }
+                    else
+                    {
+                        flag = false;
+                    }
+                }
+            }
+            else
+            {
+                System.out.println("Book not found.");
+                flag = false;
+            }
+        }while(!flag);
     }
 
     // Method to search for a book by title
     public void searchByTitle() throws IOException, InterruptedException
     {
+        boolean flag;
         String title;
-        catalog.resetSearchResultNo();
         catalog.clearBookPos();
         do
         {
@@ -186,28 +213,54 @@ public class User extends UtilitiesForSystem
             System.out.println("==================");
             System.out.print("\n\nEnter Title: ");
             title = UtilitiesForSystem.reader.readLine();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
-            for (int i = 0; i < catalog.getBookListSize(); i++) 
+            do
             {
-                if (catalog.getBookListTitle(i).toLowerCase().contains(title.toLowerCase())) 
+                catalog.resetSearchResultNo();
+                UtilitiesForSystem.clearScreen();
+                System.out.println("SEARCH RESULTS");
+                System.out.println("==============================================================================================================================================================");
+                System.out.println("No.");
+                for (int i = 0; i < catalog.getBookListSize(); i++) 
                 {
-                    catalog.foundBook();
-                    catalog.dispSearchResult(i);
-                    catalog.setBookPos(i);
+                    if (catalog.getBookListTitle(i).toLowerCase().contains(title.toLowerCase())) 
+                    {
+                        catalog.foundBook();
+                        catalog.dispSearchResult(i);
+                        catalog.setBookPos(i);
 
+                    }
+                    else if (i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+                    {
+                        catalog.not_foundBook();
+                    }
                 }
-                else if (i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+
+                if(catalog.isBookFound())
                 {
-                    catalog.not_foundBook();
+                    System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+                    chooseBook("0");
+                    if(catalog.getRejectChooseBook() == true)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        if(catalog.isBookIndexInteger() == true)
+                        {
+                            flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                        }
+                        else
+                        {
+                            flag = false;
+                        }
+                    }
                 }
-
-                if(!catalog.isBookFound())
+                else
                 {
                     System.out.println("Book not found.");
+                    flag = false;
                 }
-            }
+            }while(!flag);
         }while(!catalog.isBookFound());
     }
 
@@ -215,7 +268,7 @@ public class User extends UtilitiesForSystem
     public void searchByAuthor() throws IOException, InterruptedException
     {
         String author;
-        catalog.resetSearchResultNo();
+        boolean flag;
         catalog.clearBookPos();
         do
         {
@@ -225,27 +278,53 @@ public class User extends UtilitiesForSystem
             System.out.println("==================");
             System.out.print("\n\nEnter Author: ");
             author = UtilitiesForSystem.reader.readLine();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
-            for (int i = 0; i < catalog.getBookListSize(); i++) 
+            do
             {
-                if ((catalog.getBookListAuthor(i).toLowerCase().contains(author.toLowerCase()))) 
+                catalog.resetSearchResultNo();
+                UtilitiesForSystem.clearScreen();
+                System.out.println("SEARCH RESULTS");
+                System.out.println("==============================================================================================================================================================");
+                System.out.println("No.");
+                for (int i = 0; i < catalog.getBookListSize(); i++) 
                 {
-                    catalog.foundBook();
-                    catalog.dispSearchResult(i);
-                    catalog.setBookPos(i);
+                    if ((catalog.getBookListAuthor(i).toLowerCase().contains(author.toLowerCase()))) 
+                    {
+                        catalog.foundBook();
+                        catalog.dispSearchResult(i);
+                        catalog.setBookPos(i);
+                    }
+                    else if(i == catalog.getBookListSize() && (catalog.getSearchResultNo() == 0))
+                    {
+                        catalog.not_foundBook();
+                    } 
                 }
-                else if(i == catalog.getBookListSize() && (catalog.getSearchResultNo() == 0))
-                {
-                    catalog.not_foundBook();
-                } 
-            }
 
-            if(!catalog.isBookFound())
-            {
-                System.out.println("Book not found.");
-            }
+                if(catalog.isBookFound())
+                {
+                    System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+                    chooseBook("0");
+                    if(catalog.getRejectChooseBook() == true)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        if(catalog.isBookIndexInteger() == true)
+                        {
+                            flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                        }
+                        else
+                        {
+                            flag = false;
+                        }
+                    }
+                }
+                else
+                {
+                    System.out.println("Book not found.");
+                    flag = false;
+                }
+            }while(!flag);
         }while(!catalog.isBookFound());
     }
 
@@ -253,37 +332,64 @@ public class User extends UtilitiesForSystem
     public void searchByPublisher() throws IOException, InterruptedException
     {
         String publisher;
-        catalog.resetSearchResultNo();
+        boolean flag;
         catalog.clearBookPos();
-        UtilitiesForSystem.clearScreen();
         do
         {
+            
+            UtilitiesForSystem.clearScreen();
             System.out.println("==================");
             System.out.println("SEARCH BY PUBLISHER"); 
             System.out.println("==================");
             System.out.print("\n\nEnter Publisher: ");
             publisher = UtilitiesForSystem.reader.readLine();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
-            for (int i = 0; i < catalog.getBookListSize(); i++) 
+            do
             {
-                if (catalog.getBookListPublisher(i).toLowerCase().contains(publisher.toLowerCase())) 
+                catalog.resetSearchResultNo();
+                UtilitiesForSystem.clearScreen();
+                System.out.println("SEARCH RESULTS");
+                System.out.println("==============================================================================================================================================================");
+                System.out.println("No.");
+                for (int i = 0; i < catalog.getBookListSize(); i++) 
                 {
-                    catalog.foundBook();
-                    catalog.dispSearchResult(i);
-                    catalog.setBookPos(i);
+                    if (catalog.getBookListPublisher(i).toLowerCase().contains(publisher.toLowerCase())) 
+                    {
+                        catalog.foundBook();
+                        catalog.dispSearchResult(i);
+                        catalog.setBookPos(i);
+                    }
+                    else if(i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+                    {
+                        catalog.not_foundBook();
+                    } 
                 }
-                else if(i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
-                {
-                    catalog.not_foundBook();
-                } 
-            }
 
-            if(!catalog.isBookFound())
-            {
-                System.out.println("Book not found.");
-            }
+                if(catalog.isBookFound())
+                {
+                    System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+                    chooseBook("0");
+                    if(catalog.getRejectChooseBook() == true)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        if(catalog.isBookIndexInteger() == true)
+                        {
+                            flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                        }
+                        else
+                        {
+                            flag = false;
+                        }
+                    }
+                }
+                else
+                {
+                    System.out.println("Book not found.");
+                    flag = false;
+                }
+            }while(!flag);
         }while(!catalog.isBookFound());
     }
 
@@ -291,7 +397,7 @@ public class User extends UtilitiesForSystem
     public void searchByISBN() throws IOException, InterruptedException
     {
         String isbn = null;
-        catalog.resetSearchResultNo();
+        boolean flag;
         catalog.clearBookPos();
         UtilitiesForSystem.clearScreen();
         do
@@ -318,26 +424,51 @@ public class User extends UtilitiesForSystem
                 }
             }
             
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
-            for (int i = 0; i < catalog.getBookListSize(); i++) 
+            do
             {
-                if (catalog.getBookListIsbn(i).contains(isbn)) 
+                catalog.resetSearchResultNo();
+                System.out.println("SEARCH RESULTS");
+                System.out.println("==============================================================================================================================================================");
+                System.out.println("No.");
+                for (int i = 0; i < catalog.getBookListSize(); i++) 
                 {
-                    catalog.foundBook();
-                    catalog.dispSearchResult(i);
+                    if (catalog.getBookListIsbn(i).contains(isbn)) 
+                    {
+                        catalog.foundBook();
+                        catalog.dispSearchResult(i);
+                    }
+                    else if(i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+                    {
+                        catalog.not_foundBook();
+                    } 
                 }
-                else if(i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
-                {
-                    catalog.not_foundBook();
-                } 
-            }
 
-            if(!catalog.isBookFound())
-            {
-                System.out.println("Book not found.");
-            }
+                if(catalog.isBookFound())
+                {
+                    System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+                    chooseBook("0");
+                    if(catalog.getRejectChooseBook() == true)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        if(catalog.isBookIndexInteger() == true)
+                        {
+                            flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                        }
+                        else
+                        {
+                            flag = false;
+                        }
+                    }
+                }
+                else
+                {
+                    System.out.println("Book not found.");
+                    flag = false;
+                }
+            }while(!flag);
         }while(!catalog.isBookFound());     
     }
 
@@ -346,7 +477,7 @@ public class User extends UtilitiesForSystem
     {
         String chooseGenre;
         int index = 0;
-        boolean is_digit;
+        boolean is_digit, flag;
         catalog.clearBookPos();
         UtilitiesForSystem.clearScreen();
         
@@ -359,10 +490,10 @@ public class User extends UtilitiesForSystem
         }
 
         catalog.sortGenreTypes_inCatalog();
-
         catalog.clearBookPos();
         
-        do{
+        do
+        {
             do 
             {
                 UtilitiesForSystem.clearScreen();
@@ -379,6 +510,7 @@ public class User extends UtilitiesForSystem
                 if(!is_digit)
                 {
                     System.out.println("Please enter a digit.");
+                    TimeUnit.MILLISECONDS.sleep(500);
                 }
                 else
                 {
@@ -388,37 +520,92 @@ public class User extends UtilitiesForSystem
                 if (index > (catalog.getGenreTypes_inCatalogSize() - 1) || index < 0)
                 {
                     System.out.println("Invalid choice. Please try again.");
+                    TimeUnit.MILLISECONDS.sleep(500);
                 }
                 else
                 {
                     break;
                 }
-            } while (!is_digit);
+            } while (!is_digit && (index > (catalog.getGenreTypes_inCatalogSize() - 1) || index < 0));
 
             if(is_digit && (index < catalog.getGenreTypes_inCatalogSize() && index >= 0))
             {
-                System.out.println("SEARCH RESULTS");
-                System.out.println("==============================================================================================================================================================");
-                System.out.println("No.");
-                for (int i = 0; i < catalog.getBookListSize(); i++) 
+                do
                 {
-                    if (catalog.getBookGenre(i).equals(catalog.getGenreTypes_inCatalog(index))) 
+                    catalog.resetSearchResultNo();
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("SEARCH RESULTS");
+                    System.out.println("==============================================================================================================================================================");
+                    System.out.println("No.");
+                    for (int i = 0; i < catalog.getBookListSize(); i++) 
                     {
-                        catalog.foundBook();
-                        catalog.dispSearchResult(i);
-                    }
-                    else if (i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
-                    {
-                        catalog.not_foundBook();
+                        if (catalog.getBookGenre(i).equals(catalog.getGenreTypes_inCatalog(index))) 
+                        {
+                            catalog.foundBook();
+                            catalog.dispSearchResult(i);
+                            catalog.incrementSearchResultNo();
+                        }
+                        else if (i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+                        {
+                            catalog.not_foundBook();
+                        } 
                     } 
-                }  
+                    
+                    if(catalog.isBookFound())
+                    {
+                        System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+                        chooseBook("0");
+                        if(catalog.getRejectChooseBook() == true)
+                        {
+                            flag = true;
+                        }
+                        else
+                        {
+                            if(catalog.isBookIndexInteger() == true)
+                            {
+                                flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                            }
+                            else
+                            {
+                                flag = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("Book not found.");
+                        flag = false;
+                    }
+                }while(!flag);
             }
-
-            if(!catalog.isBookFound())
+            else
             {
-                System.out.println("Book not found.");
-            }
+                System.out.println("\nPlease choose from the available genres");
+            }   
         }while(!catalog.isBookFound());
+    }
+
+    public void dispOption_inBookPage(int i)
+    {
+        if(getUserType() == "HEAD LIBRARIAN")
+        {
+            System.out.println("\n\n\n1. Edit Book");
+            System.out.println("2. Remove Book");
+            System.out.println("3. Back");
+        }
+        else
+        {
+            if(catalog.getBookListAvailability(i).equals("Available"))
+            {
+            System.out.println("\n\n\n1. Borrow Book");
+            System.out.println("2. Back");
+            }
+            else
+            {
+                System.out.println("\n\n\n1. Return Book");
+                System.out.println("2. Back");
+            }
+        }
     }
 
     public String toString()

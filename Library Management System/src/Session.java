@@ -10,8 +10,8 @@ public class Session
 
     public Session()
     {
-        headLibrarian = new HeadLibrarian("HEAD LIBRARIAN", "Edwin Chua Jin Rui", "headStaff@001", "iamtheHeadLibrarianXD");
-        librarian = new Librarian("LIBRARIAN", "Teh Yu Kang", "staff@002", "iamTehYuk6488");
+        headLibrarian = new HeadLibrarian("HEAD LIBRARIAN", "Edwin Chua Jin Rui", "headStaff@001", "1234");
+        librarian = new Librarian("LIBRARIAN", "Teh Yu Kang", "staff@002", "12345");
     }
 
     public boolean loginPage() throws IOException, InterruptedException
@@ -106,7 +106,13 @@ public class Session
             switch (selection) 
             {
                 case "1":
-                    headLibrarian.manageCatalog(); break;
+                    do
+                    {
+                        dispManageCatalog();
+                        setManageCatalogSelection();
+                        backToHomePage = headLibrarian.manageCatalog(getManageCatalogSelection());
+                    }while(!backToHomePage);
+                    break;
             
                 case "2":
                     backToLoginPage = true; break;
@@ -126,10 +132,15 @@ public class Session
                         setBrowseCatalogSelection();
                         backToHomePage = librarian.browseCatalog(getBrowseCatalogSelection());
                     }while(!backToHomePage);
+                    wait();
                     break;
             
                 case "2": 
-                    librarian.viewPatron(); break;
+                    do
+                    {
+                        librarian.viewPatron();
+                    }while(!backToHomePage);
+                    break;
 
                 case "3":
                     backToLoginPage = true; break;
@@ -175,6 +186,20 @@ public class Session
     {
         return borrow_returnSelection;
     }
+
+    //setter for manage catalog selection
+    public void setManageCatalogSelection() throws IOException
+    {
+        manageCatalogSelection = UtilitiesForSystem.reader.readLine();
+    }
+
+    //getter for manage catalog selection
+    public String getManageCatalogSelection()
+    {
+        return manageCatalogSelection;
+    }
+
+
 
     public void borrow_returnPage()
     {
@@ -239,6 +264,7 @@ public class Session
 
     public void dispManageCatalog()
     {
+        UtilitiesForSystem.clearScreen();
         System.out.println(headLibrarian + "\n\n\n\n");
         System.out.println("1. Add Book");
         System.out.println("2. Edit Book");
@@ -253,4 +279,6 @@ public class Session
         System.out.println("2. Return Book");
         System.out.println("3. Back");
     }
+
+    
 }

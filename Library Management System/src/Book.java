@@ -25,21 +25,14 @@ public class Book
     //edit the availability of the book
     public void setBookAvailability(String selection)
     {
-        switch (selection) {
+        switch (selection) 
+        {
             case "1":
                 bookAvailability = "Available";
                 break;
-
-            case "2":
-                bookAvailability = "Borrowed";
-                break;
-
-            case "3":
-                bookAvailability = "Archived";
-                break;
         
             default:
-                System.out.println("Invalid Selection. Try again.");
+                bookAvailability = "Borrowed";
                 break;
         }
     }

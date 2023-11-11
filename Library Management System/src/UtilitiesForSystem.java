@@ -19,13 +19,20 @@ public class UtilitiesForSystem
 
     public static boolean allCharacterAreDigits(String str)
     {
-        for(int i = 0; i < str.length(); i++)
+        if(!str.isBlank())
         {
-            if(!Character.isDigit(str.charAt(i)))
+            for(int i = 0; i < str.length(); i++)
             {
-                return false;
+                if(!Character.isDigit(str.charAt(i)))
+                {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+        else
+        {
+            return false;
+        }
     }
 }
