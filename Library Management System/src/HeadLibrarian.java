@@ -33,7 +33,7 @@ public class HeadLibrarian extends User
             default:
                 System.out.println("Invalid choice. Please try again.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                clearScreen();
+                UtilitiesForSystem.clearScreen();
         }
         return backToHomePage;
     }

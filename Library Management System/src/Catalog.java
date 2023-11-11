@@ -73,13 +73,18 @@ public class Catalog implements BookData, PatronData
 
     public boolean checkCatalogForGenre(int i)
     {
-        return genreTypes_inCatalog.contains(getBookGenre(i));
+        return !genreTypes_inCatalog.contains(getBookGenre(i));
     }
 
     //get genreTypes_inCatalog size
     public int getGenreTypes_inCatalogSize()
     {
         return genreTypes_inCatalog.size();
+    }
+
+    public void clearGenreTypes_inCatalog()
+    {
+        genreTypes_inCatalog.clear();
     }
 
     //get genreTypes_inCatalog element
