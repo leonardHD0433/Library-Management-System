@@ -2,7 +2,7 @@
 import java.io.*;
 import java.util.concurrent.*;
 
-public class User
+public abstract class User
 {
     Catalog catalog;
     protected String userType, userName, userId, password, readUserId, readPassword;
@@ -122,7 +122,7 @@ public class User
                     {
                         UtilitiesForSystem.clearScreen();
                         System.out.println("Book chosen:\n\n" + catalog.getBookList(chosenIndex));
-                        borrowBookSelection(catalog.getChosenBookIndex());
+                        whatToDoWithBook(catalog.getChosenBookIndex());
                     }
                     else
                     {
@@ -138,7 +138,7 @@ public class User
                     {
                         UtilitiesForSystem.clearScreen();
                         System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
-                        borrowBookSelection(catalog.getChosenBookIndex());
+                        whatToDoWithBook(catalog.getChosenBookIndex());
                     }
                     else
                     {
@@ -616,50 +616,9 @@ public class User
         }while(index < catalog.getGenreTypes_inCatalogSize() && index >= 0 && catalog.getRejectChooseBook() == false); 
     }
 
-    public void borrowBookSelection(int bookIndex) throws IOException, InterruptedException
-    {
-        String borrow_or_back;
-        do
-        {
-            dispOption_inBookPage(bookIndex);
+    public abstract void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException;
 
-            borrow_or_back = UtilitiesForSystem.reader.readLine().toLowerCase();
-            switch (borrow_or_back) 
-            {
-                case "1": catalog.setBackTo_ChooseBook(false); break;
-            
-                case "back": catalog.setBackTo_ChooseBook(true); break;
-
-                default: UtilitiesForSystem.selectionErrorMsg();
-            }
-        }while(!(borrow_or_back.equals("1") || borrow_or_back.equals("back")));
-
-        if(catalog.getBackTo_ChooseBook() == true)
-        {
-            return;
-        }
-        else
-        {
-            if(catalog.getBookListAvailability(bookIndex).equals("Available"))
-            {
-                borrowBook(bookIndex);
-            }
-            else
-            {
-                returnBook(bookIndex);
-            }
-        }
-    }
-
-    public void borrowBook(int bookIndex)
-    {
-
-    }
-
-    public void returnBook(int bookIndex)
-    {
-
-    }
+    
 
 
 

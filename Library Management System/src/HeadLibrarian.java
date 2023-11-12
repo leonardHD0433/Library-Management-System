@@ -38,6 +38,11 @@ public class HeadLibrarian extends User
         return backToHomePage;
     }
 
+    public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException
+    {
+        
+    }
+
     //add, edit, remove book methods will be here
 
     // add book method
