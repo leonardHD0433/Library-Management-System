@@ -7,7 +7,7 @@ public class Catalog implements BookData, PatronData
     private Patron[] patronList = new Patron[5];
     ArrayList <String> genreTypes_inCatalog;
     private ArrayList <Integer> bookPos_forFilteredList;
-    private boolean found, reject_chooseBook, isBookIndexInteger;
+    private boolean found, reject_chooseBook, isBookIndexInteger, backTo_ChooseBook;
     private int searchResultNo, chosenBookIndex; //number of books found after filter
     
     public Catalog()
@@ -130,6 +130,15 @@ public class Catalog implements BookData, PatronData
         return isBookIndexInteger;
     }
     
+    public void setBackTo_ChooseBook(boolean flag)
+    {
+        backTo_ChooseBook = flag;
+    }
+
+    public boolean getBackTo_ChooseBook()
+    {
+        return backTo_ChooseBook;
+    }
 
 
 

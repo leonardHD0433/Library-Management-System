@@ -109,13 +109,14 @@ public class User
         else if(UtilitiesForSystem.allCharacterAreDigits(chooseBook))
         {
             chosenIndex = Integer.parseInt(chooseBook) - 1;
-            catalog.setChosenBookIndex(chosenIndex);
+            
             catalog.setRejectChooseBook(chooseBook);
             catalog.setBookIndexInteger(true);
             switch (chosenFilter) 
             {
                 case "1":
                     //choose book from original list
+                    catalog.setChosenBookIndex(chosenIndex);
                     if(chosenIndex >= 0 && chosenIndex < catalog.getBookListSize())
                     {
                         UtilitiesForSystem.clearScreen();
@@ -132,12 +133,12 @@ public class User
             
                 default:
                     //choose book from filtered list
-                    if(chosenIndex >= 0 && chosenIndex < catalog.bookPos_forFilteredListSize())
+                    catalog.setChosenBookIndex(catalog.getBookPos(chosenIndex));
+                    if(catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize())
                     {
                         UtilitiesForSystem.clearScreen();
-                        System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getBookPos(chosenIndex)));
-                        dispOption_inBookPage(catalog.getBookPos(chosenIndex));
-                        TimeUnit.MINUTES.sleep(5);
+                        System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
+                        borrowBookSelection(catalog.getChosenBookIndex());
                     }
                     else
                     {
@@ -243,7 +244,7 @@ public class User
                 {
                     if(catalog.isBookIndexInteger() == true)
                     {
-                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
                     }
                     else
                     {
@@ -305,7 +306,7 @@ public class User
                 {
                     if(catalog.isBookIndexInteger() == true)
                     {
-                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
                     }
                     else
                     {
@@ -367,7 +368,7 @@ public class User
                 {
                     if(catalog.isBookIndexInteger() == true)
                     {
-                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
                     }
                     else
                     {
@@ -443,7 +444,7 @@ public class User
                 {
                     if(catalog.isBookIndexInteger() == true)
                     {
-                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
                     }
                     else
                     {
@@ -467,7 +468,6 @@ public class User
         boolean is_digit, flag;
         do
         {
-            catalog.clearBookPos();
             catalog.clearGenreTypes_inCatalog();
             UtilitiesForSystem.clearScreen();
             
@@ -518,6 +518,7 @@ public class User
             {
                 do
                 {
+                    catalog.clearBookPos();
                     catalog.resetSearchResultNo();
                     UtilitiesForSystem.clearScreen();
                     System.out.println("SEARCH RESULTS");
@@ -550,7 +551,7 @@ public class User
                         {
                             if(catalog.isBookIndexInteger() == true)
                             {
-                                flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.bookPos_forFilteredListSize();
+                                flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
                             }
                             else
                             {
@@ -573,6 +574,57 @@ public class User
         }while(index < catalog.getGenreTypes_inCatalogSize() && index >= 0); 
     }
 
+    public void borrowBookSelection(int bookIndex) throws IOException, InterruptedException
+    {
+        String borrow_or_back;
+        do
+        {
+            dispOption_inBookPage(bookIndex);
+
+            borrow_or_back = UtilitiesForSystem.reader.readLine();
+            switch (borrow_or_back) 
+            {
+                case "1": catalog.setBackTo_ChooseBook(false); break;
+            
+                case "back": catalog.setBackTo_ChooseBook(true); break;
+
+                default: UtilitiesForSystem.selectionErrorMsg();
+            }
+        }while((borrow_or_back.equals("1") || borrow_or_back.equals("back")));
+
+        if(catalog.getBackTo_ChooseBook() == true)
+        {
+            return;
+        }
+        else
+        {
+            if(catalog.getBookListAvailability(bookIndex).equals("Available"))
+            {
+                borrowBook(bookIndex);
+            }
+            else
+            {
+                returnBook(bookIndex);
+            }
+        }
+    }
+
+    public void borrowBook(int bookIndex)
+    {
+
+    }
+
+    public void returnBook(int bookIndex)
+    {
+
+    }
+
+
+
+
+
+
+
     public void dispOption_inBookPage(int i)
     {
         if(getUserType() == "HEAD LIBRARIAN")
@@ -592,6 +644,7 @@ public class User
                 System.out.println("\n\n\n1. Return Book");    
             }
             System.out.println("2. Back");
+            System.out.println("\nSelection: ");
         }
     }
 
