@@ -1,6 +1,6 @@
 public class Patron
 {
-    protected String patronName, patronId, contactNumber;
+    private String patronName, patronId, contactNumber;
 
     public Patron(String patronName, String patronId, String contactNumber)
     {
@@ -12,6 +12,21 @@ public class Patron
         this.patronName = patronName;
         this.patronId = patronId;
         this.contactNumber = contactNumber;
+    }
+
+    public String getPatronName()
+    {
+        return patronName;
+    }
+
+    public String getPatronID()
+    {
+        return patronId;
+    }
+
+    public String getContactNumber()
+    {
+        return contactNumber;
     }
 
     public String toString()

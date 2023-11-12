@@ -5,9 +5,13 @@ import java.util.Comparator;
 
 public class Librarian extends User 
 {
+    Loan[] loanList = new Loan[5];
+
+
     public Librarian(String userType, String userName, String userId, String password) //Composition
     {
         super(userType, userName, userId, password);
+        
     }
 
     //To view patron details
@@ -16,7 +20,12 @@ public class Librarian extends User
         
     }
 
-
+    public void setLoanList()
+    {
+        for (int i = 0; i < loanList.length; i++) {
+            loanList[i] = new Loan(catalog.getPatronListName(i), catalog.getPatronListID(i), catalog.getPatronContactNumber(i));
+        }
+    }
 
     //Borrow and Return Book Methods Should be Here, 
     //these methods will be used to call the catalogs' methods that manipulate data or display 
@@ -58,17 +67,28 @@ public class Librarian extends User
     }
 
     // Method to borrow a book
-    public void borrowBook(int bookIndex)
+    public void borrowBook(int bookIndex) throws IOException, InterruptedException
     {
-
+        String choosePatron;
+        int patronIndex;
+        do
+        {
+            catalog.dispPatronList();
+            choosePatron = UtilitiesForSystem.reader.readLine();
+            if(!UtilitiesForSystem.allCharacterAreDigits(choosePatron))
+            {
+                UtilitiesForSystem.selectionErrorMsg();
+            }
+        }while (!UtilitiesForSystem.allCharacterAreDigits(choosePatron));
+        patronIndex = Integer.parseInt(choosePatron)-1;
+        loanList[patronIndex].addBook(patronIndex, catalog.getBookListTitle(bookIndex), catalog.getBookListIsbn(bookIndex), 
+        catalog.getBookListAuthor(bookIndex), catalog.getBookListPublisher(bookIndex), catalog.getBookListYearPublished(bookIndex), 
+        catalog.getBookGenre(bookIndex), catalog.getBookListAvailability(bookIndex));
     }
 
+    // Method to return a book
     public void returnBook(int bookIndex)
     {
 
     }
-    
-
-    // Method to return a book
-
 }

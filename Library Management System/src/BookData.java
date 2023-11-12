@@ -22,7 +22,7 @@ public interface BookData
 
     public final int[] YEAR_PUBLISHED = {2021, 2017, 2019, 2022, 2017, 2020, 2016, 2020, 2023, 2023};
 
-    public final String[] BOOK_AVAILABILITY = {"Available", "Borrowed", "Archived"};
+    public final String[] BOOK_AVAILABILITY = {"Available", "Borrowed"};
 
     public void setBookList(int i);
 }

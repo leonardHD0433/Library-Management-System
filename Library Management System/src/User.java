@@ -80,11 +80,8 @@ public abstract class User
                 backToHomePage = true; break;
 
             default:
-                System.out.println("Invalid choice. Please try again.");
-                TimeUnit.MILLISECONDS.sleep(500);
-                UtilitiesForSystem.clearScreen();
+                UtilitiesForSystem.selectionErrorMsg();
         }
-
 
         return backToHomePage;
     }
@@ -617,8 +614,7 @@ public abstract class User
     }
 
     public abstract void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException;
-
-    
+  
 
 
 

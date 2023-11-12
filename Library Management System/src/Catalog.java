@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+
 public class Catalog implements BookData, PatronData
 {
     private ArrayList<Book> bookList;
@@ -36,7 +37,21 @@ public class Catalog implements BookData, PatronData
     {
         patronList[i] = new Patron(PATRON_NAME[i], PATRON_ID[i], PATRON_CONTACT_NO[i]);
     }
+
+    public String getPatronListName(int i)
+    {
+        return patronList[i].getPatronName();
+    }
     
+    public String getPatronListID(int i)
+    {
+        return patronList[i].getPatronID();
+    }
+
+    public String getPatronContactNumber(int i)
+    {
+        return patronList[i].getContactNumber();
+    }
     //sort Catalog by book title in ascending order
     public void sortBookList()
     {
@@ -259,4 +274,16 @@ public class Catalog implements BookData, PatronData
         System.out.println("==============================================================================================================================================================\n");
     }  
 
+    public void dispPatronList()
+    {
+        System.out.println("PATRON LIST");
+        for (int j = 0; j < patronList.length; j++) {
+            System.out.println("==============================================================================================================================================================");
+            System.out.println("NO. " + (j + 1));
+            System.out.println("==============================================================================================================================================================");
+            System.out.println(patronList[j]);
+            System.out.println("==============================================================================================================================================================\n");
+        }
+        System.out.print("\n\nWhich Patron is borrowing? ");
+    }
 }

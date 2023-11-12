@@ -199,24 +199,11 @@ public class Session
         return manageCatalogSelection;
     }
 
-
-
     public void borrow_returnPage()
     {
 
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
     
     // Display Login Page
     public void dispLoginPage()
@@ -278,7 +265,5 @@ public class Session
         System.out.println("1. Borrow Book");
         System.out.println("2. Return Book");
         System.out.println("3. Back");
-    }
-
-    
+    } 
 }

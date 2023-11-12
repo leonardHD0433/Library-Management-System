@@ -23,17 +23,15 @@ public class Book
     }
 
     //edit the availability of the book
-    public void setBookAvailability(String selection)
+    public void setBookAvailability(boolean availability)
     {
-        switch (selection) 
+        if(availability = true)
         {
-            case "1":
-                bookAvailability = "Available";
-                break;
-        
-            default:
-                bookAvailability = "Borrowed";
-                break;
+            bookAvailability = "Available";
+        }
+        else
+        {
+            bookAvailability = "Borrowed";
         }
     }
 
