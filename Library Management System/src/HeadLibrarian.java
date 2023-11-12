@@ -20,7 +20,7 @@ public class HeadLibrarian extends User
                 break;
 
             case "2":
-                //edit book
+                editBook();
                 break;
 
             case "3":
@@ -28,26 +28,91 @@ public class HeadLibrarian extends User
                 break;
 
             case "4":
-                backToHomePage = true; break;
+                backToHomePage = true;  break;
 
             default:
                 System.out.println("Invalid choice. Please try again.");
                 TimeUnit.MILLISECONDS.sleep(500);
                 UtilitiesForSystem.clearScreen();
         }
+        UtilitiesForSystem.clearScreen();
         return backToHomePage;
     }
 
-    public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException
+    //edit book
+    public void editBook() throws IOException, InterruptedException
     {
-        
+        viewAllAvailable(); 
+        if(catalog.getRejectChooseBook() == false)
+        {
+            UtilitiesForSystem.clearScreen();
+            System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
+            whatToDoWithBook(0); //since the parameter is only useful for the librarian class, you can leave this 0 here.
+            
+        }      
     }
 
-    //add, edit, remove book methods will be here
+    public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException // you can use this abstract method however you like
+    {
+        dispOption_inBookPage(bookIndex);
+        String read = UtilitiesForSystem.reader.readLine(); //Shaun start editing from here
+        //choose what you want to edit or anything
+    }
+
+    //view all "available" books, modified changes using viewAll() at User Class as template
+    public void viewAllAvailable() throws IOException, InterruptedException
+    {
+        boolean flag;
+        catalog.sortBookList();
+        do
+        {
+            catalog.clearBookPos();
+            catalog.resetSearchResultNo();
+            UtilitiesForSystem.clearScreen();
+            System.out.println("CATALOG");
+            System.out.println("==============================================================================================================================================================");
+            System.out.println("No.");
+            for (int i = 0; i < catalog.getBookListSize(); i++) 
+            { 
+                if(catalog.getBookListAvailability(i).equals("Available"))
+                {
+                    catalog.setBookPos(i);
+                    catalog.dispSearchResult(i);
+                    catalog.incrementSearchResultNo();        
+                }
+            }
+
+            System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
+            chooseBook("0");
+            if(catalog.getRejectChooseBook() == true)
+            {
+                flag = true;
+            }
+            else
+            {
+                if(catalog.isBookIndexInteger() == true)
+                {
+                    if(catalog.getBackTo_ChooseBook() == true)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                    }
+                }
+                else
+                {
+                    flag = false;
+                }
+            }
+
+        }while(!flag);
+    }
+
 
     // add book method
 
-    // edit book method
 
     // remove book method
 

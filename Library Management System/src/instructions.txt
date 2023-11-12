@@ -1,0 +1,15 @@
+Shaun : Manage Catalog
+
+Context:
+i put some codes in your edit book method in head Librarian class, so you can start editing from there
+
+you can gloss through the display methods in each class, 
+and the set and get methods in the catalog class to see if there is
+anything useful to you
+
+it's also better to write your own methods since it's quicker
+don't change anything in the existing methods except
+
+manageCatalog - head Librarian class line 13
+editBook - head Librarian class line 43
+whatToDoWithBook - head Librarian class line 55

@@ -31,6 +31,6 @@ public class Loan
 
     public void setReturnDate()
     {
-
+        returnDate = dateFormat.format(d);
     }
 }

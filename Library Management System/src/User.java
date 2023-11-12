@@ -22,6 +22,8 @@ public abstract class User
         this.password = password;
     }
 
+    public abstract void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException;
+
     public boolean login() throws IOException, InterruptedException
     {
         System.out.println("\n\nUser ID: ");
@@ -611,24 +613,20 @@ public abstract class User
                 TimeUnit.MILLISECONDS.sleep(500);
             }  
         }while(index < catalog.getGenreTypes_inCatalogSize() && index >= 0 && catalog.getRejectChooseBook() == false); 
-    }
-
-    public abstract void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException;
-  
-
-
-
-
-
-
+    } 
 
     public void dispOption_inBookPage(int i)
     {
         if(getUserType() == "HEAD LIBRARIAN")
         {
-            System.out.println("\n\n\n1. Edit Book");
-            System.out.println("2. Remove Book");
-            System.out.println("3. Back");
+            System.out.println("\n\n\n1. Edit Book Title");
+            System.out.println("2. Edit Author");
+            System.out.println("3. Edit Publisher");
+            System.out.println("4. Edit ISBN");
+            System.out.println("5. Edit Genre");
+            System.out.println("6. Edit Year Published");
+            System.out.println("7. Back");
+            System.out.print("\n\nSelection: ");
         }
         else
         {
@@ -641,7 +639,7 @@ public abstract class User
                 System.out.println("\n\n\n1. Return Book");    
             }
             System.out.println("2. Back");
-            System.out.println("\nSelection: ");
+            System.out.print("\n\nSelection: ");
         }
     }
 
