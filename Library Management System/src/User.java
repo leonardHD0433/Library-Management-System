@@ -93,6 +93,7 @@ public class User
     {
         String chooseBook;
         int chosenIndex;
+        catalog.setBackTo_ChooseBook(false);
 
         chooseBook = UtilitiesForSystem.reader.readLine().toLowerCase();
         if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"))
@@ -121,8 +122,7 @@ public class User
                     {
                         UtilitiesForSystem.clearScreen();
                         System.out.println("Book chosen:\n\n" + catalog.getBookList(chosenIndex));
-                        dispOption_inBookPage(chosenIndex);
-                        TimeUnit.MINUTES.sleep(5);
+                        borrowBookSelection(catalog.getChosenBookIndex());
                     }
                     else
                     {
@@ -186,7 +186,14 @@ public class User
             {
                 if(catalog.isBookIndexInteger() == true)
                 {
-                    flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                    if(catalog.getBackTo_ChooseBook() == true)
+                    {
+                        flag = false;
+                    }
+                    else
+                    {
+                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                    }
                 }
                 else
                 {
@@ -244,7 +251,14 @@ public class User
                 {
                     if(catalog.isBookIndexInteger() == true)
                     {
-                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                        if(catalog.getBackTo_ChooseBook() == true)
+                        {
+                            flag = false;
+                        }
+                        else
+                        {
+                            flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                        }
                     }
                     else
                     {
@@ -306,7 +320,14 @@ public class User
                 {
                     if(catalog.isBookIndexInteger() == true)
                     {
-                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                        if(catalog.getBackTo_ChooseBook() == true)
+                        {
+                            flag = false;
+                        }
+                        else
+                        {
+                            flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                        }
                     }
                     else
                     {
@@ -368,7 +389,14 @@ public class User
                 {
                     if(catalog.isBookIndexInteger() == true)
                     {
-                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                        if(catalog.getBackTo_ChooseBook() == true)
+                        {
+                            flag = false;
+                        }
+                        else
+                        {
+                            flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                        }
                     }
                     else
                     {
@@ -444,7 +472,14 @@ public class User
                 {
                     if(catalog.isBookIndexInteger() == true)
                     {
-                        flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                        if(catalog.getBackTo_ChooseBook() == true)
+                        {
+                            flag = false;
+                        }
+                        else
+                        {
+                            flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                        }
                     }
                     else
                     {
@@ -551,7 +586,14 @@ public class User
                         {
                             if(catalog.isBookIndexInteger() == true)
                             {
-                                flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                                if(catalog.getBackTo_ChooseBook() == true)
+                                {
+                                    flag = false;
+                                }
+                                else
+                                {
+                                    flag = catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize();
+                                }
                             }
                             else
                             {
@@ -571,7 +613,7 @@ public class User
                 System.out.println("\nPlease choose from the available genres");
                 TimeUnit.MILLISECONDS.sleep(500);
             }  
-        }while(index < catalog.getGenreTypes_inCatalogSize() && index >= 0); 
+        }while(index < catalog.getGenreTypes_inCatalogSize() && index >= 0 && catalog.getRejectChooseBook() == false); 
     }
 
     public void borrowBookSelection(int bookIndex) throws IOException, InterruptedException
@@ -581,7 +623,7 @@ public class User
         {
             dispOption_inBookPage(bookIndex);
 
-            borrow_or_back = UtilitiesForSystem.reader.readLine();
+            borrow_or_back = UtilitiesForSystem.reader.readLine().toLowerCase();
             switch (borrow_or_back) 
             {
                 case "1": catalog.setBackTo_ChooseBook(false); break;
@@ -590,7 +632,7 @@ public class User
 
                 default: UtilitiesForSystem.selectionErrorMsg();
             }
-        }while((borrow_or_back.equals("1") || borrow_or_back.equals("back")));
+        }while(!(borrow_or_back.equals("1") || borrow_or_back.equals("back")));
 
         if(catalog.getBackTo_ChooseBook() == true)
         {
