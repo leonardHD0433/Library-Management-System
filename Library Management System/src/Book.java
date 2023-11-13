@@ -1,6 +1,8 @@
+import java.time.*;
 import java.util.*;
 public class Book
 {
+    private LocalDate bD, rD;
     private String bookTitle, bookIsbn, author, publisher, genre, bookAvailability;
     private int yearPublished;
 
@@ -33,6 +35,26 @@ public class Book
         {
             bookAvailability = "Borrowed";
         }
+    }
+
+    public void setBorrowD(LocalDate d)
+    {
+        bD = d;
+    }
+
+    public void setReturnD(LocalDate d)
+    {
+        rD = d;
+    }
+
+    public LocalDate getBorrowD()
+    {
+        return bD;
+    }
+
+    public LocalDate getReturnD()
+    {
+        return rD;
     }
 
     //get book details

@@ -1,7 +1,6 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Librarian extends User 
 {
@@ -11,7 +10,7 @@ public class Librarian extends User
     public Librarian(String userType, String userName, String userId, String password) //Composition
     {
         super(userType, userName, userId, password);
-        
+        setLoanList();
     }
 
     //To view patron details
@@ -70,9 +69,10 @@ public class Librarian extends User
     public void borrowBook(int bookIndex) throws IOException, InterruptedException
     {
         String choosePatron;
-        int patronIndex;
+        int patronIndex, borrowedBooks_index;
         do
         {
+            UtilitiesForSystem.clearScreen();
             catalog.dispPatronList();
             choosePatron = UtilitiesForSystem.reader.readLine();
             if(!UtilitiesForSystem.allCharacterAreDigits(choosePatron))
@@ -80,15 +80,65 @@ public class Librarian extends User
                 UtilitiesForSystem.selectionErrorMsg();
             }
         }while (!UtilitiesForSystem.allCharacterAreDigits(choosePatron));
+
         patronIndex = Integer.parseInt(choosePatron)-1;
-        loanList[patronIndex].addBook(patronIndex, catalog.getBookListTitle(bookIndex), catalog.getBookListIsbn(bookIndex), 
+
+        if(loanList[patronIndex].borrowedBooks.size() == 0)
+        {
+            borrowedBooks_index = 0;
+        }
+        else
+        {
+            borrowedBooks_index = 1;
+        }
+
+        loanList[patronIndex].addBook(catalog.getBookListTitle(bookIndex), catalog.getBookListIsbn(bookIndex), 
         catalog.getBookListAuthor(bookIndex), catalog.getBookListPublisher(bookIndex), catalog.getBookListYearPublished(bookIndex), 
         catalog.getBookGenre(bookIndex), catalog.getBookListAvailability(bookIndex));
+        loanList[patronIndex].setDate(borrowedBooks_index);
+        System.out.println("Transaction Number: " + patronIndex + "." + borrowedBooks_index);
+        loanList[patronIndex].displayLoanDetails(borrowedBooks_index);
+        confirmBorrow();
+        if(confirmBorrow())
+        {
+            System.out.println("Book Borrowed.");
+            TimeUnit.MILLISECONDS.sleep(500);
+            UtilitiesForSystem.clearScreen();
+            catalog.setBookListAvailability(bookIndex, false);
+        }
+        else
+        {
+            System.out.println("Book not borrowed.");
+            TimeUnit.MILLISECONDS.sleep(500);
+            UtilitiesForSystem.clearScreen();
+            loanList[patronIndex].borrowedBooks.remove(borrowedBooks_index);
+        }
     }
 
     // Method to return a book
     public void returnBook(int bookIndex)
     {
 
+    }
+
+    public boolean confirmBorrow() throws IOException, InterruptedException
+    {
+        String confirm;
+        boolean flag = true;
+        do
+        {
+            System.out.println("Confirm borrow book? (Y/N)");
+            confirm = UtilitiesForSystem.reader.readLine().toLowerCase();
+            switch (confirm) 
+            {
+                case "y": flag = true; break;
+            
+                case "n": flag = false; break;
+
+                default: UtilitiesForSystem.selectionErrorMsg();
+            }
+        }while(!(confirm.equals("y") || confirm.equals("n")));
+
+        return flag;
     }
 }

@@ -155,7 +155,10 @@ public class Catalog implements BookData, PatronData
         return backTo_ChooseBook;
     }
 
-
+    public void setBookListAvailability(int bookListIndex, boolean availability)
+    {
+        bookList.get(bookListIndex).setBookAvailability(availability);
+    }
 
 
 
