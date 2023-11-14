@@ -99,4 +99,8 @@ public class Loan
         System.out.println("Book Title:" + borrowedBooks.get(i).getBookTitle());
         System.out.println("Patron Name: " + p.getPatronName());
     }
+    public void dispPatronDetails()
+    {
+        System.out.println(p);
+    }
 }

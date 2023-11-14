@@ -14,9 +14,26 @@ public class Librarian extends User
     }
 
     //To view patron details
-    public void viewPatron()
+    public void viewPatron() throws IOException, InterruptedException
     {
-        
+        String choosePatron;
+        int patronIndex; 
+        do
+        {
+            UtilitiesForSystem.clearScreen();
+            catalog.dispViewPatron();
+            System.out.println("Choose Patron: ");
+
+            choosePatron = UtilitiesForSystem.reader.readLine();
+            if(!UtilitiesForSystem.allCharacterAreDigits(choosePatron))
+            {
+                UtilitiesForSystem.selectionErrorMsg();
+            }
+        }while(!UtilitiesForSystem.allCharacterAreDigits(choosePatron));
+
+        patronIndex = Integer.parseInt(choosePatron)-1;
+        System.out.println(loanList[patronIndex].p);
+        wait();
     }
 
     public void setLoanList()
