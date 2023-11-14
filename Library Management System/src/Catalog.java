@@ -267,6 +267,12 @@ public class Catalog implements BookData, PatronData
         return bookList.size();
     }
 
+    //[SHAUN] Method to add book to list
+    public void addBookToList(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)
+    {
+        bookList.add(new Book(bookTitle,bookIsbn,author,publisher, yearPublished,genre,bookAvailability));
+    }
+
     //search result after the respective filters
     public void dispSearchResult(int i)
     {
@@ -290,3 +296,7 @@ public class Catalog implements BookData, PatronData
         System.out.print("\n\nWhich Patron is borrowing? ");
     }
 }
+
+
+
+

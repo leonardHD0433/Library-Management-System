@@ -1,5 +1,8 @@
 import java.io.*;
 import java.util.concurrent.*;
+import java.util.Scanner;
+
+//TimeUnit.MILLISECONDS.sleep(500);
 
 public class HeadLibrarian extends User 
 {
@@ -12,11 +15,18 @@ public class HeadLibrarian extends User
     //provide selections to manage the catalog
     public boolean manageCatalog(String selection) throws IOException, InterruptedException
     {
+
         boolean backToHomePage = false;
         switch (selection) 
         {
             case "1":
-                //add book; 
+                System.out.println("You have chosen to add a book..."); 
+                TimeUnit.MILLISECONDS.sleep(500);
+                System.out.println("..");
+                TimeUnit.MILLISECONDS.sleep(500);
+                System.out.println(".");
+                TimeUnit.MILLISECONDS.sleep(500);
+
                 break;
 
             case "2":
@@ -47,7 +57,8 @@ public class HeadLibrarian extends User
         {
             UtilitiesForSystem.clearScreen();
             System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
-            whatToDoWithBook(0); //since the parameter is only useful for the librarian class, you can leave this 0 here.
+            whatToDoWithBook(0); 
+            //since the parameter is only useful for the librarian class, you can leave this 0 here.
             
         }      
     }
@@ -113,6 +124,14 @@ public class HeadLibrarian extends User
 
     // add book method
 
+    public void createBook()
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the name of the book: \n");
+
+        
+    }
 
     // remove book method
 
