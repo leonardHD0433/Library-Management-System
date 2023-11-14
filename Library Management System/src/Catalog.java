@@ -5,9 +5,10 @@ import java.util.*;
 public class Catalog implements BookData, PatronData
 {
     private ArrayList<Book> bookList;
+    private ArrayList<Book> archiveList; // Uses pointer to remove book from a certain index. (.remove function)
     private Patron[] patronList = new Patron[5];
     ArrayList <String> genreTypes_inCatalog;
-    private ArrayList <Integer> bookPos_forFilteredList;
+    private ArrayList <Integer> bookPos_forFilteredList; //
     private boolean found, reject_chooseBook, isBookIndexInteger, backTo_ChooseBook;
     private int searchResultNo, chosenBookIndex; //number of books found after filter
     
@@ -270,7 +271,7 @@ public class Catalog implements BookData, PatronData
     //[SHAUN] Method to add book to list
     public void addBookToList(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)
     {
-        bookList.add(new Book(bookTitle,bookIsbn,author,publisher, yearPublished,genre,bookAvailability));
+        bookList.add(new Book(bookTitle, bookIsbn, author, publisher, yearPublished, genre, bookAvailability));
     }
 
     //search result after the respective filters
