@@ -2,7 +2,7 @@ import java.time.*;
 import java.util.*;
 public class Book
 {
-    private LocalDate bD, rD;
+    private LocalDate borrowDate, returnDate;
     private String bookTitle, bookIsbn, author, publisher, genre, bookAvailability;
     private int yearPublished;
 
@@ -39,22 +39,22 @@ public class Book
 
     public void setBorrowD(LocalDate d)
     {
-        bD = d;
+        borrowDate = d;
     }
 
     public void setReturnD(LocalDate d)
     {
-        rD = d;
+        returnDate = d;
     }
 
     public LocalDate getBorrowD()
     {
-        return bD;
+        return borrowDate;
     }
 
     public LocalDate getReturnD()
     {
-        return rD;
+        return returnDate;
     }
 
     //get book details
