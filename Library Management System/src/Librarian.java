@@ -34,6 +34,11 @@ public class Librarian extends User
         patronIndex = Integer.parseInt(choosePatron)-1;
         System.out.println(loanList[patronIndex].p);
         wait();
+        System.out.println("Borrowed Book: ");
+        // for (int i=0; i<=1;i++)
+        // {
+        //   System.out.println(p.borrowedBooks[i]);
+        // }
     }
 
     //Set the patron to their respective loans - [Yu Kang]
