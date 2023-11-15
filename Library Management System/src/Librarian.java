@@ -121,7 +121,6 @@ public class Librarian extends User
         loanList[patronIndex].setDate(borrowedBooks_index);
         System.out.println("Transaction Number: " + patronIndex + "." + borrowedBooks_index);
         loanList[patronIndex].displayLoanDetails(borrowedBooks_index);
-        confirmBorrow();
         if(confirmBorrow())
         {
             System.out.println("Book Borrowed.");
@@ -151,7 +150,8 @@ public class Librarian extends User
         do
         {
             System.out.println("Confirm borrow book? (Y/N)");
-            confirm = UtilitiesForSystem.reader.readLine().toLowerCase();
+            confirm = UtilitiesForSystem.reader.readLine();
+            confirm = confirm.toLowerCase();
             switch (confirm) 
             {
                 case "y": flag = true; break;

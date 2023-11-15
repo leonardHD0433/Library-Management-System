@@ -132,7 +132,6 @@ public class Session
                         setBrowseCatalogSelection();
                         backToHomePage = librarian.browseCatalog(getBrowseCatalogSelection());
                     }while(!backToHomePage);
-                    wait();
                     break;
             
                 case "2": 
