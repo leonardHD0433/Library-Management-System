@@ -135,10 +135,10 @@ public class HeadLibrarian extends User
         String bAuthor = " ";
         String bPublisher = " ";
 
-        //TITLE
+        //-------------------TITLE---------------------------
         System.out.println("Enter book TITLE: \n");
         String bTitle = UtilitiesForSystem.reader.readLine();
-        //ISBN
+        //-------------------ISBN----------------------------
         do
         {
 
@@ -161,18 +161,46 @@ public class HeadLibrarian extends User
                 }  
 
         }while(validIsbn == false);
-        //AUTHOR
+        //--------------------AUTHOR--------------------------
+        do {
+
             System.out.println("Enter book AUTHOR: \n");
             String bookAuthor = UtilitiesForSystem.reader.readLine();
-            bAuthor = bookAuthor;
-        //PUBLISHER
-        System.out.println("Enter book PUBLISHER: \n");
-        String bookPublisher = UtilitiesForSystem.reader.readLine();
-        bPublisher = bookPublisher;
-        //YEAR OF PUBLISHING
+
+            if(UtilitiesForSystem.containsDigits(bookAuthor))
+            {
+                System.out.println("Please ensure there are no digits in your name.");
+                continue;
+            }
+            else
+            {
+                bAuthor = bookAuthor;
+                validAuthor = true;
+            }
+
+        }while(validAuthor == false);
+        //------------------PUBLISHER-------------------------
+        do {
+
+            System.out.println("Enter book PUBLISHER: \n");
+             String bookPublisher = UtilitiesForSystem.reader.readLine();
+
+            if(UtilitiesForSystem.containsDigits(bookPublisher))
+            {
+                System.out.println("Please ensure there are no digits in your input.");
+                continue;
+            }
+            else
+            {
+                bPublisher = bookPublisher;
+                validPublisher = true;
+            }
+
+        }while(validPublisher == false);
+        //---------------YEAR OF PUBLISHING---------------------
         System.out.println("Enter book's PUBLISHED YEAR: \n");
         int bYearPublished = Integer.parseInt(UtilitiesForSystem.reader.readLine());
-        //GENRE
+        //--------------------GENRE-------------------------------
         System.out.println("Enter book GENRE: \n");
         String bGenre = UtilitiesForSystem.reader.readLine();
         //BOOK AVAILABILITY will always be set to AVAILABLE after a new book creation.

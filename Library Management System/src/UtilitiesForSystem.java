@@ -55,4 +55,14 @@ public class UtilitiesForSystem
         }
     }
     */
+
+    public static boolean containsDigits(String input) {
+        // Check if the input string contains digits
+        for (char c : input.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true; // Digits found
+            }
+        }
+        return false; // No digits found
+    }
 }
