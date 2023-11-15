@@ -13,7 +13,7 @@ public class Librarian extends User
         setLoanList();
     }
 
-    //To view patron details
+    //To view patron details - [Liew Zhen Nam] TODO
     public void viewPatron() throws IOException, InterruptedException
     {
         String choosePatron;
@@ -36,7 +36,8 @@ public class Librarian extends User
         wait();
     }
 
-    public void setLoanList()
+    //Set the patron to their respective loans - [Yu Kang]
+    public void setLoanList() 
     {
         for (int i = 0; i < loanList.length; i++) {
             loanList[i] = new Loan(catalog.getPatronListName(i), catalog.getPatronListID(i), catalog.getPatronContactNumber(i));
@@ -82,7 +83,7 @@ public class Librarian extends User
         }
     }
 
-    // Method to borrow a book
+    // Method to borrow a book -[Yu Kang] Guide: Edwin
     public void borrowBook(int bookIndex) throws IOException, InterruptedException
     {
         String choosePatron;

@@ -27,7 +27,7 @@ public class Book
     //edit the availability of the book
     public void setBookAvailability(boolean availability)
     {
-        if(availability = true)
+        if(availability)
         {
             bookAvailability = "Available";
         }
