@@ -13,7 +13,7 @@ public class Librarian extends User
         setLoanList();
     }
 
-    //To view patron details - [Liew Zhen Nam] TODO
+    //To view patron details - [Liew Zhen Nam] //add remove book need to be done to view book borrowed
     public void viewPatron() throws IOException, InterruptedException
     {
         String choosePatron;
