@@ -286,6 +286,12 @@ public class Catalog implements BookData, PatronData
 
     public void dispPatronList()
     {
+        dispViewPatron();
+        System.out.print("\n\nWhich Patron is borrowing? ");
+    }
+
+    public void dispViewPatron()
+    {
         System.out.println("PATRON LIST");
         for (int j = 0; j < patronList.length; j++) {
             System.out.println("==============================================================================================================================================================");
@@ -294,7 +300,6 @@ public class Catalog implements BookData, PatronData
             System.out.println(patronList[j]);
             System.out.println("==============================================================================================================================================================\n");
         }
-        System.out.print("\n\nWhich Patron is borrowing? ");
     }
 }
 
