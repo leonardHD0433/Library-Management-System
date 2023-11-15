@@ -50,7 +50,7 @@ public class HeadLibrarian extends User
         return backToHomePage;
     }
 
-    //edit book
+    //edit book - [Shaun] TODO
     public void editBook() throws IOException, InterruptedException
     {
         viewAllAvailable(); 
@@ -72,7 +72,7 @@ public class HeadLibrarian extends User
         //Use for loop -> find book -> nested for loop -> find details
     }
 
-    //view all "available" books, modified changes using viewAll() at User Class as template
+    //view all "available" books, modified changes using viewAll() at User Class as template - [Edwin]
     public void viewAllAvailable() throws IOException, InterruptedException
     {
         boolean flag;
@@ -124,8 +124,7 @@ public class HeadLibrarian extends User
     }
 
 
-    // add book method
-
+    // add book method - [Shaun]
     public void createBook() throws IOException
     {
         Boolean validIsbn = false;
@@ -180,10 +179,8 @@ public class HeadLibrarian extends User
         }while(validAuthor == false);
         //------------------PUBLISHER-------------------------
         do {
-
             System.out.println("Enter book PUBLISHER: \n");
              String bookPublisher = UtilitiesForSystem.reader.readLine();
-
             if(UtilitiesForSystem.containsDigits(bookPublisher))
             {
                 System.out.println("Please ensure there are no digits in your input.");
@@ -194,7 +191,6 @@ public class HeadLibrarian extends User
                 bPublisher = bookPublisher;
                 validPublisher = true;
             }
-
         }while(validPublisher == false);
         //---------------YEAR OF PUBLISHING---------------------
         System.out.println("Enter book's PUBLISHED YEAR: \n");
@@ -210,7 +206,7 @@ public class HeadLibrarian extends User
         catalog.addBookToList(bTitle, bIsbn, bAuthor, bPublisher, bYearPublished, bGenre, bAvailability);
     }
 
-    // remove book method
+    // remove book method - [Shaun]
 
     
 }
