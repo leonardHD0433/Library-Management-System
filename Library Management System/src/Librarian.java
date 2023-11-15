@@ -150,8 +150,7 @@ public class Librarian extends User
         do
         {
             System.out.println("Confirm borrow book? (Y/N)");
-            confirm = UtilitiesForSystem.reader.readLine();
-            confirm = confirm.toLowerCase();
+            confirm = UtilitiesForSystem.reader.readLine().toLowerCase();
             switch (confirm) 
             {
                 case "y": flag = true; break;
