@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="8YS385IrpmPssAD0AtMK" name="Page-1">
-        <mxGraphModel dx="2077" dy="816" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="5000" pageHeight="5000" math="0" shadow="0">
+        <mxGraphModel dx="3105" dy="1428" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="5000" pageHeight="5000" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -10,7 +10,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="6" value="Book" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="1080" y="2130" width="460" height="620" as="geometry"/>
+                    <mxGeometry x="1030" y="2371" width="460" height="620" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="-borrowDate:LocalDate&#10;-returnDate:LocalDate&#10;-bookTitle:String&#10;-bookIsbn:String&#10;-author:String&#10;-publisher:String&#10;-genre:String&#10;-bookAvailability:String&#10;-yearPublished:int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="6" vertex="1">
                     <mxGeometry y="26" width="460" height="224" as="geometry"/>
@@ -28,19 +28,19 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="10" value="Catalog" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="1790" y="1620" width="390" height="252" as="geometry"/>
+                    <mxGeometry x="1790" y="1620" width="390" height="920" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="10" vertex="1">
-                    <mxGeometry y="26" width="390" height="134" as="geometry"/>
+                <mxCell id="11" value=" - bookList: ArrayList&lt;Book&gt; &#10;- archiveList: ArrayList&lt;Book&gt; &#10; - patronList: Patron[]  &#10; - genreTypes_inCatalog: ArrayList&lt;String&gt; &#10; - bookPos_forFilteredList: ArrayList&lt;Integer&gt; &#10; - found: boolean        &#10; - reject_chooseBook: boolean &#10; - isBookIndexInteger: boolean &#10; - backTo_ChooseBook: boolean &#10; - searchResultNo: int   &#10; - chosenBookIndex: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="10" vertex="1">
+                    <mxGeometry y="26" width="390" height="174" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="10" vertex="1">
-                    <mxGeometry y="160" width="390" height="8" as="geometry"/>
+                    <mxGeometry y="200" width="390" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="10" vertex="1">
-                    <mxGeometry y="168" width="390" height="84" as="geometry"/>
+                <mxCell id="13" value="+ Catalog()            &#10; + setBookList(i: int): void &#10; + setPatronList(i: int): void &#10;+ getPatronListName(i: int): String &#10; + getPatronListID(i: int): String &#10; + getPatronContactNumber(i: int): String &#10; + sortBookList(): void  &#10; + sortGenreTypes_inCatalog(): void &#10; + addToGenreTypes_inCatalogSize(i: int): void &#10; + checkCatalogForGenre(i: int): boolean &#10; + getGenreTypes_inCatalogSize(): int &#10; + clearGenreTypes_inCatalog(): void &#10; + getGenreTypes_inCatalog(i: int): String &#10; + setChosenBookIndex(chosenBookIndex: int): void &#10; + getChosenBookIndex(): int &#10; + setRejectChooseBook(str: String): void &#10; + getRejectChooseBook(): boolean &#10; + setBookIndexInteger(flag: boolean): void &#10;+ isBookIndexInteger(): boolean &#10; + setBackTo_ChooseBook(flag: boolean): void &#10; + getBackTo_ChooseBook(): boolean &#10; + setBookListAvailability(bookListIndex: int, availability: boolean): void &#10; + clearBookPos(): void &#10; + setBookPos(i: int): void &#10; + getBookPos(i: int): int &#10; + bookPos_forFilteredListSize(): int &#10; + resetSearchResultNo(): void &#10; + incrementSearchResultNo(): void &#10; + getSearchResultNo(): int &#10; + isBookFound(): boolean &#10; + foundBook(): void   &#10; + not_foundBook(): void&#10; + getBookList(i: int): String &#10; + getBookListIsbn(i: int): String &#10; + getBookListTitle(i: int): String &#10; + getBookGenre(i: int): String &#10; + getBookListAuthor(i: int): String &#10; + getBookListPublisher(i: int): String &#10;+ getBookListYearPublished(i: int): int &#10; + getBookListAvailability(i: int): String &#10; + getBook(i: int): void &#10; + getBookListSize(): int&#10; + addBookToList(bookTitle: String,bookIsbn: String,author: String,&#10;publisher: String,yearPublished: int,genre: String,bookAvailability: String )&#10;: void                &#10;+ dispSearchResult(i: int): void &#10;+ dispPatronList(): void &#10;+ dispViewPatron(): void " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="10" vertex="1">
+                    <mxGeometry y="208" width="390" height="712" as="geometry"/>
                 </mxCell>
                 <mxCell id="14" value="Loan" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="1820" y="2360" width="240" height="440" as="geometry"/>
+                    <mxGeometry x="1970" y="2700" width="240" height="440" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="- borrowedBooks: ArrayList&lt;Book&gt;&#10;-borrowDate:String&#10;-returnDate:String&#10;-p:Patron" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="14" vertex="1">
                     <mxGeometry y="26" width="240" height="84" as="geometry"/>
@@ -55,7 +55,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" value="Patron" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="2150" y="2050" width="340" height="270" as="geometry"/>
+                    <mxGeometry x="2340" y="2440" width="340" height="270" as="geometry"/>
                 </mxCell>
                 <mxCell id="19" value="-patronName:String&#10;-patronID:String&#10;-contactNumber:String&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="18" vertex="1">
                     <mxGeometry y="26" width="340" height="74" as="geometry"/>
@@ -100,7 +100,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="33" value="HeadLibrarian" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="1620" y="1000" width="210" height="216" as="geometry"/>
+                    <mxGeometry x="1670" y="1114" width="210" height="216" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="33" vertex="1">
                     <mxGeometry y="26" width="210" height="8" as="geometry"/>
@@ -164,7 +164,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="55" value="UtilitiesForSystem" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="1740" y="1920" width="340" height="202" as="geometry"/>
+                    <mxGeometry x="1550" y="2580" width="340" height="202" as="geometry"/>
                 </mxCell>
                 <mxCell id="56" value="-reader:BufferedReader&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="55" vertex="1">
                     <mxGeometry y="26" width="340" height="74" as="geometry"/>
@@ -175,7 +175,7 @@
                 <mxCell id="58" value="+clearScreen():void&#10;+selectionErrorMsg():void&#10;+allCharacterAreDigits(str:String):boolean&#10;+containsDigits(input:String):boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="55" vertex="1">
                     <mxGeometry y="108" width="340" height="94" as="geometry"/>
                 </mxCell>
-                <mxCell id="70" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.448;entryY=0.999;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="49" target="40">
+                <mxCell id="70" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.448;entryY=0.999;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="49" target="40" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="1300" y="1140" as="sourcePoint"/>
                         <mxPoint x="1350" y="1090" as="targetPoint"/>
