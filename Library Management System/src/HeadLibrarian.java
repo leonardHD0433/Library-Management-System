@@ -130,9 +130,12 @@ public class HeadLibrarian extends User
         Boolean validIsbn = false;
         Boolean validAuthor = false;
         Boolean validPublisher = false;
+        Boolean validGenre = false;
         String bIsbn = " ";
         String bAuthor = " ";
         String bPublisher = " ";
+        String bGenre = " ";
+        String bookYearPublished = " ";
 
         //-------------------TITLE---------------------------
         System.out.println("Enter book TITLE: \n");
@@ -167,7 +170,7 @@ public class HeadLibrarian extends User
 
             if(UtilitiesForSystem.containsDigits(bookAuthor))
             {
-                System.out.println("Please ensure there are no digits in your name.");
+                System.out.println("Please ensure there are no digits in the name.");
                 continue;
             }
             else
@@ -193,11 +196,25 @@ public class HeadLibrarian extends User
             }
         }while(validPublisher == false);
         //---------------YEAR OF PUBLISHING---------------------
-        System.out.println("Enter book's PUBLISHED YEAR: \n");
-        int bYearPublished = Integer.parseInt(UtilitiesForSystem.reader.readLine());
+            System.out.println("Enter book's PUBLISHED YEAR: \n");
+            int bYearPublished = Integer.parseInt(UtilitiesForSystem.reader.readLine());
+            //bookYearPublished = String.valueOf(bYearPublished);
         //--------------------GENRE-------------------------------
-        System.out.println("Enter book GENRE: \n");
-        String bGenre = UtilitiesForSystem.reader.readLine();
+
+        do {
+            System.out.println("Enter book GENRE: \n");
+            String bookGenre = UtilitiesForSystem.reader.readLine();
+            if(UtilitiesForSystem.containsDigits(bookGenre))
+            {
+                System.out.println("Please ensure there are no digits in your input.");
+                continue;
+            }
+            else
+            {
+                bGenre = bookGenre;
+                validGenre = true;
+            }
+        }while(validGenre == false);
         //BOOK AVAILABILITY will always be set to AVAILABLE after a new book creation.
         String bAvailability = "Available";
 
