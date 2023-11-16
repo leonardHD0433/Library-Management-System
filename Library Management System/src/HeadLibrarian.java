@@ -55,21 +55,98 @@ public class HeadLibrarian extends User
     {
         viewAllAvailable(); 
         if(catalog.getRejectChooseBook() == false)
-        {
-            UtilitiesForSystem.clearScreen();
+        {     
             System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
-            whatToDoWithBook(0); 
+            whatToDoWithBook(0);
             //since the parameter is only useful for the librarian class, you can leave this 0 here.
-            
         }      
     }
 
     public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException // you can use this abstract method however you like
     {
-        dispOption_inBookPage(bookIndex);
-        String read = UtilitiesForSystem.reader.readLine(); //Shaun start editing from here
-        //choose what you want to edit or anything
+        Boolean validOption = false;
+        dispOption_inBookPage(bookIndex); //Displays the options for what to edit
+        //bookIndex will be my book chosen option - 1
+        do {
+            System.out.println("\nSelection: ");
+            String selectedOption = UtilitiesForSystem.reader.readLine();
+            
+            if(UtilitiesForSystem.allCharacterAreDigits(selectedOption) && selectedOption.length() == 1)
+            {
+                switch (selectedOption)
+                {
+                    case "1":
+                    {
+                        System.out.println("Edit Title!");
+                        System.out.println("[Book Title]: "+catalog.getBookListTitle(bookIndex));
+                        TimeUnit.MILLISECONDS.sleep(1000);
+                        
+
+                        break;
+                    }
+                    case "2":
+                    {
+                        System.out.println("Edit Author!");
+                        System.out.println("[Book Author]: "+catalog.getBookListAuthor(bookIndex));
+                        TimeUnit.MILLISECONDS.sleep(1000);
+
+                        break;
+                    }
+                    case "3":
+                    {
+                        System.out.println("Edit Publisher!");
+                        System.out.println("[Book Publisher]: "+catalog.getBookListPublisher(bookIndex));
+                        TimeUnit.MILLISECONDS.sleep(1000);
+
+                        break;
+                    }
+                    case "4":
+                    {
+                        System.out.println("Edit ISBN!");
+                        System.out.println("[Book ISBN]: "+catalog.getBookListIsbn(bookIndex));
+                        TimeUnit.MILLISECONDS.sleep(1000);
+
+                        break;
+                    }
+                    case "5":
+                    {
+                        System.out.println("Edit Genre!");
+                        System.out.println("[Book Genre]: "+catalog.getBookGenre(bookIndex));
+                        TimeUnit.MILLISECONDS.sleep(1000);
+
+                        break;
+                    }
+                    case "6":
+                    {
+                        System.out.println("Edit Year Published!");
+                        System.out.println("[Book's Year Published]: "+catalog.getBookListYearPublished(bookIndex));
+                        TimeUnit.MILLISECONDS.sleep(1000);
+
+                        break;
+                    }
+                    case "7":
+                    {
+                        System.out.println("Exiting..");
+                        TimeUnit.MILLISECONDS.sleep(1000);
+                        validOption = true;
+                        break;
+                    }
+                    default:
+                    {
+                        System.out.println("This is default!");
+                    }
+                }
+                        
+            }
+            else
+            {
+                System.out.println("Please select only options from 1 - 7!");
+                continue;
+            }
+        }while(!validOption);
+
         //Use for loop -> find book -> nested for loop -> find details
+
     }
 
     //view all "available" books, modified changes using viewAll() at User Class as template - [Edwin]

@@ -35,27 +35,8 @@ public class UtilitiesForSystem
             return false;
         }
     }
-    /* Trying to make a method that makes sure no digits are in the user input! - Shaun
-    public static boolean allCharactersAreWords(String str)
-    {
-        if(!str.isBlank())
-        {
-            for(int i = 0; i < str.length(); i++)
-            {
-                if(Character.isDigit(str.charAt(i)))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    */
-
+    
+    // This method checks to see if the user input has any digits! - [Shaun]
     public static boolean containsDigits(String input) {
         // Check if the input string contains digits
         for (char c : input.toCharArray()) {

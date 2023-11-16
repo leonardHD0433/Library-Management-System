@@ -626,7 +626,6 @@ public abstract class User
             System.out.println("5. Edit Genre");
             System.out.println("6. Edit Year Published");
             System.out.println("7. Back");
-            System.out.print("\n\nSelection: ");
         }
         else
         {
