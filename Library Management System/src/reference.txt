@@ -13,3 +13,6 @@ https://code.visualstudio.com/docs/java/java-project#:~:text=You%20can%20directl
 https://www.tutorialkart.com/java/how-to-get-current-date-in-mm-dd-yyyy-format-in-java/#gsc.tab=0
 https://stackoverflow.com/questions/14194290/validating-a-date-in-java
 https://docs.oracle.com/javase/8/docs/api/java/time/format/ResolverStyle.html
+https://stackoverflow.com/questions/1075278/is-it-ok-to-use-same-file-writer-for-writing-different-files
+https://stackoverflow.com/questions/6548157/how-to-write-an-arraylist-of-strings-into-a-text-file
+https://www.baeldung.com/java-write-to-file

@@ -12,6 +12,7 @@ public class Session
     {
         headLibrarian = new HeadLibrarian("HEAD LIBRARIAN", "Edwin Chua Jin Rui", "headStaff@001", "1234");
         librarian = new Librarian("LIBRARIAN", "Teh Yu Kang", "staff@002", "12345");
+        UtilitiesForSystem.fileName();
     }
 
     public boolean loginPage() throws IOException, InterruptedException
@@ -115,6 +116,7 @@ public class Session
                     break;
             
                 case "2":
+                    logout("1");
                     backToLoginPage = true; break;
 
                 default:
@@ -142,7 +144,7 @@ public class Session
                     break;
 
                 case "3":
-                    
+                    logout("2");
                     backToLoginPage = true; break;
 
                 default:
@@ -204,22 +206,22 @@ public class Session
 
     }
   
-    public void logout(String userSession) throws IOException//save sessions and data updates using files
+    public void logout(String userSession) throws IOException, InterruptedException//save sessions and data updates using files
     {
-        if(userSession.equals("1"))
-        {
-            saveBookTitle(userSession);
-            
-
-        }
-        else if (userSession.equals("2"))
-        {
-
-        }
+        UtilitiesForSystem.createFiles();
+        saveBookTitle(userSession);
+        saveBookIsbn(userSession);
+        saveBookAuthor(userSession);
+        saveBookPublisher(userSession);
+        saveBookYearPublished(userSession);
+        saveBookGenre(userSession);
+        saveBookAvailability(userSession);
+        UtilitiesForSystem.closeFile();
     }
 
     public void saveBookTitle(String userSession) throws IOException
     {
+        UtilitiesForSystem.setFile(0);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -238,6 +240,7 @@ public class Session
 
     public void saveBookIsbn(String userSession) throws IOException
     {
+        UtilitiesForSystem.setFile(1);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -256,6 +259,7 @@ public class Session
 
     public void saveBookAuthor(String userSession) throws IOException
     {
+        UtilitiesForSystem.setFile(2);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -274,6 +278,7 @@ public class Session
 
     public void saveBookPublisher(String userSession) throws IOException
     {
+        UtilitiesForSystem.setFile(3);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -295,6 +300,7 @@ public class Session
         String str;
         if(userSession.equals("1"))
         {
+            UtilitiesForSystem.setFile(4);
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
             {
                 str = Integer.toString(headLibrarian.catalog.getBookListYearPublished(i));
@@ -313,6 +319,7 @@ public class Session
 
     public void saveBookGenre(String userSession) throws IOException
     {
+        UtilitiesForSystem.setFile(5);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -325,6 +332,25 @@ public class Session
             for (int i = 0; i < librarian.catalog.getBookListSize(); i++) 
             {
                 UtilitiesForSystem.writeToFile(5, librarian.catalog.getBookGenre(i));
+            }
+        }
+    }
+
+    public void saveBookAvailability(String userSession) throws IOException
+    {
+        UtilitiesForSystem.setFile(6);
+        if(userSession.equals("1"))
+        {
+            for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(6, headLibrarian.catalog.getBookListAvailability(i));
+            }
+        }
+        else if (userSession.equals("2"))
+        {
+            for (int i = 0; i < librarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(6, librarian.catalog.getBookListAvailability(i));
             }
         }
     }
