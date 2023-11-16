@@ -290,6 +290,45 @@ public class Session
         }
     }
 
+    public void saveBookYearPublished(String userSession) throws IOException
+    {
+        String str;
+        if(userSession.equals("1"))
+        {
+            for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
+            {
+                str = Integer.toString(headLibrarian.catalog.getBookListYearPublished(i));
+                UtilitiesForSystem.writeToFile(4, str);
+            }
+        }
+        else if (userSession.equals("2"))
+        {
+            for (int i = 0; i < librarian.catalog.getBookListSize(); i++) 
+            {
+                str = Integer.toString(librarian.catalog.getBookListYearPublished(i));
+                UtilitiesForSystem.writeToFile(4, str);
+            }
+        }
+    }
+
+    public void saveBookGenre(String userSession) throws IOException
+    {
+        if(userSession.equals("1"))
+        {
+            for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(5, headLibrarian.catalog.getBookGenre(i));
+            }
+        }
+        else if (userSession.equals("2"))
+        {
+            for (int i = 0; i < librarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(5, librarian.catalog.getBookGenre(i));
+            }
+        }
+    }
+
 
 
 
