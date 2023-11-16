@@ -162,7 +162,6 @@ public class Catalog implements BookData, PatronData
     }
 
 
-
     public void clearBookPos()
     {
         bookPos_forFilteredList.clear();

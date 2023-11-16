@@ -203,7 +203,6 @@ public class Session
 
     }
   
-    
     // Display Login Page
     public void dispLoginPage()
     {
@@ -264,5 +263,5 @@ public class Session
         System.out.println("1. Borrow Book");
         System.out.println("2. Return Book");
         System.out.println("3. Back");
-    } 
+    }
 }

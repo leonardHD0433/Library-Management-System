@@ -137,6 +137,8 @@ public class Librarian extends User
             TimeUnit.MILLISECONDS.sleep(500);
             UtilitiesForSystem.clearScreen();
             catalog.setBookListAvailability(bookIndex, false); //change to "borrowed"
+            //make it borrowed for the headLibrarian side
+            
         }
         else
         {
