@@ -5,6 +5,7 @@ import java.util.concurrent.*;
 public class UtilitiesForSystem 
 {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static BufferedWriter writer;
     private static File file;
     private static ArrayList <String> fileName;
 
@@ -103,5 +104,22 @@ public class UtilitiesForSystem
         }
     }
 
+    public static void deleteFiles()
+    {
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            setFile(i);
+            file.delete();
+        }
+    }
 
+    public static void writeToFile(int whichFile, String str) throws IOException
+    {
+        setFile(whichFile);
+        writer = new BufferedWriter(new FileWriter(file));
+        writer.write(str);
+        writer.newLine();
+    }
+
+    
 }
