@@ -142,6 +142,7 @@ public class Session
                     break;
 
                 case "3":
+                    
                     backToLoginPage = true; break;
 
                 default:
@@ -203,12 +204,91 @@ public class Session
 
     }
   
-    public void logout() //save sessions and data updates using files
+    public void logout(String userSession) throws IOException//save sessions and data updates using files
     {
+        if(userSession.equals("1"))
+        {
+            saveBookTitle(userSession);
+            
 
+        }
+        else if (userSession.equals("2"))
+        {
+
+        }
     }
 
+    public void saveBookTitle(String userSession) throws IOException
+    {
+        if(userSession.equals("1"))
+        {
+            for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(0, headLibrarian.catalog.getBookListTitle(i));
+            }
+        }
+        else if (userSession.equals("2"))
+        {
+            for (int i = 0; i < librarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(0, librarian.catalog.getBookListTitle(i));
+            }
+        }
+    }
 
+    public void saveBookIsbn(String userSession) throws IOException
+    {
+        if(userSession.equals("1"))
+        {
+            for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(1, headLibrarian.catalog.getBookListIsbn(i));
+            }
+        }
+        else if (userSession.equals("2"))
+        {
+            for (int i = 0; i < librarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(1, librarian.catalog.getBookListIsbn(i));
+            }
+        }
+    }
+
+    public void saveBookAuthor(String userSession) throws IOException
+    {
+        if(userSession.equals("1"))
+        {
+            for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(2, headLibrarian.catalog.getBookListAuthor(i));
+            }
+        }
+        else if (userSession.equals("2"))
+        {
+            for (int i = 0; i < librarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(2, librarian.catalog.getBookListAuthor(i));
+            }
+        }
+    }
+
+    public void saveBookPublisher(String userSession) throws IOException
+    {
+        if(userSession.equals("1"))
+        {
+            for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(3, headLibrarian.catalog.getBookListPublisher(i));
+            }
+        }
+        else if (userSession.equals("2"))
+        {
+            for (int i = 0; i < librarian.catalog.getBookListSize(); i++) 
+            {
+                UtilitiesForSystem.writeToFile(3, librarian.catalog.getBookListPublisher(i));
+            }
+        }
+    }
 
 
 

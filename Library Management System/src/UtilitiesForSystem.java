@@ -59,13 +59,13 @@ public class UtilitiesForSystem
     public void fileName()
     {
         fileName = new ArrayList<String>();
-        fileName.add("BookTitle.txt");
-        fileName.add("BookISBN.txt");
-        fileName.add("BookAuthor.txt");
-        fileName.add("BookPublisher.txt");
-        fileName.add("BookYearPublished.txt");
-        fileName.add("BookGenre.txt");
-        fileName.add("BookAvailability.txt");
+        fileName.add("BookTitle.txt");           //0
+        fileName.add("BookISBN.txt");            //1
+        fileName.add("BookAuthor.txt");          //2
+        fileName.add("BookPublisher.txt");       //3
+        fileName.add("BookYearPublished.txt");   //4
+        fileName.add("BookGenre.txt");           //5
+        fileName.add("BookAvailability.txt");    //6
     }
 
     public static String getFileName(int i)
@@ -120,6 +120,4 @@ public class UtilitiesForSystem
         writer.write(str);
         writer.newLine();
     }
-
-    
 }
