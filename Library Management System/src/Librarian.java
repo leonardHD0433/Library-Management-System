@@ -156,6 +156,7 @@ public class Librarian extends User
     {
         LocalDate actualReturnDate = LocalDate.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+        String confirm;
         int loanIndex = -1, borrowedBooksIndex = -1;
         boolean flag;
 
@@ -194,12 +195,24 @@ public class Librarian extends User
             }
         }while(flag);
 
-        //calculate if actual return date is before or after
-        if(actualReturnDate.isBefore(loanList[loanIndex].getReturnDate(borrowedBooksIndex)))
+        System.out.println("Confirm Return Date? (Y/N)");
+        confirm = UtilitiesForSystem.reader.readLine().toLowerCase();
+        switch (confirm) 
         {
-            System.out.println("Book returned earlier than expected.");
-            TimeUnit.MILLISECONDS.sleep(500);
-            UtilitiesForSystem.clearScreen();
+            case "y": break;
+        
+            case "n": return;
+
+            default: UtilitiesForSystem.selectionErrorMsg(); return;
+        }        
+
+        catalog.setBookListAvailability(bookIndex, true);
+
+        //calculate if actual return date is before or after
+        if(actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant().isBefore(loanList[loanIndex].getReturnDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant()) ||
+           actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant().equals(loanList[loanIndex].getReturnDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant()))
+        {
+            System.out.println("Book Returned Successfully");
         }
         else if(actualReturnDate.isAfter(loanList[loanIndex].getReturnDate(borrowedBooksIndex)))
         {
