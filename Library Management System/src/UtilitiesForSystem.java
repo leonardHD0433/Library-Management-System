@@ -1,9 +1,13 @@
 import java.io.*;
+import java.util.*;
 import java.util.concurrent.*;
 
 public class UtilitiesForSystem 
 {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static File file;
+    private static ArrayList <String> fileName;
+
     public static void clearScreen()
     {
         for (int i = 0; i < 10; i++) 
@@ -50,4 +54,54 @@ public class UtilitiesForSystem
         }
         return false; // No digits found
     }
+
+    public void fileName()
+    {
+        fileName = new ArrayList<String>();
+        fileName.add("BookTitle.txt");
+        fileName.add("BookISBN.txt");
+        fileName.add("BookAuthor.txt");
+        fileName.add("BookPublisher.txt");
+        fileName.add("BookYearPublished.txt");
+        fileName.add("BookGenre.txt");
+        fileName.add("BookAvailability.txt");
+    }
+
+    public static String getFileName(int i)
+    {
+        return fileName.get(i);
+    }
+
+    public static void setFile(int i)
+    {
+        file = new File(getFileName(i));
+    }
+
+    public static void createFiles() throws InterruptedException
+    {
+        System.out.println("Backing up........");
+        TimeUnit.MILLISECONDS.sleep(1000);
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            setFile(i);
+            try
+            {
+                if(file.createNewFile())
+                {
+                    System.out.println("File created: " + file.getName());
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            catch(IOException e)
+            {
+                System.out.println("An error occured.");
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }

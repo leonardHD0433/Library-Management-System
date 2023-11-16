@@ -203,6 +203,25 @@ public class Session
 
     }
   
+    public void logout() //save sessions and data updates using files
+    {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Display Login Page
     public void dispLoginPage()
     {
