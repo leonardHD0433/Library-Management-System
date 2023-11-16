@@ -121,7 +121,7 @@ public abstract class User
                     {
                         UtilitiesForSystem.clearScreen();
                         System.out.println("Book chosen:\n\n" + catalog.getBookList(chosenIndex));
-                        whatToDoWithBook(catalog.getChosenBookIndex());
+                        whatToDoWithBook(chosenIndex);
                     }
                     else
                     {

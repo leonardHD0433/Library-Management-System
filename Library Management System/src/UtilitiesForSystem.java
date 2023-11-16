@@ -6,6 +6,10 @@ public class UtilitiesForSystem
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static void clearScreen()
     {
+        for (int i = 0; i < 10; i++) 
+        {
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        }
         System.out.print("\033[H\033[2J");  
         System.out.flush();
     }

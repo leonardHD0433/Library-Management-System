@@ -6,12 +6,14 @@ import java.util.*;
 
 public class Loan 
 {
+    DateTimeFormatter dtf;
     ArrayList <Book> borrowedBooks = new ArrayList<Book>();
     Patron p;
     private String borrowDate, returnDate;
 
     public Loan(String PatronName, String PatronID, String PatronContactNumber)
     {
+        dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
         p = new Patron(PatronName, PatronID, PatronContactNumber); 
     }
 
@@ -25,7 +27,9 @@ public class Loan
         boolean flag;
         do
         {
-            System.out.println(borrowedBooks.get(bI) + "\n\n");
+            UtilitiesForSystem.clearScreen();
+            System.out.println(borrowedBooks.get(bI) + "\n");
+            System.out.print("Borrowed by: " + p.getPatronName() + " (" + p.getPatronID() + ")\n\n");
             setBorrowedDate(bI);
             setReturnDate(bI);
             flag = !(borrowedBooks.get(bI).getBorrowD().isBefore(borrowedBooks.get(bI).getReturnD()) && (Duration.between(borrowedBooks.get(bI).getReturnD().atStartOfDay(ZoneId.systemDefault()).toInstant(), borrowedBooks.get(bI).getBorrowD().atStartOfDay(ZoneId.systemDefault()).toInstant()).toDays() <= 7));
@@ -42,7 +46,6 @@ public class Loan
     //method to get borrow date
     public void setBorrowedDate(int i) throws IOException, InterruptedException
     {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
         boolean flag;
         do
         {
@@ -56,6 +59,8 @@ public class Loan
                 System.out.println("Invalid date. Try again");
                 TimeUnit.MILLISECONDS.sleep(500);
                 UtilitiesForSystem.clearScreen();
+                System.out.println(borrowedBooks.get(i) + "\n");
+                System.out.print("Borrowed by: " + p.getPatronName() + " (" + p.getPatronID() + ")\n\n");
                 flag = true;
             }
         }while(flag);
@@ -63,7 +68,6 @@ public class Loan
 
     public void setReturnDate(int i) throws IOException, InterruptedException
     {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
         boolean flag;
         do
         {
@@ -73,10 +77,15 @@ public class Loan
             {
                 borrowedBooks.get(i).setReturnD(LocalDate.parse(returnDate, dtf));
                 flag = false;
-            } catch (DateTimeParseException e) {
+            } 
+            catch (DateTimeParseException e) 
+            {
                 System.out.println("Invalid date. Try again");
                 TimeUnit.MILLISECONDS.sleep(500);
                 UtilitiesForSystem.clearScreen();
+                System.out.println(borrowedBooks.get(i) + "\n");
+                System.out.print("Borrowed by: " + p.getPatronName() + " (" + p.getPatronID() + ")\n\n");
+                System.out.println("Borrowed Date: " + getBorrowedDate(i).format(dtf));
                 flag = true;
             }
         }while(flag);
@@ -85,6 +94,7 @@ public class Loan
     public LocalDate getBorrowedDate(int i)
     {
         return borrowedBooks.get(i).getBorrowD();
+
     }
 
     public LocalDate getReturnDate(int i)
@@ -94,11 +104,12 @@ public class Loan
 
     public void displayLoanDetails(int i) 
     {
-        System.out.println("Date Borrowed:" + getBorrowedDate(i));
-        System.out.println("Date Returned:" + getReturnDate(i));
+        System.out.println("Date Borrowed:" + getBorrowedDate(i).format(dtf));
+        System.out.println("Date Returned:" + getReturnDate(i).format(dtf));
         System.out.println("Book Title:" + borrowedBooks.get(i).getBookTitle());
-        System.out.println("Patron Name: " + p.getPatronName());
+        System.out.println("Patron: " + p.getPatronName() + " (" + p.getPatronID() + ")");
     }
+
     public void dispPatronDetails()
     {
         System.out.println(p);

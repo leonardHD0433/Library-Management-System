@@ -13,7 +13,7 @@ public class Librarian extends User
         setLoanList();
     }
 
-    //To view patron details - [Liew Zhen Nam] TODO
+    //To view patron details - [Liew Zhen Nam] //add remove book need to be done to view book borrowed
     public void viewPatron() throws IOException, InterruptedException
     {
         String choosePatron;
@@ -65,11 +65,13 @@ public class Librarian extends User
             {
                 case "1": catalog.setBackTo_ChooseBook(false); break;
             
-                case "back": catalog.setBackTo_ChooseBook(true); break;
+                case "2": catalog.setBackTo_ChooseBook(true); break;
 
-                default: UtilitiesForSystem.selectionErrorMsg();
+                default: 
+                    UtilitiesForSystem.selectionErrorMsg(); 
+                    System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
             }
-        }while(!(borrow_or_back.equals("1") || borrow_or_back.equals("back")));
+        }while(!(borrow_or_back.equals("1") || borrow_or_back.equals("2")));
 
         if(catalog.getBackTo_ChooseBook() == true)
         {
@@ -115,19 +117,28 @@ public class Librarian extends User
             borrowedBooks_index = 1;
         }
 
+        //add book record to loan
         loanList[patronIndex].addBook(catalog.getBookListTitle(bookIndex), catalog.getBookListIsbn(bookIndex), 
         catalog.getBookListAuthor(bookIndex), catalog.getBookListPublisher(bookIndex), catalog.getBookListYearPublished(bookIndex), 
         catalog.getBookGenre(bookIndex), catalog.getBookListAvailability(bookIndex));
+
+        //set borrow & return date
         loanList[patronIndex].setDate(borrowedBooks_index);
+
+        //display loan details
+        UtilitiesForSystem.clearScreen();
         System.out.println("Transaction Number: " + patronIndex + "." + borrowedBooks_index);
         loanList[patronIndex].displayLoanDetails(borrowedBooks_index);
-        confirmBorrow();
+        
+        //confirmation
         if(confirmBorrow())
         {
             System.out.println("Book Borrowed.");
             TimeUnit.MILLISECONDS.sleep(500);
             UtilitiesForSystem.clearScreen();
-            catalog.setBookListAvailability(bookIndex, false);
+            catalog.setBookListAvailability(bookIndex, false); //change to "borrowed"
+            //make it borrowed for the headLibrarian side
+            
         }
         else
         {
