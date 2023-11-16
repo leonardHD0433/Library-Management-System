@@ -53,21 +53,16 @@ public class HeadLibrarian extends User
     //edit book - [Shaun] TODO
     public void editBook() throws IOException, InterruptedException
     {
-        viewAllAvailable(); 
-        if(catalog.getRejectChooseBook() == false)
-        {     
-            System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
-            whatToDoWithBook(0);
-            //since the parameter is only useful for the librarian class, you can leave this 0 here.
-        }      
+        viewAllAvailable();  
     }
 
     public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException // you can use this abstract method however you like
     {
-        Boolean validOption = false;
-        dispOption_inBookPage(bookIndex); //Displays the options for what to edit
+        Boolean validOption = true;
         //bookIndex will be my book chosen option - 1
         do {
+
+            dispOption_inBookPage(bookIndex); //Displays the options for what to edit
             System.out.println("\nSelection: ");
             String selectedOption = UtilitiesForSystem.reader.readLine();
             
@@ -80,8 +75,6 @@ public class HeadLibrarian extends User
                         System.out.println("Edit Title!");
                         System.out.println("[Book Title]: "+catalog.getBookListTitle(bookIndex));
                         TimeUnit.MILLISECONDS.sleep(1000);
-                        
-
                         break;
                     }
                     case "2":
@@ -126,24 +119,29 @@ public class HeadLibrarian extends User
                     }
                     case "7":
                     {
+                        validOption = false;
                         System.out.println("Exiting..");
                         TimeUnit.MILLISECONDS.sleep(1000);
-                        validOption = true;
                         break;
                     }
                     default:
                     {
-                        System.out.println("This is default!");
+                        System.out.println("Please select only options from 1 - 7!");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        UtilitiesForSystem.clearScreen();
+                        System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
                     }
                 }
                         
             }
             else
             {
-                System.out.println("Please select only options from 1 - 7!");
-                continue;
+                System.out.println("Please enter a digit");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+                System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
             }
-        }while(!validOption);
+        }while(validOption);
 
         //Use for loop -> find book -> nested for loop -> find details
 
