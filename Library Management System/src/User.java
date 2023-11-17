@@ -132,9 +132,9 @@ public abstract class User
             
                 default:
                     //choose book from filtered list
-                    catalog.setChosenBookIndex(catalog.getBookPos(chosenIndex));
-                    if(catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize())
+                    if(chosenIndex >= 0 && chosenIndex < catalog.bookPos_forFilteredListSize())
                     {
+                        catalog.setChosenBookIndex(catalog.getBookPos(chosenIndex));
                         UtilitiesForSystem.clearScreen();
                         System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
                         whatToDoWithBook(catalog.getChosenBookIndex());

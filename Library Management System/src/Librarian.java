@@ -156,8 +156,8 @@ public class Librarian extends User
     {
         LocalDate actualReturnDate = LocalDate.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
-        String confirm;
-        int loanIndex = -1, borrowedBooksIndex = -1;
+        String confirm, pay, transactionNo;
+        int loanIndex = -1, borrowedBooksIndex = -1, daysOverdue;
         boolean flag;
 
         outerLoop: //label
@@ -174,10 +174,12 @@ public class Librarian extends User
             }
         }
 
+        transactionNo = loanIndex + "." + borrowedBooksIndex;
+
         do
         {
             System.out.println("-----------------------------------------------------------------------------------------------------");
-            System.out.println("Transaction Number: " + loanIndex + "." + borrowedBooksIndex);
+            System.out.println("Transaction Number: " + transactionNo);
             loanList[loanIndex].displayLoanDetails(borrowedBooksIndex);
             System.out.println("-----------------------------------------------------------------------------------------------------");
 
@@ -186,7 +188,17 @@ public class Librarian extends User
             try 
             {
                 actualReturnDate = LocalDate.parse(UtilitiesForSystem.reader.readLine(), dtf);
-                flag = false;
+                if(actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant().isBefore(loanList[loanIndex].getBorrowedDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant()))
+                {
+                    System.out.println("Actual return date cannot be before borrow date.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    flag = true;
+                }
+                else
+                {
+                    flag = false;
+                }
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date. Try again");
                 TimeUnit.MILLISECONDS.sleep(500);
@@ -216,19 +228,32 @@ public class Librarian extends User
         }
         else if(actualReturnDate.isAfter(loanList[loanIndex].getReturnDate(borrowedBooksIndex)))
         {
+            daysOverdue = (int)Duration.between(loanList[loanIndex].getReturnDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant(), actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant()).toDays();
             System.out.println("Book Returned Successfully");
-            System.out.println("Overdue by: ");
-            TimeUnit.MILLISECONDS.sleep(500);
-            UtilitiesForSystem.clearScreen();
+            System.out.println("Overdue by: " + daysOverdue + " days");
+            System.out.println("Calculating Fine.........");
+            TimeUnit.MILLISECONDS.sleep(1000);
+            System.out.print("Fine to be paid: RM ");
+            System.out.printf("%.2f", loanList[loanIndex].calculateFine(daysOverdue));
+            System.out.println();
+            System.out.println("1. Pay");
+            pay = UtilitiesForSystem.reader.readLine();
+            if(pay.equals("1"))
+            {
+                System.out.println("Payment Successful");
+                loanList[loanIndex].displayFineReceipt(transactionNo, actualReturnDate.format(dtf), borrowedBooksIndex);
+                UtilitiesForSystem.pressEnterToContinue();
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+                loanList[loanIndex].borrowedBooks.remove(borrowedBooksIndex);
+            }
+            else
+            {
+                System.out.println("Select the above options.");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+            }
         }
-        else
-        {
-            System.out.println("Book returned on time.");
-            TimeUnit.MILLISECONDS.sleep(500);
-            UtilitiesForSystem.clearScreen();
-        }
-
-
 
     }
 

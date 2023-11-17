@@ -56,6 +56,12 @@ public class UtilitiesForSystem
         return false; // No digits found
     }
 
+    public static void pressEnterToContinue() throws IOException
+    { 
+        System.out.println("Press any key to continue...");
+        reader.readLine();
+    }
+
     public static void fileName()
     {
         fileName = new ArrayList<String>();
