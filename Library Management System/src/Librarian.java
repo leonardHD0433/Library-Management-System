@@ -216,7 +216,8 @@ public class Librarian extends User
         }
         else if(actualReturnDate.isAfter(loanList[loanIndex].getReturnDate(borrowedBooksIndex)))
         {
-            System.out.println("Book returned later than expected.");
+            System.out.println("Book Returned Successfully");
+            System.out.println("Overdue by: ");
             TimeUnit.MILLISECONDS.sleep(500);
             UtilitiesForSystem.clearScreen();
         }
