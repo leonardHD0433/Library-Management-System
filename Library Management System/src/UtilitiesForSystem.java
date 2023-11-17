@@ -5,6 +5,7 @@ import java.util.concurrent.*;
 public class UtilitiesForSystem 
 {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static FileWriter[] writer = new FileWriter[7];
     private static File file;
     private static ArrayList <String> fileName;
 
@@ -55,16 +56,16 @@ public class UtilitiesForSystem
         return false; // No digits found
     }
 
-    public void fileName()
+    public static void fileName()
     {
         fileName = new ArrayList<String>();
-        fileName.add("BookTitle.txt");
-        fileName.add("BookISBN.txt");
-        fileName.add("BookAuthor.txt");
-        fileName.add("BookPublisher.txt");
-        fileName.add("BookYearPublished.txt");
-        fileName.add("BookGenre.txt");
-        fileName.add("BookAvailability.txt");
+        fileName.add("BookTitle.txt");           //0
+        fileName.add("BookISBN.txt");            //1
+        fileName.add("BookAuthor.txt");          //2
+        fileName.add("BookPublisher.txt");       //3
+        fileName.add("BookYearPublished.txt");   //4
+        fileName.add("BookGenre.txt");           //5
+        fileName.add("BookAvailability.txt");    //6
     }
 
     public static String getFileName(int i)
@@ -72,12 +73,13 @@ public class UtilitiesForSystem
         return fileName.get(i);
     }
 
-    public static void setFile(int i)
+    public static void setFile(int i) throws IOException
     {
         file = new File(getFileName(i));
+        writer[i] = new FileWriter(file);
     }
 
-    public static void createFiles() throws InterruptedException
+    public static void createFiles() throws IOException, InterruptedException
     {
         System.out.println("Backing up........");
         TimeUnit.MILLISECONDS.sleep(1000);
@@ -103,5 +105,25 @@ public class UtilitiesForSystem
         }
     }
 
+    public static void deleteFiles() throws IOException
+    {
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            setFile(i);
+            file.delete();
+        }
+    }
 
+    public static void writeToFile(int i, String str) throws IOException
+    {
+        writer[i].write(str + System.lineSeparator());
+    }
+
+    public static void closeFile() throws IOException
+    {
+        for (int i = 0; i < fileName.size(); i++) 
+        {
+            writer[i].close();
+        }   
+    }
 }

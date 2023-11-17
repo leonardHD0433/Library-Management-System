@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.*;
+import java.time.format.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -138,7 +140,7 @@ public class Librarian extends User
             UtilitiesForSystem.clearScreen();
             catalog.setBookListAvailability(bookIndex, false); //change to "borrowed"
             //make it borrowed for the headLibrarian side
-            
+
         }
         else
         {
@@ -150,8 +152,82 @@ public class Librarian extends User
     }
 
     // Method to return a book
-    public void returnBook(int bookIndex)
+    public void returnBook(int bookIndex) throws IOException, InterruptedException
     {
+        LocalDate actualReturnDate = LocalDate.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+        String confirm;
+        int loanIndex = -1, borrowedBooksIndex = -1;
+        boolean flag;
+
+        outerLoop: //label
+        for (int i = 0; i < loanList.length; i++) //find in the loan list for where the borrowed book is
+        {
+            for (int j = 0; j < loanList[i].borrowedBooks.size(); j++) 
+            {
+                if(loanList[i].borrowedBooks.get(j).getBookTitle().equals(catalog.getBookListTitle(bookIndex)))
+                {
+                    loanIndex = i;
+                    borrowedBooksIndex = j;
+                    break outerLoop; //break both loops
+                }
+            }
+        }
+
+        do
+        {
+            System.out.println("-----------------------------------------------------------------------------------------------------");
+            System.out.println("Transaction Number: " + loanIndex + "." + borrowedBooksIndex);
+            loanList[loanIndex].displayLoanDetails(borrowedBooksIndex);
+            System.out.println("-----------------------------------------------------------------------------------------------------");
+
+            //actual return date
+            System.out.println("Actual Return Date: (dd/mm/yyyy)");
+            try 
+            {
+                actualReturnDate = LocalDate.parse(UtilitiesForSystem.reader.readLine(), dtf);
+                flag = false;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date. Try again");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+                flag = true;
+            }
+        }while(flag);
+
+        System.out.println("Confirm Return Date? (Y/N)");
+        confirm = UtilitiesForSystem.reader.readLine().toLowerCase();
+        switch (confirm) 
+        {
+            case "y": break;
+        
+            case "n": return;
+
+            default: UtilitiesForSystem.selectionErrorMsg(); return;
+        }        
+
+        catalog.setBookListAvailability(bookIndex, true);
+
+        //calculate if actual return date is before or after
+        if(actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant().isBefore(loanList[loanIndex].getReturnDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant()) ||
+           actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant().equals(loanList[loanIndex].getReturnDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant()))
+        {
+            System.out.println("Book Returned Successfully");
+        }
+        else if(actualReturnDate.isAfter(loanList[loanIndex].getReturnDate(borrowedBooksIndex)))
+        {
+            System.out.println("Book returned later than expected.");
+            TimeUnit.MILLISECONDS.sleep(500);
+            UtilitiesForSystem.clearScreen();
+        }
+        else
+        {
+            System.out.println("Book returned on time.");
+            TimeUnit.MILLISECONDS.sleep(500);
+            UtilitiesForSystem.clearScreen();
+        }
+
+
 
     }
 
