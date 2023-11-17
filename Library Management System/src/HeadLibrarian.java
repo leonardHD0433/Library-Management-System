@@ -44,24 +44,23 @@ public class HeadLibrarian extends User
             default:
                 System.out.println("Invalid choice. Please try again.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                UtilitiesForSystem.clearScreen();
         }
         UtilitiesForSystem.clearScreen();
         return backToHomePage;
     }
 
-    //edit book - [Shaun] TODO
+    //editBook() - Shaun
     public void editBook() throws IOException, InterruptedException
     {
         viewAllAvailable();  
     }
 
-    public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException // you can use this abstract method however you like
+    public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException //whatToDoWithBook() - Shaun
     {
         Boolean validOption = true;
         //bookIndex will be my book chosen option - 1
         do {
-
+            
             dispOption_inBookPage(bookIndex); //Displays the options for what to edit
             System.out.println("\nSelection: ");
             String selectedOption = UtilitiesForSystem.reader.readLine();
@@ -72,9 +71,40 @@ public class HeadLibrarian extends User
                 {
                     case "1":
                     {
-                        System.out.println("Edit Title!");
-                        System.out.println("[Book Title]: "+catalog.getBookListTitle(bookIndex));
-                        TimeUnit.MILLISECONDS.sleep(1000);
+                        Boolean validChange = false;
+                    
+                        do {
+                            System.out.println("[Current Book Title]: "+catalog.getBookListTitle(bookIndex));
+                            String oldTitle = catalog.getBookListTitle(bookIndex);
+                            System.out.println(oldTitle);
+                            TimeUnit.MILLISECONDS.sleep(1000);
+                            System.out.println("Please enter the new title for the book or enter '-999' to exit: ");
+                            String newTitle = UtilitiesForSystem.reader.readLine();
+                            if(newTitle.equals(oldTitle)) //Ensures the new title is not the same as the old title.
+                            {
+                                System.out.println("Please do not enter the same title.");
+                                continue;
+                            }
+                            else if("-999".equals(newTitle)) //Exit using "-999".
+                            {
+                                System.out.println("Exiting [Edit Title]..");
+                                TimeUnit.MILLISECONDS.sleep(500);
+                                validChange = true;
+                            }
+                            else if(newTitle.trim().isEmpty()) //Ensures the title is not left into a blank space.
+                            {
+                                System.out.println("Please do not enter a blank title.");
+                                continue;
+                            }
+                            else
+                            {
+                                System.out.println("Edited Succesfully!");
+                                TimeUnit.MILLISECONDS.sleep(500);
+                                validChange = true;
+                                break;
+                            }
+                        
+                        }while(validChange == false);
                         break;
                     }
                     case "2":
