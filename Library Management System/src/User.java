@@ -149,7 +149,7 @@ public abstract class User
         }
         else
         {
-            catalog.setRejectChooseBook(chooseBook);
+            catalog.setRejectChooseBook("back");
             catalog.setBookIndexInteger(false);
         }
     }
@@ -527,12 +527,8 @@ public abstract class User
                 System.out.print("\n\nChoose Genre: ");
                 chooseGenre = UtilitiesForSystem.reader.readLine();
                 is_digit = chooseGenre.chars().allMatch(Character::isDigit);
-                if(!is_digit)
-                {
-                    System.out.println("Please enter a digit.");
-                    TimeUnit.MILLISECONDS.sleep(500);
-                }
-                else
+
+                if(is_digit)
                 {
                     index = Integer.parseInt(chooseGenre) - 1;
                 }
