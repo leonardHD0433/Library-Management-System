@@ -5,9 +5,10 @@ import java.util.concurrent.*;
 public class UtilitiesForSystem 
 {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static BufferedReader[] readFile;
     public static FileWriter[] writer = new FileWriter[7];
-    private static File file;
-    private static ArrayList <String> fileName;
+    public static File file;
+    public static ArrayList <String> fileName;
 
     public static void clearScreen()
     {
@@ -83,6 +84,7 @@ public class UtilitiesForSystem
     {
         file = new File(getFileName(i));
         writer[i] = new FileWriter(file);
+        readFile[i] = new BufferedReader(new FileReader(file));
     }
 
     public static void createFiles() throws IOException, InterruptedException
@@ -132,4 +134,19 @@ public class UtilitiesForSystem
             writer[i].close();
         }   
     }
+
+    //check if files exist
+    public static boolean checkIfFilesExist() throws IOException
+    {
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            setFile(i);
+            if(!file.exists())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

@@ -12,7 +12,7 @@ public class Catalog implements BookData, PatronData
     private boolean found, reject_chooseBook, isBookIndexInteger, backTo_ChooseBook;
     private int searchResultNo, chosenBookIndex; //number of books found after filter
     
-    public Catalog()
+    public Catalog() throws IOException
     {
         bookList = new ArrayList<Book>();
         bookPos_forFilteredList = new ArrayList<Integer>();
@@ -22,16 +22,33 @@ public class Catalog implements BookData, PatronData
             setPatronList(i);
         }
 
-        for (int i = 0; i < BOOK_TITLE.length; i++)
+        if(UtilitiesForSystem.checkIfFilesExist())
         {
-            setBookList(i);
+            for (int i = 0; i < UtilitiesForSystem.fileName.size(); i++) 
+            {
+                setBookListFromFile(loadBookTitle(), loadBookIsbn(), loadBookAuthor(), loadBookPublisher(), loadBookYearPublished(), loadBookGenre(), loadBookAvailability());
+                
+            }
         }
+        else
+        {
+            for (int i = 0; i < BOOK_TITLE.length; i++)
+            {
+                setBookList(i);
+            }
+        }
+        
         sortBookList();
     }
 
     public void setBookList(int i)
     {
         bookList.add(new Book(BOOK_TITLE[i], BOOK_TITLE[i], AUTHOR[i], PUBLISHER[i], YEAR_PUBLISHED[i], GENRE[i], BOOK_AVAILABILITY[0]));
+    }
+
+    public void setBookListFromFile(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)
+    {
+        bookList.add(new Book(bookTitle, bookIsbn, author, publisher, yearPublished, genre, bookAvailability));
     }
 
     public void setPatronList(int i)
@@ -271,6 +288,55 @@ public class Catalog implements BookData, PatronData
     public void addBookToList(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)
     {
         bookList.add(new Book(bookTitle, bookIsbn, author, publisher, yearPublished, genre, bookAvailability));
+    }
+
+    public String loadBookTitle() throws IOException
+    {
+        String line;
+        line = UtilitiesForSystem.readFile[0].readLine();
+        return line;
+    }
+
+    public String loadBookIsbn() throws IOException
+    {
+        String line;
+        line = UtilitiesForSystem.readFile[1].readLine();
+        return line;
+    }
+
+    public String loadBookAuthor() throws IOException
+    {
+        String line;
+        line = UtilitiesForSystem.readFile[2].readLine();
+        return line;
+    }
+
+    public String loadBookPublisher() throws IOException
+    {
+        String line;
+        line = UtilitiesForSystem.readFile[3].readLine();
+        return line;
+    }
+
+    public int loadBookYearPublished() throws IOException
+    {
+        String line;
+        line = UtilitiesForSystem.readFile[4].readLine();
+        return Integer.parseInt(line);
+    }
+
+    public String loadBookGenre() throws IOException
+    {
+        String line;
+        line = UtilitiesForSystem.readFile[5].readLine();
+        return line;
+    }
+
+    public String loadBookAvailability() throws IOException
+    {
+        String line;
+        line = UtilitiesForSystem.readFile[6].readLine();
+        return line;
     }
 
     //search result after the respective filters
