@@ -8,11 +8,12 @@ public class Session
     private String loginPageSelection, homePageSelection, manageCatalogSelection, browseCatalogSelection, borrow_returnSelection;
     private boolean isLoginSuccessful;
 
-    public Session()
+    public Session() throws IOException
     {
+        UtilitiesForSystem.fileName();
+        UtilitiesForSystem.setFile();
         headLibrarian = new HeadLibrarian("HEAD LIBRARIAN", "Edwin Chua Jin Rui", "headStaff@001", "1234");
         librarian = new Librarian("LIBRARIAN", "Teh Yu Kang", "staff@002", "12345");
-        UtilitiesForSystem.fileName();
     }
 
     public boolean loginPage() throws IOException, InterruptedException
@@ -208,7 +209,12 @@ public class Session
   
     public void logout(String userSession) throws IOException, InterruptedException//save sessions and data updates using files
     {
+        if(UtilitiesForSystem.checkIfFilesExist())
+        {
+            UtilitiesForSystem.deleteFiles();
+        }
         UtilitiesForSystem.createFiles();
+        UtilitiesForSystem.setWriter();
         saveBookTitle(userSession);
         saveBookIsbn(userSession);
         saveBookAuthor(userSession);
@@ -221,7 +227,6 @@ public class Session
 
     public void saveBookTitle(String userSession) throws IOException
     {
-        UtilitiesForSystem.setFile(0);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -240,7 +245,6 @@ public class Session
 
     public void saveBookIsbn(String userSession) throws IOException
     {
-        UtilitiesForSystem.setFile(1);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -259,7 +263,6 @@ public class Session
 
     public void saveBookAuthor(String userSession) throws IOException
     {
-        UtilitiesForSystem.setFile(2);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -278,7 +281,6 @@ public class Session
 
     public void saveBookPublisher(String userSession) throws IOException
     {
-        UtilitiesForSystem.setFile(3);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -300,7 +302,6 @@ public class Session
         String str;
         if(userSession.equals("1"))
         {
-            UtilitiesForSystem.setFile(4);
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
             {
                 str = Integer.toString(headLibrarian.catalog.getBookListYearPublished(i));
@@ -319,7 +320,6 @@ public class Session
 
     public void saveBookGenre(String userSession) throws IOException
     {
-        UtilitiesForSystem.setFile(5);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 
@@ -338,7 +338,6 @@ public class Session
 
     public void saveBookAvailability(String userSession) throws IOException
     {
-        UtilitiesForSystem.setFile(6);
         if(userSession.equals("1"))
         {
             for (int i = 0; i < headLibrarian.catalog.getBookListSize(); i++) 

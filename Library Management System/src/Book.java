@@ -24,6 +24,36 @@ public class Book
         this.bookAvailability = bookAvailability;
     }
 
+    public void setBookTitle(String bookTitle)
+    {
+        this.bookTitle = bookTitle;
+    }
+
+    public void setBookIsbn(String bookIsbn)
+    {
+        this.bookIsbn = bookIsbn;
+    }
+
+    public void setAuthor(String author)
+    {
+        this.author = author;
+    }
+
+    public void setPublisher(String publisher)
+    {
+        this.publisher = publisher;
+    }
+
+    public void setYearPublished(int yearPublished)
+    {
+        this.yearPublished = yearPublished;
+    }
+
+    public void setGenre(String genre)
+    {
+        this.genre = genre;
+    }
+
     //edit the availability of the book
     public void setBookAvailability(boolean availability)
     {

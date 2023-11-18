@@ -8,7 +8,7 @@ public abstract class User
     protected String userType, userName, userId, password, readUserId, readPassword;
     
 
-    public User(String userType, String userName, String userId, String password) //Composition
+    public User(String userType, String userName, String userId, String password) throws IOException//Composition
     {
         catalog = new Catalog();
         setUserDetails(userType, userName, userId, password);

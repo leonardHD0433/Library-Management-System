@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class HeadLibrarian extends User 
 {
 
-    public HeadLibrarian(String userType, String userName, String userId, String password) //Composition
+    public HeadLibrarian(String userType, String userName, String userId, String password) throws IOException//Composition
     {
         super(userType, userName, userId, password);
     }
