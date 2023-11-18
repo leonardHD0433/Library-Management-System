@@ -310,44 +310,42 @@ public class Catalog implements BookData, PatronData
         bookList.add(new Book(bookTitle, bookIsbn, author, publisher, yearPublished, genre, bookAvailability));
     }
 
-<<<<<<< HEAD
     //Method to directly edit the title of a book - [SHAUN]
     public void setBookListTitle(int bookListIndex, String newBookTitle)
     {
-        bookList.get(bookListIndex).setBookTitle(newBookTitle);
+        bookList.get(bookListIndex).changeBookTitle(newBookTitle);
     }
 
     //Method to directly edit the author of a book - [SHAUN]
     public void setBookListAuthor(int bookListIndex, String newBookAuthor)
     {
-        bookList.get(bookListIndex).setBookAuthor(newBookAuthor);
+        bookList.get(bookListIndex).changeBookAuthor(newBookAuthor);
     }
 
     //Method to directly edit the publisher of a book - [SHAUN]
     public void setBookListPublisher(int bookListIndex, String newBookPublisher)
     {
-        bookList.get(bookListIndex).setBookPublisher(newBookPublisher);
+        bookList.get(bookListIndex).changeBookPublisher(newBookPublisher);
     }
 
     //Method to directly edit the ISBN of a book - [SHAUN]
     public void setBookListIsbn(int bookListIndex, String newBookIsbn)
     {
-        bookList.get(bookListIndex).setBookIsbn(newBookIsbn);
+        bookList.get(bookListIndex).changeBookIsbn(newBookIsbn);
     }
 
     //Method to directly edit the genre of a book - [SHAUN]
     public void setBookListGenre(int bookListIndex, String newBookGenre)
     {
-        bookList.get(bookListIndex).setBookGenre(newBookGenre);
+        bookList.get(bookListIndex).changeBookGenre(newBookGenre);
     }
 
     //Method to directly edit the publishing year of a book - [SHAUN]
     public void setBookListYearPublished(int bookListIndex, int newBookYearPublished)
     {
-        bookList.get(bookListIndex).setBookYearPublished(newBookYearPublished);
+        bookList.get(bookListIndex).changeBookYearPublished(newBookYearPublished);
     }
 
-=======
     public void loadBookTitle() throws IOException
     {
         bookTitleFromFile = new ArrayList<String>();
@@ -417,7 +415,6 @@ public class Catalog implements BookData, PatronData
             bookAvailabilityFromFile.add(UtilitiesForSystem.readFile[6].nextLine());
         }
     }
->>>>>>> 0479f6ebfa31e4fda154965f23cd76cb698d40d1
 
     //search result after the respective filters
     public void dispSearchResult(int i)

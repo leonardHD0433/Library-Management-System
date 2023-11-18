@@ -23,7 +23,8 @@ public class Book
         this.yearPublished = yearPublished;
         this.bookAvailability = bookAvailability;
     }
-/* 
+
+
     public void setBookTitle(String bookTitle)
     {
         this.bookTitle = bookTitle;
@@ -53,7 +54,6 @@ public class Book
     {
         this.genre = genre;
     }
- */
 
     //edit the availability of the book
     public void setBookAvailability(boolean availability)
@@ -71,35 +71,35 @@ public class Book
 
     // THESE METHODS GET THEIR ARGUMENTS FROM CATALOG.JAVA - [SHAUN]
     //Method to set the book title - [Shaun]
-    public void setBookTitle(String newBookTitle)
+    public void changeBookTitle(String newBookTitle)
     {
         bookTitle = newBookTitle;
     }
 
      //Method to set the book author- [Shaun]
-    public void setBookAuthor(String newBookAuthor)
+    public void changeBookAuthor(String newBookAuthor)
     {
         author = newBookAuthor;
     }
 
      //Method to set the book publisher - [Shaun]
-    public void setBookPublisher(String newBookPublisher)
+    public void changeBookPublisher(String newBookPublisher)
     {
         publisher = newBookPublisher;
     }
 
      //Method to set the book ISBN - [Shaun]
-    public void setBookIsbn(String newBookIsbn)
+    public void changeBookIsbn(String newBookIsbn)
     {
         bookIsbn = newBookIsbn;
     }
      //Method to set the book genre - [Shaun]
-    public void setBookGenre(String newBookGenre)
+    public void changeBookGenre(String newBookGenre)
     {
         genre = newBookGenre;
     }
      //Method to set the book year published - [Shaun]
-    public void setBookYearPublished(int newBookYearPublished)
+    public void changeBookYearPublished(int newBookYearPublished)
     {
         yearPublished = newBookYearPublished;
     }
