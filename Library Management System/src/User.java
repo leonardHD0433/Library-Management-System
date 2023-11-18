@@ -8,7 +8,7 @@ public abstract class User
     protected String userType, userName, userId, password, readUserId, readPassword;
     
 
-    public User(String userType, String userName, String userId, String password) //Composition
+    public User(String userType, String userName, String userId, String password) throws IOException//Composition
     {
         catalog = new Catalog();
         setUserDetails(userType, userName, userId, password);
@@ -95,7 +95,7 @@ public abstract class User
         catalog.setBackTo_ChooseBook(false);
 
         chooseBook = UtilitiesForSystem.reader.readLine().toLowerCase();
-        if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"))
+        if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back") && (Integer.parseInt(chooseBook) - 1) > catalog.getBookListSize())
         {
             System.out.println("Please enter a digit or enter back.");
             TimeUnit.MILLISECONDS.sleep(500);
@@ -132,9 +132,9 @@ public abstract class User
             
                 default:
                     //choose book from filtered list
-                    catalog.setChosenBookIndex(catalog.getBookPos(chosenIndex));
-                    if(catalog.getChosenBookIndex() >= 0 && catalog.getChosenBookIndex() < catalog.getBookListSize())
+                    if(chosenIndex >= 0 && chosenIndex < catalog.bookPos_forFilteredListSize())
                     {
+                        catalog.setChosenBookIndex(catalog.getBookPos(chosenIndex));
                         UtilitiesForSystem.clearScreen();
                         System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
                         whatToDoWithBook(catalog.getChosenBookIndex());
@@ -149,7 +149,7 @@ public abstract class User
         }
         else
         {
-            catalog.setRejectChooseBook(chooseBook);
+            catalog.setRejectChooseBook("back");
             catalog.setBookIndexInteger(false);
         }
     }
@@ -527,12 +527,8 @@ public abstract class User
                 System.out.print("\n\nChoose Genre: ");
                 chooseGenre = UtilitiesForSystem.reader.readLine();
                 is_digit = chooseGenre.chars().allMatch(Character::isDigit);
-                if(!is_digit)
-                {
-                    System.out.println("Please enter a digit.");
-                    TimeUnit.MILLISECONDS.sleep(500);
-                }
-                else
+
+                if(is_digit)
                 {
                     index = Integer.parseInt(chooseGenre) - 1;
                 }

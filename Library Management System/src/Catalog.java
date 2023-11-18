@@ -7,12 +7,19 @@ public class Catalog implements BookData, PatronData
     private ArrayList<Book> bookList;
     private ArrayList<Book> archiveList; // Uses pointer to remove book from a certain index. (.remove function)
     private Patron[] patronList = new Patron[5];
-    ArrayList <String> genreTypes_inCatalog;
+    private ArrayList <String> genreTypes_inCatalog;
+    private ArrayList <String> bookTitleFromFile;
+    private ArrayList <String> bookIsbnFromFile;
+    private ArrayList <String> authorFromFile;
+    private ArrayList <String> publisherFromFile;
+    private ArrayList <Integer> yearPublishedFromFile;
+    private ArrayList <String> genreFromFile;
+    private ArrayList <String> bookAvailabilityFromFile;
     private ArrayList <Integer> bookPos_forFilteredList; //
     private boolean found, reject_chooseBook, isBookIndexInteger, backTo_ChooseBook;
     private int searchResultNo, chosenBookIndex; //number of books found after filter
     
-    public Catalog()
+    public Catalog() throws IOException
     {
         bookList = new ArrayList<Book>();
         bookPos_forFilteredList = new ArrayList<Integer>();
@@ -22,16 +29,46 @@ public class Catalog implements BookData, PatronData
             setPatronList(i);
         }
 
-        for (int i = 0; i < BOOK_TITLE.length; i++)
+        if(!UtilitiesForSystem.checkIfFilesExist())
         {
-            setBookList(i);
+            for (int i = 0; i < BOOK_TITLE.length; i++)
+            {
+                setBookList(i);
+            }
+            
         }
+        else
+        {
+            UtilitiesForSystem.setReader();
+            setBookFromFile();
+            for (int i = 0; i < bookTitleFromFile.size(); i++) 
+            {
+                setBookList(bookTitleFromFile.get(i), bookIsbnFromFile.get(i), authorFromFile.get(i), publisherFromFile.get(i), yearPublishedFromFile.get(i), genreFromFile.get(i), bookAvailabilityFromFile.get(i));  
+            } 
+        }
+        
         sortBookList();
     }
 
     public void setBookList(int i)
     {
         bookList.add(new Book(BOOK_TITLE[i], BOOK_TITLE[i], AUTHOR[i], PUBLISHER[i], YEAR_PUBLISHED[i], GENRE[i], BOOK_AVAILABILITY[0]));
+    }
+
+    public void setBookList(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)
+    {
+        bookList.add(new Book(bookTitle, bookIsbn, author, publisher, yearPublished, genre, bookAvailability));
+    }
+
+    public void setBookFromFile() throws IOException
+    {
+        loadBookTitle();
+        loadBookIsbn();
+        loadBookAuthor();
+        loadBookPublisher();
+        loadBookYearPublished();
+        loadBookGenre();
+        loadBookAvailability();
     }
 
     public void setPatronList(int i)
@@ -272,6 +309,115 @@ public class Catalog implements BookData, PatronData
     {
         bookList.add(new Book(bookTitle, bookIsbn, author, publisher, yearPublished, genre, bookAvailability));
     }
+
+<<<<<<< HEAD
+    //Method to directly edit the title of a book - [SHAUN]
+    public void setBookListTitle(int bookListIndex, String newBookTitle)
+    {
+        bookList.get(bookListIndex).setBookTitle(newBookTitle);
+    }
+
+    //Method to directly edit the author of a book - [SHAUN]
+    public void setBookListAuthor(int bookListIndex, String newBookAuthor)
+    {
+        bookList.get(bookListIndex).setBookAuthor(newBookAuthor);
+    }
+
+    //Method to directly edit the publisher of a book - [SHAUN]
+    public void setBookListPublisher(int bookListIndex, String newBookPublisher)
+    {
+        bookList.get(bookListIndex).setBookPublisher(newBookPublisher);
+    }
+
+    //Method to directly edit the ISBN of a book - [SHAUN]
+    public void setBookListIsbn(int bookListIndex, String newBookIsbn)
+    {
+        bookList.get(bookListIndex).setBookIsbn(newBookIsbn);
+    }
+
+    //Method to directly edit the genre of a book - [SHAUN]
+    public void setBookListGenre(int bookListIndex, String newBookGenre)
+    {
+        bookList.get(bookListIndex).setBookGenre(newBookGenre);
+    }
+
+    //Method to directly edit the publishing year of a book - [SHAUN]
+    public void setBookListYearPublished(int bookListIndex, int newBookYearPublished)
+    {
+        bookList.get(bookListIndex).setBookYearPublished(newBookYearPublished);
+    }
+
+=======
+    public void loadBookTitle() throws IOException
+    {
+        bookTitleFromFile = new ArrayList<String>();
+
+        while(UtilitiesForSystem.readFile[0].hasNextLine())
+        {
+            bookTitleFromFile.add(UtilitiesForSystem.readFile[0].nextLine());
+        }
+    }
+
+    public void loadBookIsbn() throws IOException
+    {
+        bookIsbnFromFile = new ArrayList<String>();
+
+        while(UtilitiesForSystem.readFile[1].hasNextLine())
+        {
+            bookIsbnFromFile.add(UtilitiesForSystem.readFile[1].nextLine());
+        }
+    }
+
+    public void loadBookAuthor() throws IOException
+    {
+        authorFromFile = new ArrayList<String>();
+
+        while(UtilitiesForSystem.readFile[2].hasNextLine())
+        {
+            authorFromFile.add(UtilitiesForSystem.readFile[2].nextLine());
+        }
+    }
+
+    public void loadBookPublisher() throws IOException
+    {
+        publisherFromFile = new ArrayList<String>();
+
+        while(UtilitiesForSystem.readFile[3].hasNextLine())
+        {
+            publisherFromFile.add(UtilitiesForSystem.readFile[3].nextLine());
+        }
+    }
+
+    public void loadBookYearPublished() throws IOException
+    {
+        yearPublishedFromFile = new ArrayList<Integer>();
+
+        while(UtilitiesForSystem.readFile[4].hasNextLine())
+        {
+            yearPublishedFromFile.add(Integer.parseInt(UtilitiesForSystem.readFile[4].nextLine()));
+        }
+    }
+
+    public void loadBookGenre() throws IOException
+    {
+        genreFromFile = new ArrayList<String>();
+
+        while(UtilitiesForSystem.readFile[5].hasNextLine())
+        {
+            genreFromFile.add(UtilitiesForSystem.readFile[5].nextLine());
+        }
+    }
+
+    public void loadBookAvailability() throws IOException
+    {
+        bookAvailabilityFromFile = new ArrayList<String>();
+
+        while(UtilitiesForSystem.readFile[6].hasNextLine())
+        {
+            bookAvailabilityFromFile.add(UtilitiesForSystem.readFile[6].nextLine());
+        }
+    }
+>>>>>>> 0479f6ebfa31e4fda154965f23cd76cb698d40d1
 
     //search result after the respective filters
     public void dispSearchResult(int i)

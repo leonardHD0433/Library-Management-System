@@ -10,6 +10,7 @@ public class Loan
     ArrayList <Book> borrowedBooks = new ArrayList<Book>();
     Patron p;
     private String borrowDate, returnDate;
+    private double fine;
 
     public Loan(String PatronName, String PatronID, String PatronContactNumber)
     {
@@ -32,7 +33,7 @@ public class Loan
             System.out.print("Borrowed by: " + p.getPatronName() + " (" + p.getPatronID() + ")\n\n");
             setBorrowedDate(bI);
             setReturnDate(bI);
-            flag = !(borrowedBooks.get(bI).getBorrowD().isBefore(borrowedBooks.get(bI).getReturnD()) && (Duration.between(borrowedBooks.get(bI).getReturnD().atStartOfDay(ZoneId.systemDefault()).toInstant(), borrowedBooks.get(bI).getBorrowD().atStartOfDay(ZoneId.systemDefault()).toInstant()).toDays() <= 7));
+            flag = !(borrowedBooks.get(bI).getBorrowD().isBefore(borrowedBooks.get(bI).getReturnD()) && (Duration.between(borrowedBooks.get(bI).getBorrowD().atStartOfDay(ZoneId.systemDefault()).toInstant(), borrowedBooks.get(bI).getReturnD().atStartOfDay(ZoneId.systemDefault()).toInstant()).toDays() <= 7));
             //return must be 1 day or one week after borrow date
             if(flag)
             {
@@ -102,12 +103,37 @@ public class Loan
         return borrowedBooks.get(i).getReturnD();
     }
 
+    public double calculateFine(int daysOverdue)
+    {
+        fine = (double)daysOverdue * 1.00;
+        return fine;
+    }
+
+
+
+
+
+
+
     public void displayLoanDetails(int i) 
     {
         System.out.println("Date Borrowed:" + getBorrowedDate(i).format(dtf));
         System.out.println("Date Returned:" + getReturnDate(i).format(dtf));
         System.out.println("Book Title:" + borrowedBooks.get(i).getBookTitle());
         System.out.println("Patron: " + p.getPatronName() + " (" + p.getPatronID() + ")");
+    }
+
+    public void displayFineReceipt(String transactionNo, String date, int borrowedBooksIndex)
+    {
+        System.out.println("---------------------------------------");
+        System.out.println("Date: " + date);
+        System.out.println("---------------------------------------");
+        System.out.println("Transaction No: " + transactionNo);
+        System.out.println("Patron: " + p.getPatronName() + " (" + p.getPatronID() + ")");
+        System.out.println("Book Title: " + borrowedBooks.get(borrowedBooksIndex).getBookTitle());
+        System.out.println("---------------------------------------");
+        System.out.println("Fine: RM" + fine);
+        System.out.println("---------------------------------------");
     }
 
     public void dispPatronDetails()

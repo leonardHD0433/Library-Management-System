@@ -23,6 +23,37 @@ public class Book
         this.yearPublished = yearPublished;
         this.bookAvailability = bookAvailability;
     }
+/* 
+    public void setBookTitle(String bookTitle)
+    {
+        this.bookTitle = bookTitle;
+    }
+
+    public void setBookIsbn(String bookIsbn)
+    {
+        this.bookIsbn = bookIsbn;
+    }
+
+    public void setAuthor(String author)
+    {
+        this.author = author;
+    }
+
+    public void setPublisher(String publisher)
+    {
+        this.publisher = publisher;
+    }
+
+    public void setYearPublished(int yearPublished)
+    {
+        this.yearPublished = yearPublished;
+    }
+
+    public void setGenre(String genre)
+    {
+        this.genre = genre;
+    }
+ */
 
     //edit the availability of the book
     public void setBookAvailability(boolean availability)
@@ -35,6 +66,42 @@ public class Book
         {
             bookAvailability = "Borrowed";
         }
+    }
+
+
+    // THESE METHODS GET THEIR ARGUMENTS FROM CATALOG.JAVA - [SHAUN]
+    //Method to set the book title - [Shaun]
+    public void setBookTitle(String newBookTitle)
+    {
+        bookTitle = newBookTitle;
+    }
+
+     //Method to set the book author- [Shaun]
+    public void setBookAuthor(String newBookAuthor)
+    {
+        author = newBookAuthor;
+    }
+
+     //Method to set the book publisher - [Shaun]
+    public void setBookPublisher(String newBookPublisher)
+    {
+        publisher = newBookPublisher;
+    }
+
+     //Method to set the book ISBN - [Shaun]
+    public void setBookIsbn(String newBookIsbn)
+    {
+        bookIsbn = newBookIsbn;
+    }
+     //Method to set the book genre - [Shaun]
+    public void setBookGenre(String newBookGenre)
+    {
+        genre = newBookGenre;
+    }
+     //Method to set the book year published - [Shaun]
+    public void setBookYearPublished(int newBookYearPublished)
+    {
+        yearPublished = newBookYearPublished;
     }
 
     public void setBorrowD(LocalDate d)

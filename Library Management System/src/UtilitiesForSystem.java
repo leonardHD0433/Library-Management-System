@@ -5,9 +5,10 @@ import java.util.concurrent.*;
 public class UtilitiesForSystem 
 {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static Scanner[] readFile = new Scanner[7];
     public static FileWriter[] writer = new FileWriter[7];
-    private static File file;
-    private static ArrayList <String> fileName;
+    public static File[] file = new File[7];
+    public static ArrayList <String> fileName;
 
     public static void clearScreen()
     {
@@ -56,6 +57,12 @@ public class UtilitiesForSystem
         return false; // No digits found
     }
 
+    public static void pressEnterToContinue() throws IOException
+    { 
+        System.out.println("Press any key to continue...");
+        reader.readLine();
+    }
+
     public static void fileName()
     {
         fileName = new ArrayList<String>();
@@ -73,10 +80,36 @@ public class UtilitiesForSystem
         return fileName.get(i);
     }
 
-    public static void setFile(int i) throws IOException
+    public static void setFile() throws IOException
     {
-        file = new File(getFileName(i));
-        writer[i] = new FileWriter(file);
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            file[i] = new File(getFileName(i));
+        }
+    }
+
+    public static void setWriter() throws IOException
+    {
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            writer[i] = new FileWriter(file[i]);
+        }
+    }
+
+    public static void setReader() throws IOException
+    {
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            readFile[i] = new Scanner(new FileReader(file[i]));
+        }
+    }
+
+    public static void closeReader() throws IOException
+    {
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            readFile[i].close();
+        }
     }
 
     public static void createFiles() throws IOException, InterruptedException
@@ -85,22 +118,10 @@ public class UtilitiesForSystem
         TimeUnit.MILLISECONDS.sleep(1000);
         for(int i = 0; i < fileName.size(); i++)
         {
-            setFile(i);
-            try
+            file[i].createNewFile();
+            if(file[i].exists())
             {
-                if(file.createNewFile())
-                {
-                    System.out.println("File created: " + file.getName());
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            catch(IOException e)
-            {
-                System.out.println("An error occured.");
-                e.printStackTrace();
+                System.out.println("File created: " + file[i].getName());
             }
         }
     }
@@ -109,8 +130,7 @@ public class UtilitiesForSystem
     {
         for(int i = 0; i < fileName.size(); i++)
         {
-            setFile(i);
-            file.delete();
+            file[i].delete();
         }
     }
 
@@ -125,5 +145,18 @@ public class UtilitiesForSystem
         {
             writer[i].close();
         }   
+    }
+
+    //check if files exist
+    public static boolean checkIfFilesExist() throws IOException
+    {
+        for(int i = 0; i < fileName.size(); i++)
+        {
+            if(!file[i].exists())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -9,6 +9,7 @@ public class Main
         {
             UtilitiesForSystem.clearScreen();
             exit = session.loginPage();
+            session = new Session();
         }while(!exit);
     }
 }
