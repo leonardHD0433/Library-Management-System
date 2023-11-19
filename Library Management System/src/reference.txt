@@ -20,3 +20,7 @@ https://stackoverflow.com/questions/27696712/java-label-outer-middle-inner
 https://stackoverflow.com/questions/19870467/how-do-i-get-press-any-key-to-continue-to-work-in-my-java-code
 https://www.youtube.com/watch?v=3bpJzyw60x8
 https://www.baeldung.com/java-transient-keyword
+https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
+https://stackoverflow.com/questions/27631183/writing-an-arraylist-of-objects-to-a-file
+https://stackoverflow.com/questions/27409718/java-reading-multiple-objects-from-a-file-as-they-were-in-an-array
+https://www.java67.com/2012/08/what-is-transient-variable-in-java.html#:~:text=transient%20variable%20in%20Java%20is,variable%20it%20would%20be%20null.
