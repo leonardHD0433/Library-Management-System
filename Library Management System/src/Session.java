@@ -140,7 +140,7 @@ public class Session
                 case "2": 
                     do
                     {
-                        librarian.viewPatron();
+                        backToHomePage = librarian.viewPatron();
                     }while(!backToHomePage);
                     break;
 

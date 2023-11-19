@@ -16,9 +16,10 @@ public class Librarian extends User
     }
 
     //To view patron details - [Liew Zhen Nam] //add remove book need to be done to view book borrowed
-    public void viewPatron() throws IOException, InterruptedException
+    public boolean viewPatron() throws IOException, InterruptedException
     {
         String choosePatron, choice;
+        boolean flag = false;
         int patronIndex; 
         do
         {
@@ -47,7 +48,7 @@ public class Librarian extends User
                 choice = UtilitiesForSystem.reader.readLine();
                 switch (choice) 
                 {
-                    case "1": break;
+                    case "1": flag = true; break;
                 
                     default: UtilitiesForSystem.selectionErrorMsg();
                 }
@@ -68,12 +69,14 @@ public class Librarian extends User
                 {
                     case "1": viewBorrowedBooks(patronIndex); break;
                 
-                    case "2": break;
+                    case "2": flag = true; break;
 
                     default: UtilitiesForSystem.selectionErrorMsg();
                 }
             }while(!(choice.equals("1") || choice.equals("2")));
         }
+
+        return flag;
     }
 
     //To view borrowed books - [Liew Zhen Nam]
@@ -145,10 +148,12 @@ public class Librarian extends User
             if(catalog.getBookListAvailability(bookIndex).equals("Available"))
             {
                 borrowBook(bookIndex);
+                catalog.setRejectChooseBook("back");
             }
             else
             {
                 returnBook(bookIndex);
+                catalog.setRejectChooseBook("back");
             }
         }
     }
@@ -200,8 +205,6 @@ public class Librarian extends User
             TimeUnit.MILLISECONDS.sleep(500);
             UtilitiesForSystem.clearScreen();
             catalog.setBookListAvailability(bookIndex, false); //change to "borrowed"
-            //make it borrowed for the headLibrarian side
-
         }
         else
         {
