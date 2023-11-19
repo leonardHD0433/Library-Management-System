@@ -18,7 +18,7 @@ public class Librarian extends User
     //To view patron details - [Liew Zhen Nam] //add remove book need to be done to view book borrowed
     public void viewPatron() throws IOException, InterruptedException
     {
-        String choosePatron;
+        String choosePatron, choice;
         int patronIndex; 
         do
         {
@@ -34,13 +34,74 @@ public class Librarian extends User
         }while(!UtilitiesForSystem.allCharacterAreDigits(choosePatron));
 
         patronIndex = Integer.parseInt(choosePatron)-1;
-        System.out.println(loanList[patronIndex].p);
-        wait();
-        System.out.println("Borrowed Book: ");
-        // for (int i=0; i<=1;i++)
-        // {
-        //   System.out.println(p.borrowedBooks[i]);
-        // }
+        
+        if(loanList[patronIndex].borrowedBooks.size() == 0)
+        {
+            UtilitiesForSystem.clearScreen();
+            do
+            {
+                System.out.println(loanList[patronIndex].p);
+                System.out.println("Status: Not borrowing");
+                System.out.println("\n\n1. Back");
+                System.out.println("\nSelection: ");
+                choice = UtilitiesForSystem.reader.readLine();
+                switch (choice) 
+                {
+                    case "1": break;
+                
+                    default: UtilitiesForSystem.selectionErrorMsg();
+                }
+            }while(!(choice.equals("1")));
+        }
+        else
+        {
+            UtilitiesForSystem.clearScreen();
+            do
+            {
+                System.out.println(loanList[patronIndex].p);
+                System.out.print("Status: Borrowing");
+                System.out.println("\n\n1. View Borrowed Books: ");
+                System.out.println("2. Back");
+                System.out.println("\nSelection: ");
+                choice = UtilitiesForSystem.reader.readLine();
+                switch (choice) 
+                {
+                    case "1": viewBorrowedBooks(patronIndex); break;
+                
+                    case "2": break;
+
+                    default: UtilitiesForSystem.selectionErrorMsg();
+                }
+            }while(!(choice.equals("1") || choice.equals("2")));
+        }
+    }
+
+    //To view borrowed books - [Liew Zhen Nam]
+    public void viewBorrowedBooks(int patronIndex) throws IOException, InterruptedException
+    {
+        String choice;
+        do
+        {
+            UtilitiesForSystem.clearScreen();
+            System.out.println("-----------------------------------------------------------------------------------------------------");
+            System.out.println("Patron: " + loanList[patronIndex].p.getPatronName() + " (" + loanList[patronIndex].p.getPatronID() + ")");
+            
+            for (int i = 0; i < loanList[patronIndex].borrowedBooks.size(); i++) 
+            {
+                System.out.println("-----------------------------------------------------------------------------------------------------");
+                System.out.println(loanList[patronIndex].borrowedBooks.get(i));  
+            }
+            System.out.println("-----------------------------------------------------------------------------------------------------");
+            System.out.println("\n\n1. Back");
+            System.out.println("\nSelection: ");
+            choice = UtilitiesForSystem.reader.readLine();
+            switch (choice) 
+            {
+                case "1": return;
+            
+                default: UtilitiesForSystem.selectionErrorMsg();
+            }
+        }while(!(choice.equals("1")));
     }
 
     //Set the patron to their respective loans - [Yu Kang]
@@ -151,7 +212,7 @@ public class Librarian extends User
         }
     }
 
-    // Method to return a book
+    // Method to return a book - [Edwin]
     public void returnBook(int bookIndex) throws IOException, InterruptedException
     {
         LocalDate actualReturnDate = LocalDate.now();
@@ -257,6 +318,7 @@ public class Librarian extends User
 
     }
 
+    // Method to confirm when a book is borrowed - [Yu Kang]
     public boolean confirmBorrow() throws IOException, InterruptedException
     {
         String confirm;
