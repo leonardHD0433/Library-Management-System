@@ -8,17 +8,17 @@ public class Librarian extends User
 {
     Loan[] loanList = new Loan[5];
 
-
-    public Librarian(String userType, String userName, String userId, String password) throws IOException//Composition
+    public Librarian(String userType, String userName, String userId, String password) throws IOException, ClassNotFoundException//Composition
     {
         super(userType, userName, userId, password);
         setLoanList();
     }
 
     //To view patron details - [Liew Zhen Nam] //add remove book need to be done to view book borrowed
-    public void viewPatron() throws IOException, InterruptedException
+    public boolean viewPatron() throws IOException, InterruptedException
     {
         String choosePatron, choice;
+        boolean flag = false;
         int patronIndex; 
         do
         {
@@ -47,7 +47,7 @@ public class Librarian extends User
                 choice = UtilitiesForSystem.reader.readLine();
                 switch (choice) 
                 {
-                    case "1": break;
+                    case "1": flag = true; break;
                 
                     default: UtilitiesForSystem.selectionErrorMsg();
                 }
@@ -68,12 +68,14 @@ public class Librarian extends User
                 {
                     case "1": viewBorrowedBooks(patronIndex); break;
                 
-                    case "2": break;
+                    case "2": flag = true; break;
 
                     default: UtilitiesForSystem.selectionErrorMsg();
                 }
             }while(!(choice.equals("1") || choice.equals("2")));
         }
+
+        return flag;
     }
 
     //To view borrowed books - [Liew Zhen Nam]
@@ -105,11 +107,24 @@ public class Librarian extends User
     }
 
     //Set the patron to their respective loans - [Yu Kang]
-    public void setLoanList() 
+    public void setLoanList() throws IOException, ClassNotFoundException
     {
-        for (int i = 0; i < loanList.length; i++) {
-            loanList[i] = new Loan(catalog.getPatronListName(i), catalog.getPatronListID(i), catalog.getPatronContactNumber(i));
+        if(!UtilitiesForSystem.checkIfFilesExist())
+        {
+            for (int i = 0; i < loanList.length; i++) 
+            {
+                loanList[i] = new Loan(catalog.getPatronListName(i), catalog.getPatronListID(i), catalog.getPatronContactNumber(i));
+            }
         }
+        else
+        {
+            for (int i = 0; i < loanList.length; i++) 
+            {
+                loanList[i] = UtilitiesForSystem.readObjectFromFile(i + 1);
+            }
+        }
+
+
     }
 
     //Borrow and Return Book Methods Should be Here, 
@@ -145,10 +160,12 @@ public class Librarian extends User
             if(catalog.getBookListAvailability(bookIndex).equals("Available"))
             {
                 borrowBook(bookIndex);
+                catalog.setRejectChooseBook("back");
             }
             else
             {
                 returnBook(bookIndex);
+                catalog.setRejectChooseBook("back");
             }
         }
     }
@@ -200,8 +217,6 @@ public class Librarian extends User
             TimeUnit.MILLISECONDS.sleep(500);
             UtilitiesForSystem.clearScreen();
             catalog.setBookListAvailability(bookIndex, false); //change to "borrowed"
-            //make it borrowed for the headLibrarian side
-
         }
         else
         {

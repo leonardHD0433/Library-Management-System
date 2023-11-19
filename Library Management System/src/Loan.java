@@ -4,11 +4,11 @@ import java.time.*;
 import java.time.format.*;
 import java.util.*;
 
-public class Loan 
+public class Loan implements Serializable
 {
-    DateTimeFormatter dtf;
-    ArrayList <Book> borrowedBooks = new ArrayList<Book>();
-    Patron p;
+    transient DateTimeFormatter dtf;
+    protected ArrayList <Book> borrowedBooks = new ArrayList<Book>();
+    protected Patron p;
     private String borrowDate, returnDate;
     private double fine;
 
@@ -25,6 +25,10 @@ public class Loan
 
     public void setDate(int bI) throws IOException, InterruptedException
     {
+        if (dtf == null) 
+        {
+            dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        }
         boolean flag;
         do
         {
@@ -109,14 +113,12 @@ public class Loan
         return fine;
     }
 
-
-
-
-
-
-
     public void displayLoanDetails(int i) 
     {
+        if (dtf == null) 
+        {
+            dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        }
         System.out.println("Date Borrowed:" + getBorrowedDate(i).format(dtf));
         System.out.println("Date Returned:" + getReturnDate(i).format(dtf));
         System.out.println("Book Title:" + borrowedBooks.get(i).getBookTitle());

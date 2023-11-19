@@ -95,7 +95,7 @@ public abstract class User
         catalog.setBackTo_ChooseBook(false);
 
         chooseBook = UtilitiesForSystem.reader.readLine().toLowerCase();
-        if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back") && (Integer.parseInt(chooseBook) - 1) > catalog.getBookListSize())
+        if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"))
         {
             System.out.println("Please enter a digit or enter back.");
             TimeUnit.MILLISECONDS.sleep(500);
@@ -106,7 +106,13 @@ public abstract class User
             catalog.setRejectChooseBook(chooseBook);
             return;
         }
-        else if(UtilitiesForSystem.allCharacterAreDigits(chooseBook))
+        else if ((Integer.parseInt(chooseBook) - 1) > catalog.getBookListSize() || Integer.parseInt(chooseBook) - 1 < 0)
+        {
+            System.out.println("Invalid choice. Please try again.");
+            TimeUnit.MILLISECONDS.sleep(500);
+            UtilitiesForSystem.clearScreen();
+        }
+        else if((Integer.parseInt(chooseBook) - 1) < catalog.getBookListSize() && Integer.parseInt(chooseBook) - 1 >= 0)
         {
             chosenIndex = Integer.parseInt(chooseBook) - 1;
             
@@ -138,6 +144,7 @@ public abstract class User
                         UtilitiesForSystem.clearScreen();
                         System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
                         whatToDoWithBook(catalog.getChosenBookIndex());
+                        
                     }
                     else
                     {
@@ -206,8 +213,8 @@ public abstract class User
     // Method to search for a book by title
     public void searchByTitle() throws IOException, InterruptedException
     {
-        boolean flag;
         String title;
+        boolean flag, once = true;
         
         UtilitiesForSystem.clearScreen();
         System.out.println("==================");       
@@ -220,19 +227,23 @@ public abstract class User
             catalog.clearBookPos();
             catalog.resetSearchResultNo();
             UtilitiesForSystem.clearScreen();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
+            
             for (int i = 0; i < catalog.getBookListSize(); i++) 
             {
                 if (catalog.getBookListTitle(i).toLowerCase().contains(title.toLowerCase())) 
                 {
+                    if(once)
+                    {
+                        System.out.println("SEARCH RESULTS");
+                        System.out.println("==============================================================================================================================================================");
+                        System.out.println("No.");
+                    }
                     catalog.foundBook();
                     catalog.dispSearchResult(i);
                     catalog.setBookPos(i);
-
+                    catalog.incrementSearchResultNo();
                 }
-                else if (i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+                else if (i == (catalog.getBookListSize() - 1) && (catalog.getSearchResultNo() == 0))
                 {
                     catalog.not_foundBook();
                 }
@@ -268,6 +279,7 @@ public abstract class User
             else
             {
                 System.out.println("Book not found.");
+                TimeUnit.MILLISECONDS.sleep(1000);
                 flag = true;
             }
         }while(!flag);
@@ -277,7 +289,7 @@ public abstract class User
     public void searchByAuthor() throws IOException, InterruptedException
     {
         String author;
-        boolean flag;
+        boolean flag, once = true;
 
         UtilitiesForSystem.clearScreen();
         System.out.println("==================");
@@ -290,18 +302,24 @@ public abstract class User
             catalog.clearBookPos();
             catalog.resetSearchResultNo();
             UtilitiesForSystem.clearScreen();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
+            
             for (int i = 0; i < catalog.getBookListSize(); i++) 
             {
                 if ((catalog.getBookListAuthor(i).toLowerCase().contains(author.toLowerCase()))) 
                 {
+                    if(once)
+                    {
+                        System.out.println("SEARCH RESULTS");
+                        System.out.println("==============================================================================================================================================================");
+                        System.out.println("No.");
+                        once = false;
+                    }
                     catalog.foundBook();
                     catalog.dispSearchResult(i);
                     catalog.setBookPos(i);
+                    catalog.incrementSearchResultNo();
                 }
-                else if(i == catalog.getBookListSize() && (catalog.getSearchResultNo() == 0))
+                else if(i == (catalog.getBookListSize() - 1) && (catalog.getSearchResultNo() == 0))
                 {
                     catalog.not_foundBook();
                 } 
@@ -337,6 +355,7 @@ public abstract class User
             else
             {
                 System.out.println("Book not found.");
+                TimeUnit.MILLISECONDS.sleep(1000);
                 flag = true;
             }
         }while(!flag);
@@ -346,7 +365,7 @@ public abstract class User
     public void searchByPublisher() throws IOException, InterruptedException
     {
         String publisher;
-        boolean flag;
+        boolean flag, once = true;
  
         UtilitiesForSystem.clearScreen();
         System.out.println("==================");
@@ -359,18 +378,24 @@ public abstract class User
             catalog.clearBookPos();   
             catalog.resetSearchResultNo();
             UtilitiesForSystem.clearScreen();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
+            
             for (int i = 0; i < catalog.getBookListSize(); i++) 
             {
                 if (catalog.getBookListPublisher(i).toLowerCase().contains(publisher.toLowerCase())) 
                 {
+                    if(once)
+                    {
+                        System.out.println("SEARCH RESULTS");
+                        System.out.println("==============================================================================================================================================================");
+                        System.out.println("No.");
+                        once = false;
+                    }
                     catalog.foundBook();
                     catalog.dispSearchResult(i);
                     catalog.setBookPos(i);
+                    catalog.incrementSearchResultNo();
                 }
-                else if(i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+                else if(i == (catalog.getBookListSize() - 1) && (catalog.getSearchResultNo() == 0))
                 {
                     catalog.not_foundBook();
                 } 
@@ -406,6 +431,7 @@ public abstract class User
             else
             {
                 System.out.println("Book not found.");
+                TimeUnit.MILLISECONDS.sleep(1000);
                 flag = true;
             }
         }while(!flag);
@@ -414,46 +440,49 @@ public abstract class User
     //Method to search for a book by ISBN
     public void searchByISBN() throws IOException, InterruptedException
     {
-        String isbn = " ";
-        boolean flag;
-        while (isbn.equals(" ")) 
+        String isbn;
+        boolean flag, once = true;
+        UtilitiesForSystem.clearScreen();
+        System.out.println("==================");
+        System.out.println("SEARCH BY ISBN"); 
+        System.out.println("==================");
+        System.out.print("\n\nEnter ISBN (ISBN-13 format): ");
+        isbn = UtilitiesForSystem.reader.readLine();
+        if ((isbn.length() == 13 && isbn.startsWith("978") && UtilitiesForSystem.allCharacterAreDigits(isbn)) || (isbn.length() == 14 && isbn.startsWith("978-") && UtilitiesForSystem.allCharacterAreDigits(isbn.replace("-", ""))))
         {
-            UtilitiesForSystem.clearScreen();
-            System.out.println("==================");
-            System.out.println("SEARCH BY ISBN"); 
-            System.out.println("==================");
-            System.out.print("\n\nEnter ISBN (ISBN-13 format): ");
-            isbn = UtilitiesForSystem.reader.readLine();
-            if ((isbn.length() == 13 && isbn.startsWith("978") && UtilitiesForSystem.allCharacterAreDigits(isbn)) || (isbn.length() == 14 && isbn.startsWith("978-") && UtilitiesForSystem.allCharacterAreDigits(isbn.replace("-", ""))))
+            if((isbn.length() == 13 && isbn.startsWith("978")))
             {
-                if((isbn.length() == 13 && isbn.startsWith("978")))
-                {
-                    isbn = isbn.substring(0, 3) + "-" + isbn.substring(3, 13);
-                }
+                isbn = isbn.substring(0, 3) + "-" + isbn.substring(3, 13);
             }
-            else
-            {
-                System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
-                isbn = " ";
-            }
+        }
+        else
+        {
+            System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
+            UtilitiesForSystem.pressEnterToContinue();
+            return;
         }
         
         do
         {
             catalog.clearBookPos();
             catalog.resetSearchResultNo();
-            System.out.println("SEARCH RESULTS");
-            System.out.println("==============================================================================================================================================================");
-            System.out.println("No.");
             for (int i = 0; i < catalog.getBookListSize(); i++) 
             {
                 if (catalog.getBookListIsbn(i).contains(isbn)) 
                 {
+                    if(once)
+                    {
+                        System.out.println("SEARCH RESULTS");
+                        System.out.println("==============================================================================================================================================================");
+                        System.out.println("No.");
+                        once = false;
+                    }
                     catalog.foundBook();
                     catalog.dispSearchResult(i);
                     catalog.setBookPos(i);
+                    catalog.incrementSearchResultNo();
                 }
-                else if(i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+                else if(i == (catalog.getBookListSize() - 1) && (catalog.getSearchResultNo() == 0))
                 {
                     catalog.not_foundBook();
                 } 
@@ -489,6 +518,7 @@ public abstract class User
             else
             {
                 System.out.println("Book not found.");
+                TimeUnit.MILLISECONDS.sleep(1000);
                 flag = true;
             }
         }while(!flag);    
@@ -499,7 +529,7 @@ public abstract class User
     {
         String chooseGenre;
         int index = 0;
-        boolean is_digit, flag;
+        boolean is_digit, flag, once = true;
         do
         {
             catalog.clearGenreTypes_inCatalog();
@@ -558,12 +588,19 @@ public abstract class User
                     {
                         if (catalog.getBookGenre(i).equals(catalog.getGenreTypes_inCatalog(index))) 
                         {
+                            if(once)
+                            {
+                                System.out.println("SEARCH RESULTS");
+                                System.out.println("==============================================================================================================================================================");
+                                System.out.println("No.");
+                                once = false;
+                            }
                             catalog.foundBook();
                             catalog.dispSearchResult(i);
                             catalog.setBookPos(i);
                             catalog.incrementSearchResultNo();
                         }
-                        else if (i == (catalog.getBookListSize()) && (catalog.getSearchResultNo() == 0))
+                        else if (i == (catalog.getBookListSize() - 1) && (catalog.getSearchResultNo() == 0))
                         {
                             catalog.not_foundBook();
                         } 
@@ -599,6 +636,7 @@ public abstract class User
                     else
                     {
                         System.out.println("Book not found.");
+                        TimeUnit.MILLISECONDS.sleep(1000);
                         flag = true;
                     }
                 }while(!flag);

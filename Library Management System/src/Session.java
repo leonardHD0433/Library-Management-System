@@ -8,7 +8,7 @@ public class Session
     private String loginPageSelection, homePageSelection, manageCatalogSelection, browseCatalogSelection, borrow_returnSelection;
     private boolean isLoginSuccessful;
 
-    public Session() throws IOException
+    public Session() throws IOException, ClassNotFoundException
     {
         UtilitiesForSystem.fileName();
         UtilitiesForSystem.setFile();
@@ -16,7 +16,7 @@ public class Session
         librarian = new Librarian("LIBRARIAN", "Teh Yu Kang", "staff@002", "12345");
     }
 
-    public boolean loginPage() throws IOException, InterruptedException
+    public boolean loginPage() throws IOException, InterruptedException, ClassNotFoundException
     {
         boolean exit = false;
         do 
@@ -35,7 +35,7 @@ public class Session
     }
 
     // Home Page State
-    public void homePage() throws IOException, InterruptedException
+    public void homePage() throws IOException, InterruptedException, ClassNotFoundException
     {
         boolean backToLoginPage = false;
 
@@ -99,7 +99,7 @@ public class Session
     }
 
     // Home Page Selection Methods
-    public boolean homePageSelection(String selection) throws InterruptedException, IOException
+    public boolean homePageSelection(String selection) throws InterruptedException, IOException, ClassNotFoundException
     {
         boolean backToLoginPage = false, backToHomePage = false;
 
@@ -140,7 +140,7 @@ public class Session
                 case "2": 
                     do
                     {
-                        librarian.viewPatron();
+                        backToHomePage = librarian.viewPatron();
                     }while(!backToHomePage);
                     break;
 
@@ -207,7 +207,7 @@ public class Session
 
     }
   
-    public void logout(String userSession) throws IOException, InterruptedException//save sessions and data updates using files
+    public void logout(String userSession) throws IOException, InterruptedException, ClassNotFoundException//save sessions and data updates using files
     {
         if(UtilitiesForSystem.checkIfFilesExist())
         {
@@ -222,6 +222,7 @@ public class Session
         saveBookYearPublished(userSession);
         saveBookGenre(userSession);
         saveBookAvailability(userSession);
+        saveLoanList();
         UtilitiesForSystem.closeFile();
     }
 
@@ -354,7 +355,10 @@ public class Session
         }
     }
 
-
+    public void saveLoanList() throws IOException, ClassNotFoundException
+    {
+        UtilitiesForSystem.writeLoanListToFile(librarian.loanList);
+    }
 
 
 
