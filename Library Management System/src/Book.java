@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
-public class Book
+public class Book implements Serializable
 {
     private LocalDate borrowDate, returnDate;
     private String bookTitle, bookIsbn, author, publisher, genre, bookAvailability;

@@ -8,8 +8,7 @@ public class Librarian extends User
 {
     Loan[] loanList = new Loan[5];
 
-
-    public Librarian(String userType, String userName, String userId, String password) throws IOException//Composition
+    public Librarian(String userType, String userName, String userId, String password) throws IOException, ClassNotFoundException//Composition
     {
         super(userType, userName, userId, password);
         setLoanList();
@@ -108,11 +107,24 @@ public class Librarian extends User
     }
 
     //Set the patron to their respective loans - [Yu Kang]
-    public void setLoanList() 
+    public void setLoanList() throws IOException, ClassNotFoundException
     {
-        for (int i = 0; i < loanList.length; i++) {
-            loanList[i] = new Loan(catalog.getPatronListName(i), catalog.getPatronListID(i), catalog.getPatronContactNumber(i));
+        if(!UtilitiesForSystem.checkIfFilesExist())
+        {
+            for (int i = 0; i < loanList.length; i++) 
+            {
+                loanList[i] = new Loan(catalog.getPatronListName(i), catalog.getPatronListID(i), catalog.getPatronContactNumber(i));
+            }
         }
+        else
+        {
+            for (int i = 0; i < loanList.length; i++) 
+            {
+                loanList[i] = UtilitiesForSystem.readObjectFromFile(i + 1);
+            }
+        }
+
+
     }
 
     //Borrow and Return Book Methods Should be Here, 

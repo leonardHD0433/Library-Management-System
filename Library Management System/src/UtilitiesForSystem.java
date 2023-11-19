@@ -159,4 +159,38 @@ public class UtilitiesForSystem
         }
         return true;
     }
+
+    public static void writeLoanListToFile(Loan[] loanList) throws IOException, ClassNotFoundException
+    {
+        FileOutputStream fos;
+        ObjectOutputStream oos;
+        int count = 1;
+        for (Loan loan : loanList) 
+        {
+            try 
+            {
+                fos = new FileOutputStream("loan[" + count + "].txt");
+                oos = new ObjectOutputStream(fos);
+                oos.writeObject(loan);
+                oos.close();
+            }
+            finally
+            {
+                count++;
+            }
+        } 
+    }
+
+    public static Loan readObjectFromFile(int count) throws IOException, ClassNotFoundException
+    {
+        FileInputStream fis;
+        ObjectInputStream ois;
+        Loan loan;
+        fis = new FileInputStream("loan[" + count + "].txt");
+        ois = new ObjectInputStream(fis);
+        loan = (Loan) ois.readObject();
+        ois.close();
+        return loan;        
+    }
 }
+

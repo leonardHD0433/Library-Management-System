@@ -1,4 +1,6 @@
-public class Patron
+import java.io.Serializable;
+
+public class Patron implements Serializable
 {
     private String patronName, patronId, contactNumber;
 
