@@ -236,6 +236,10 @@ public class Librarian extends User
         int loanIndex = -1, borrowedBooksIndex = -1, daysOverdue;
         boolean flag;
 
+        /*
+            (Asked by: OPK) (Answered by: wassgren) Java label? Outer, middle, inner. (n.d.). Stack Overflow. [Source]
+            https://stackoverflow.com/questions/27696712/java-label-outer-middle-inner (Date Accessed: 10/11/2023)
+         */
         outerLoop: //label
         for (int i = 0; i < loanList.length; i++) //find in the loan list for where the borrowed book is
         {

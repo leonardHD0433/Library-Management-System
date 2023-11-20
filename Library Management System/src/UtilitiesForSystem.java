@@ -27,7 +27,10 @@ public class UtilitiesForSystem
         clearScreen();
     }
 
-    public static boolean allCharacterAreDigits(String str)
+    public static boolean allCharacterAreDigits(String str)  /*
+                                                                (Asked by: Craig Angus) (Answered by: Ibrahim Arief) How to check if a String is numeric in Java. (n.d.). Stack Overflow. [Source Code]
+                                                                https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java (Date Accessed: 25/10/2023)
+                                                             */
     {
         if(!str.isBlank())
         {
@@ -57,7 +60,10 @@ public class UtilitiesForSystem
         return false; // No digits found
     }
 
-    public static void pressEnterToContinue() throws IOException
+    public static void pressEnterToContinue() throws IOException /*
+                                                                    (Asked by: user2840682) (Answered by: E235) How do I get “Press any key to continue” to work in my Java code? (n.d.). Stack Overflow. [Source Code]
+                                                                    https://stackoverflow.com/questions/19870467/how-do-i-get-press-any-key-to-continue-to-work-in-my-java-code (Date Accessed: 9/11/2023)
+                                                                 */
     { 
         System.out.println("Press any key to continue...");
         reader.readLine();
@@ -88,7 +94,10 @@ public class UtilitiesForSystem
         }
     }
 
-    public static void setWriter() throws IOException
+    public static void setWriter() throws IOException /*
+                                                        (Asked by: Milly) (Answered by: Joachim Sauer) Is it ok to use same file writer for writing different files. (n.d.). Stack Overflow. [Source Code]
+                                                        https://stackoverflow.com/questions/1075278/is-it-ok-to-use-same-file-writer-for-writing-different-files (Date Accessed: 13/11/2023)
+                                                      */
     {
         for(int i = 0; i < fileName.size(); i++)
         {
@@ -148,7 +157,13 @@ public class UtilitiesForSystem
         }
     }
 
-    public static void writeToFile(int i, String str) throws IOException
+    public static void writeToFile(int i, String str) throws IOException /*
+                                                                            (Asked by: Ricky) (Answered by: Andrey Adamovich) How to write an ArrayList of Strings into a text file? (n.d.). Stack Overflow. [Source Code]
+                                                                            https://stackoverflow.com/questions/6548157/how-to-write-an-arraylist-of-strings-into-a-text-file (Date Accessed: 13/11/2023)
+
+                                                                            Paraschiv, E., & Paraschiv, E. (2023, October 18). Java - Write to file | Baeldung. Baeldung. [Article]
+                                                                            https://www.baeldung.com/java-write-to-file (Date Accessed: 13/11/2023)
+                                                                         */
     {
         writer[i].write(str + System.lineSeparator());
     }
@@ -215,6 +230,20 @@ public class UtilitiesForSystem
         oos.close();
     }
 
+    /*
+        Sam. (2018, November 26). Write and read an ArrayList object to a file in Java - Samderlust. Samderlust. [Article]
+        https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java (Date Accessed: 14/11/2023)
+
+        (Asked by: kevin lee) (Answered by: user207421) Writing an ArrayList of Objects to a file. (n.d.). Stack Overflow. [Source Code]
+        https://stackoverflow.com/questions/27631183/writing-an-arraylist-of-objects-to-a-file (Date Accessed: 14/11/2023)
+
+        (Asked by: user3435407) (Answered by: MitchAman) java - Reading multiple objects from a file, as they were in an array. (n.d.). Stack Overflow. [Source Code]
+        https://stackoverflow.com/questions/27409718/java-reading-multiple-objects-from-a-file-as-they-were-in-an-array (Date Accessed: 18/11/2023)
+
+        What is transient variable in Java? Serialization Example. (n.d.). Java67. [Article]
+        https://www.java67.com/2012/08/what-is-transient-variable-in-java.html#:~:text=transient%20variable%20in%20Java%20is,variable%20it%20would%20be%20null. (Date Accessed: 18/11/2023)
+     */
+    
     public static int readArchiveListSize() throws IOException, ClassNotFoundException
     {
         FileInputStream fis = new FileInputStream("archiveListSize.txt");

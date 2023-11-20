@@ -34,8 +34,17 @@ public abstract class User
         if(readUserId.equals(userId) && readPassword.equals(password))
         { 
             System.out.println("Login Successful");
-            TimeUnit.MILLISECONDS.sleep(500);
-            UtilitiesForSystem.clearScreen();
+            TimeUnit.MILLISECONDS.sleep(500);           /*
+                                                                    GeeksforGeeks. (2021, September 29). TimeUnit Class in Java with Examples. [Article] 
+                                                                    https://www.geeksforgeeks.org/timeunit-class-in-java-with-examples/ (Date Accessed: 9/10/2023)
+
+                                                                    (Asked by: Chris)(Answered by: Eyal Schneider) sleep from main thread is throwing InterruptedException. (n.d.). Stack Overflow. [Source Code]
+                                                                    https://stackoverflow.com/questions/2663419/sleep-from-main-thread-is-throwing-interruptedexception (Date Accessed: 9/10/2023)
+                                                                 */
+            UtilitiesForSystem.clearScreen();  /*
+                                                    How to clear screen in Java - Javatpoint. (n.d.). www.javatpoint.com. [Article] 
+                                                    https://www.javatpoint.com/how-to-clear-screen-in-java (Date Accessed : 10/10/2023)
+                                               */
             return true;
         }
         else
@@ -230,7 +239,10 @@ public abstract class User
             
             for (int i = 0; i < catalog.getBookListSize(); i++) 
             {
-                if (catalog.getBookListTitle(i).toLowerCase().contains(title.toLowerCase())) 
+                if (catalog.getBookListTitle(i).toLowerCase().contains(title.toLowerCase())) /*
+                                                                                                GeeksforGeeks. (2023, May 7). Arraylist.contains in Java. [Article]
+                                                                                                https://www.geeksforgeeks.org/arraylist-contains-java/ (Date accessed: 25/10/2023)
+                                                                                             */
                 {
                     if(once)
                     {
@@ -448,6 +460,13 @@ public abstract class User
         System.out.println("==================");
         System.out.print("\n\nEnter ISBN (ISBN-13 format): ");
         isbn = UtilitiesForSystem.reader.readLine();
+        /*
+            Java String startsWith() method - javatpoint. (n.d.). www.javatpoint.com. [Article]
+            https://www.javatpoint.com/java-string-startswith (Date Accessed: 2/11/2023)
+
+            Java String substring() method - javatpoint. (n.d.). www.javatpoint.com. [Article]
+            https://www.javatpoint.com/java-string-substring (Date Accessed: 2/11/2023)
+        */
         if ((isbn.length() == 13 && isbn.startsWith("978") && UtilitiesForSystem.allCharacterAreDigits(isbn)) || (isbn.length() == 14 && isbn.startsWith("978-") && UtilitiesForSystem.allCharacterAreDigits(isbn.replace("-", ""))))
         {
             if((isbn.length() == 13 && isbn.startsWith("978")))

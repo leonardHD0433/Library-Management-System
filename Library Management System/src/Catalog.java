@@ -95,6 +95,13 @@ public class Catalog implements BookData, PatronData
     //sort Catalog by book title in ascending order
     public void sortBookList()
     {
+        /*
+            (Asked by: Samuel) (Answered by: Michael Myers)Sort ArrayList of custom Objects by property. (n.d.). Stack Overflow. [Source Code]
+            https://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property (Date Accessed: 30/10/2023)
+
+            How to Sort ArrayList in Java - JavatPoint. (n.d.). www.javatpoint.com. [Article]
+            https://www.javatpoint.com/how-to-sort-arraylist-in-java (Date Accessed: 30/10/2023)
+         */
         Collections.sort(bookList, 
         new Comparator <Book>() 
         {
@@ -379,10 +386,10 @@ public class Catalog implements BookData, PatronData
         bookList.remove(bookIndex);
     }
 
-
-
-
-
+    /*
+        CodeInvest. (2021, February 21). How to scan a text file in Java-hasNext-nextLine [Video]. YouTube. 
+        https://www.youtube.com/watch?v=3bpJzyw60x8 (Date Accessed: 15/11/2023)
+     */
 
     public void loadBookTitle() throws IOException
     {

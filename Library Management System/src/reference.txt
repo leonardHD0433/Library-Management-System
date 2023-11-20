@@ -57,85 +57,85 @@ https://www.javatpoint.com/java-string-substring
 10.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 Web_Page_Person. (2021, January 21). How to get Current Date in MM/DD/YYYY format in Java? - TutorialKart. TutorialKart. [Article]
-https://www.tutorialkart.com/java/how-to-get-current-date-in-mm-dd-yyyy-format-in-java/#gsc.tab=0
+https://www.tutorialkart.com/java/how-to-get-current-date-in-mm-dd-yyyy-format-in-java/#gsc.tab=0 (Date Accessed: 10/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 11.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 (Asked by: user1954746) (Answered by: duffymo) Validating a date in Java. (n.d.). Stack Overflow. [Source Code]
-https://stackoverflow.com/questions/14194290/validating-a-date-in-java
+https://stackoverflow.com/questions/14194290/validating-a-date-in-java (Date Accessed: 10/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 12.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 (Asked by: Milly) (Answered by: Joachim Sauer) Is it ok to use same file writer for writing different files. (n.d.). Stack Overflow. [Source Code]
-https://stackoverflow.com/questions/1075278/is-it-ok-to-use-same-file-writer-for-writing-different-files
+https://stackoverflow.com/questions/1075278/is-it-ok-to-use-same-file-writer-for-writing-different-files (Date Accessed: 13/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 13.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 (Asked by: Ricky) (Answered by: Andrey Adamovich) How to write an ArrayList of Strings into a text file? (n.d.). Stack Overflow. [Source Code]
-https://stackoverflow.com/questions/6548157/how-to-write-an-arraylist-of-strings-into-a-text-file
+https://stackoverflow.com/questions/6548157/how-to-write-an-arraylist-of-strings-into-a-text-file (Date Accessed: 13/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 14.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 Paraschiv, E., & Paraschiv, E. (2023, October 18). Java - Write to file | Baeldung. Baeldung. [Article]
-https://www.baeldung.com/java-write-to-file
+https://www.baeldung.com/java-write-to-file (Date Accessed: 13/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 15.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 (Asked by: OPK) (Answered by: wassgren) Java label? Outer, middle, inner. (n.d.). Stack Overflow. [Source]
-https://stackoverflow.com/questions/27696712/java-label-outer-middle-inner
+https://stackoverflow.com/questions/27696712/java-label-outer-middle-inner (Date Accessed: 10/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 16.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 (Asked by: user2840682) (Answered by: E235) How do I get “Press any key to continue” to work in my Java code? (n.d.). Stack Overflow. [Source Code]
-https://stackoverflow.com/questions/19870467/how-do-i-get-press-any-key-to-continue-to-work-in-my-java-code
+https://stackoverflow.com/questions/19870467/how-do-i-get-press-any-key-to-continue-to-work-in-my-java-code (Date Accessed: 9/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 17.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 CodeInvest. (2021, February 21). How to scan a text file in Java-hasNext-nextLine [Video]. YouTube. 
-https://www.youtube.com/watch?v=3bpJzyw60x8
+https://www.youtube.com/watch?v=3bpJzyw60x8 (Date Accessed: 15/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 18.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 Pankaj. (2022, August 3). Serialization in java - Java serialization. DigitalOcean. [Article]
-https://www.digitalocean.com/community/tutorials/serialization-in-java
+https://www.digitalocean.com/community/tutorials/serialization-in-java (Date Accessed: 18/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 19.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 Baeldung, & Baeldung. (2023, February 9). The transient Keyword in Java | Baeldung. Baeldung. [Article]
-https://www.baeldung.com/java-transient-keyword
+https://www.baeldung.com/java-transient-keyword (Date Accessed: 18/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 20.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 Sam. (2018, November 26). Write and read an ArrayList object to a file in Java - Samderlust. Samderlust. [Article]
-https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
+https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java (Date Accessed: 14/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 21.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 (Asked by: kevin lee) (Answered by: user207421) Writing an ArrayList of Objects to a file. (n.d.). Stack Overflow. [Source Code]
-https://stackoverflow.com/questions/27631183/writing-an-arraylist-of-objects-to-a-file
+https://stackoverflow.com/questions/27631183/writing-an-arraylist-of-objects-to-a-file (Date Accessed: 14/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 22.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 (Asked by: user3435407) (Answered by: MitchAman) java - Reading multiple objects from a file, as they were in an array. (n.d.). Stack Overflow. [Source Code]
-https://stackoverflow.com/questions/27409718/java-reading-multiple-objects-from-a-file-as-they-were-in-an-array
+https://stackoverflow.com/questions/27409718/java-reading-multiple-objects-from-a-file-as-they-were-in-an-array (Date Accessed: 18/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 23.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 What is transient variable in Java? Serialization Example. (n.d.). Java67. [Article]
-https://www.java67.com/2012/08/what-is-transient-variable-in-java.html#:~:text=transient%20variable%20in%20Java%20is,variable%20it%20would%20be%20null.
+https://www.java67.com/2012/08/what-is-transient-variable-in-java.html#:~:text=transient%20variable%20in%20Java%20is,variable%20it%20would%20be%20null. (Date Accessed: 18/11/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 

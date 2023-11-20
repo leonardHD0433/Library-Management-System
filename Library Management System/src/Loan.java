@@ -4,6 +4,10 @@ import java.time.*;
 import java.time.format.*;
 import java.util.*;
 
+/*
+    Baeldung, & Baeldung. (2023, February 9). The transient Keyword in Java | Baeldung. Baeldung. [Article]
+    https://www.baeldung.com/java-transient-keyword (Date Accessed: 18/11/2023)
+ */
 public class Loan implements Serializable
 {
     transient DateTimeFormatter dtf;
@@ -14,7 +18,13 @@ public class Loan implements Serializable
 
     public Loan(String PatronName, String PatronID, String PatronContactNumber)
     {
-        dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+        dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT); /*
+                                                                                                            Web_Page_Person. (2021, January 21). How to get Current Date in MM/DD/YYYY format in Java? - TutorialKart. TutorialKart. [Article]
+                                                                                                            https://www.tutorialkart.com/java/how-to-get-current-date-in-mm-dd-yyyy-format-in-java/#gsc.tab=0 (Date Accessed: 10/11/2023)
+                                                                                                            
+                                                                                                            (Asked by: user1954746) (Answered by: duffymo) Validating a date in Java. (n.d.). Stack Overflow. [Source Code]
+                                                                                                            https://stackoverflow.com/questions/14194290/validating-a-date-in-java (Date Accessed: 10/11/2023)
+                                                                                                         */
         p = new Patron(PatronName, PatronID, PatronContactNumber); 
     }
 

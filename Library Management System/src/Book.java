@@ -1,6 +1,11 @@
 import java.io.Serializable;
 import java.time.*;
 import java.util.*;
+
+/*
+    Pankaj. (2022, August 3). Serialization in java - Java serialization. DigitalOcean. [Article]
+    https://www.digitalocean.com/community/tutorials/serialization-in-java (Date Accessed: 18/11/2023)
+ */
 public class Book implements Serializable
 {
     private LocalDate borrowDate, returnDate;
