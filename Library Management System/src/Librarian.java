@@ -252,7 +252,7 @@ public class Librarian extends User
             }
         }
 
-        transactionNo = loanIndex + "." + borrowedBooksIndex;
+        transactionNo = (loanIndex + 1) + "." + borrowedBooksIndex;
 
         do
         {
@@ -323,7 +323,8 @@ public class Librarian extends User
                 pay = UtilitiesForSystem.reader.readLine();
                 if(pay.equals("1"))
                 {
-                    System.out.println("Payment Successful");
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("Payment Successful !");
                     loanList[loanIndex].displayFineReceipt(transactionNo, actualReturnDate.format(dtf), borrowedBooksIndex);
                     UtilitiesForSystem.pressEnterToContinue();
                     TimeUnit.MILLISECONDS.sleep(1000);
