@@ -389,15 +389,16 @@ public class Session
             case "1":
                 System.out.println(headLibrarian + "\n\n\n\n");
                 System.out.println("1. Manage Catalog");
-                System.out.println("2. Logout");
+                System.out.println("2. Logout\n");
+                System.out.println("Selection: ");
                 break;
         
             default:
                 System.out.println(librarian + "\n\n\n\n");
                 System.out.println("1. Browse Catalog");
                 System.out.println("2. View Patron");
-                System.out.println("3. Logout");
-                break;
+                System.out.println("3. Logout\n");
+                System.out.println("Selection: ");
         }
     }
 
@@ -411,7 +412,8 @@ public class Session
         System.out.println("4. Browse by Author");
         System.out.println("5. Browse by Publisher");
         System.out.println("6. Browse by ISBN");
-        System.out.println("7. Back");
+        System.out.println("7. Back\n");
+        System.out.println("Selection: ");
     }
 
     public void dispManageCatalog()
@@ -421,7 +423,8 @@ public class Session
         System.out.println("1. Add Book");
         System.out.println("2. Edit Book");
         System.out.println("3. Remove Book");
-        System.out.println("4. Back");
+        System.out.println("4. Back\n");
+        System.out.println("Selection: ");
     }
 
     public void dispBorrowReturn()
@@ -429,6 +432,7 @@ public class Session
         System.out.println(librarian + "\n\n\n\n");
         System.out.println("1. Borrow Book");
         System.out.println("2. Return Book");
-        System.out.println("3. Back");
+        System.out.println("3. Back\n");
+        System.out.println("Selection: ");
     }
 }

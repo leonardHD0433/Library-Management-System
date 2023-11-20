@@ -53,7 +53,8 @@ public class HeadLibrarian extends User
             System.out.println(toString());
             System.out.println("\n\n\n1. Add from archive");
             System.out.println("2. Add new book");
-            System.out.println("3.Back ");
+            System.out.println("3. Back\n");
+            System.out.print("Selection: ");
             selection = UtilitiesForSystem.reader.readLine();
             switch (selection) 
             {
@@ -342,7 +343,10 @@ public class HeadLibrarian extends User
                     {
                         bIsbn = bookIsbn.substring(0, 3) + "-" + bookIsbn.substring(3, 13);
                     }
-                    bIsbn = bookIsbn;
+                    else
+                    {
+                        bIsbn = bookIsbn;
+                    }
                     valid = true;
                 }
                 else
@@ -353,14 +357,14 @@ public class HeadLibrarian extends User
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
                     System.out.println("-------------------------------------------------\n");
-                    System.out.print("Enter book TITLE: " + bTitle + "\n");
+                    System.out.println("Enter book TITLE: " + bTitle);
                 }  
         }while(!valid);
         
         //--------------------AUTHOR--------------------------
         do 
         {
-            System.out.println("Enter book AUTHOR: \n");
+            System.out.print("\nEnter book AUTHOR: ");
             String bookAuthor = UtilitiesForSystem.reader.readLine();
 
             if(UtilitiesForSystem.containsDigits(bookAuthor))
@@ -371,8 +375,8 @@ public class HeadLibrarian extends User
                 System.out.println("-------------------------------------------------");
                 System.out.println("ADDING NEW BOOK");
                 System.out.println("-------------------------------------------------\n");
-                System.out.print("Enter book TITLE: " + bTitle + "\n");
-                System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                System.out.println("Enter book TITLE: " + bTitle + "\n");
+                System.out.println("Enter book ISBN: " + bIsbn);
                 valid = false;
             }
             else
@@ -386,7 +390,7 @@ public class HeadLibrarian extends User
         //------------------PUBLISHER-------------------------
         do 
         {
-            System.out.println("Enter book PUBLISHER: \n");
+            System.out.print("\nEnter book PUBLISHER: ");
              String bookPublisher = UtilitiesForSystem.reader.readLine();
             if(UtilitiesForSystem.containsDigits(bookPublisher))
             {
@@ -396,9 +400,9 @@ public class HeadLibrarian extends User
                 System.out.println("-------------------------------------------------");
                 System.out.println("ADDING NEW BOOK");
                 System.out.println("-------------------------------------------------\n");
-                System.out.print("Enter book TITLE: " + bTitle + "\n");
-                System.out.print("Enter book ISBN: " + bIsbn + "\n");
-                System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
+                System.out.println("Enter book TITLE: " + bTitle + "\n");
+                System.out.println("Enter book ISBN: " + bIsbn + "\n");
+                System.out.println("Enter book AUTHOR: " + bAuthor);
                 valid = false;
             }
             else
@@ -412,12 +416,12 @@ public class HeadLibrarian extends User
         do 
         {
             String yearPublished;
-            System.out.println("Enter book's publication year (Publishing year limit: 2000-2023): \n");
+            System.out.print("\nEnter book's publication year (Publishing year limit: 2000-2023): ");
             yearPublished = UtilitiesForSystem.reader.readLine();
             if(UtilitiesForSystem.allCharacterAreDigits(yearPublished) && yearPublished.length() == 4)
             {
                 bookYearPublished = Integer.parseInt(yearPublished);
-                if(bookYearPublished > 2000 && bookYearPublished < 2023)
+                if(bookYearPublished >= 2000 && bookYearPublished <= 2023)
                 {
                     valid = true;
                 }
@@ -429,10 +433,10 @@ public class HeadLibrarian extends User
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
                     System.out.println("-------------------------------------------------\n");
-                    System.out.print("Enter book TITLE: " + bTitle + "\n");
-                    System.out.print("Enter book ISBN: " + bIsbn + "\n");
-                    System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
-                    System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
+                    System.out.println("Enter book TITLE: " + bTitle + "\n");
+                    System.out.println("Enter book ISBN: " + bIsbn + "\n");
+                    System.out.println("Enter book AUTHOR: " + bAuthor + "\n");
+                    System.out.println("Enter book PUBLISHER: " + bPublisher);
                     valid = false;
                 }
             }
@@ -444,10 +448,10 @@ public class HeadLibrarian extends User
                 System.out.println("-------------------------------------------------");
                 System.out.println("ADDING NEW BOOK");
                 System.out.println("-------------------------------------------------\n");
-                System.out.print("Enter book TITLE: " + bTitle + "\n");
-                System.out.print("Enter book ISBN: " + bIsbn + "\n");
-                System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
-                System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
+                System.out.println("Enter book TITLE: " + bTitle + "\n");
+                System.out.println("Enter book ISBN: " + bIsbn + "\n");
+                System.out.println("Enter book AUTHOR: " + bAuthor + "\n");
+                System.out.println("Enter book PUBLISHER: " + bPublisher);
                 valid = false;
             }
                 
@@ -457,16 +461,24 @@ public class HeadLibrarian extends User
         do 
         {
             String selection;
+            catalog.clearGenreTypes_inCatalog();
+            for(int i = 0; i < catalog.getBookListSize(); i++)
+            {
+                if(catalog.checkCatalogForGenre(i))
+                {
+                    catalog.addToGenreTypes_inCatalogSize(i);
+                }
+            }
             catalog.sortGenreTypes_inCatalog();
             for(int i = 0; i < catalog.getGenreTypes_inCatalogSize(); i++)
             {
                 System.out.println((i + 1) + ". " + catalog.getGenreTypes_inCatalog(i));
             }
-            System.out.println(catalog.getGenreTypes_inCatalogSize() + ". " + "Add New Genre");
+            System.out.println(catalog.getGenreTypes_inCatalogSize() + 1 + ". " + "Add New Genre");
             System.out.println("\nSelection: ");
             selection = UtilitiesForSystem.reader.readLine();
 
-            if(selection.equals(String.valueOf(catalog.getGenreTypes_inCatalogSize())))
+            if(selection.equals(String.valueOf(catalog.getGenreTypes_inCatalogSize() + 1)))
             {
                 boolean flag = false;
                 
@@ -475,7 +487,7 @@ public class HeadLibrarian extends User
 
                 for (int i = 0; i < catalog.getGenreTypes_inCatalogSize(); i++) 
                 {
-                    if (catalog.getGenreTypes_inCatalog(i).equalsIgnoreCase(selection))
+                    if (catalog.getGenreTypes_inCatalog(i).equalsIgnoreCase(bGenre))
                     {
                         flag = true;
                         break;
@@ -490,11 +502,11 @@ public class HeadLibrarian extends User
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
                     System.out.println("-------------------------------------------------\n");
-                    System.out.print("Enter book TITLE: " + bTitle + "\n");
-                    System.out.print("Enter book ISBN: " + bIsbn + "\n");
-                    System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
-                    System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
-                    System.out.print("Enter book YEAR PUBLISHED: " + bookYearPublished + "\n");
+                    System.out.println("Enter book TITLE: " + bTitle + "\n");
+                    System.out.println("Enter book ISBN: " + bIsbn + "\n");
+                    System.out.println("Enter book AUTHOR: " + bAuthor + "\n");
+                    System.out.println("Enter book PUBLISHER: " + bPublisher + "\n");
+                    System.out.println("Enter book's publication year (Publishing year limit: 2000-2023): " + bookYearPublished);
                     valid = false;
                 }
                 else if(flag)
@@ -505,11 +517,11 @@ public class HeadLibrarian extends User
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
                     System.out.println("-------------------------------------------------\n");
-                    System.out.print("Enter book TITLE: " + bTitle + "\n");
-                    System.out.print("Enter book ISBN: " + bIsbn + "\n");
-                    System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
-                    System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
-                    System.out.print("Enter book YEAR PUBLISHED: " + bookYearPublished + "\n");
+                    System.out.println("Enter book TITLE: " + bTitle + "\n");
+                    System.out.println("Enter book ISBN: " + bIsbn + "\n");
+                    System.out.println("Enter book AUTHOR: " + bAuthor + "\n");
+                    System.out.println("Enter book PUBLISHER: " + bPublisher + "\n");
+                    System.out.println("Enter book's publication year (Publishing year limit: 2000-2023): " + bookYearPublished);
                     valid = false;
                 }
             }
@@ -532,11 +544,11 @@ public class HeadLibrarian extends User
                         System.out.println("-------------------------------------------------");
                         System.out.println("ADDING NEW BOOK");
                         System.out.println("-------------------------------------------------\n");
-                        System.out.print("Enter book TITLE: " + bTitle + "\n");
-                        System.out.print("Enter book ISBN: " + bIsbn + "\n");
-                        System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
-                        System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
-                        System.out.print("Enter book YEAR PUBLISHED: " + bookYearPublished + "\n");
+                        System.out.println("Enter book TITLE: " + bTitle + "\n");
+                        System.out.println("Enter book ISBN: " + bIsbn + "\n");
+                        System.out.println("Enter book AUTHOR: " + bAuthor + "\n");
+                        System.out.println("Enter book PUBLISHER: " + bPublisher + "\n");
+                        System.out.println("Enter book's publication year (Publishing year limit: 2000-2023): " + bookYearPublished);
                         valid = false;
                     }
                 }
@@ -548,11 +560,11 @@ public class HeadLibrarian extends User
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
                     System.out.println("-------------------------------------------------\n");
-                    System.out.print("Enter book TITLE: " + bTitle + "\n");
-                    System.out.print("Enter book ISBN: " + bIsbn + "\n");
-                    System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
-                    System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
-                    System.out.print("Enter book's publication year (Publishing year limit: 2000-2023): " + bookYearPublished + "\n");
+                    System.out.println("Enter book TITLE: " + bTitle + "\n");
+                    System.out.println("Enter book ISBN: " + bIsbn + "\n");
+                    System.out.println("Enter book AUTHOR: " + bAuthor + "\n");
+                    System.out.println("Enter book PUBLISHER: " + bPublisher + "\n");
+                    System.out.println("Enter book's publication year (Publishing year limit: 2000-2023): " + bookYearPublished);
                     valid = false;
                 }
             }
@@ -561,16 +573,18 @@ public class HeadLibrarian extends User
         //confirm add book
         do
         {
+            UtilitiesForSystem.clearScreen();
             System.out.println("-------------------------------------------------");
             System.out.println("NEW BOOK");
-            System.out.println("-------------------------------------------------\n");
-            System.out.print("Book TITLE: " + bTitle + "\n");
-            System.out.print("Book ISBN: " + bIsbn + "\n");
-            System.out.print("Book AUTHOR: " + bAuthor + "\n");
-            System.out.print("Book PUBLISHER: " + bPublisher + "\n");
-            System.out.print("Book YEAR PUBLISHED: " + bookYearPublished + "\n");
-            System.out.print("Book GENRE: " + bGenre + "\n");
-            System.out.print("Book AVAILABILITY: " + bAvailability + "\n");
+            System.out.println("-------------------------------------------------");
+            System.out.println("Book TITLE: " + bTitle);
+            System.out.println("Book ISBN: " + bIsbn);
+            System.out.println("Book AUTHOR: " + bAuthor);
+            System.out.println("Book PUBLISHER: " + bPublisher);
+            System.out.println("Book YEAR PUBLISHED: " + bookYearPublished);
+            System.out.println("Book GENRE: " + bGenre);
+            System.out.println("Book AVAILABILITY: " + bAvailability);
+            System.out.println("-------------------------------------------------");
             System.out.println("\n\nConfirm add book? (Y/N)");
             confirm = UtilitiesForSystem.reader.readLine().toLowerCase();
             
@@ -591,7 +605,6 @@ public class HeadLibrarian extends User
             {
                 System.out.println("Invalid input. Please try again.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                UtilitiesForSystem.clearScreen();
             }
         }while(!(confirm.equals("y") || confirm.equals("n")));
     }
@@ -600,7 +613,6 @@ public class HeadLibrarian extends User
     {
         //remove book
         viewAllAvailable();
-
     }
     
     public void setManageCatalogSelectionFromSession(String selection)
