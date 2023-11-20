@@ -5,7 +5,7 @@ import java.util.*;
 public class Catalog implements BookData, PatronData
 {
     private ArrayList<Book> bookList;
-    private ArrayList<Book> archiveList; // Uses pointer to remove book from a certain index. (.remove function)
+    protected ArrayList<Book> archiveList; // Uses pointer to remove book from a certain index. (.remove function)
     private Patron[] patronList = new Patron[5];
     private ArrayList <String> genreTypes_inCatalog;
     private ArrayList <String> bookTitleFromFile;
@@ -19,7 +19,7 @@ public class Catalog implements BookData, PatronData
     private boolean found, reject_chooseBook, isBookIndexInteger, backTo_ChooseBook;
     private int searchResultNo, chosenBookIndex; //number of books found after filter
     
-    public Catalog() throws IOException
+    public Catalog() throws IOException, ClassNotFoundException
     {
         bookList = new ArrayList<Book>();
         bookPos_forFilteredList = new ArrayList<Integer>();
@@ -46,6 +46,7 @@ public class Catalog implements BookData, PatronData
             {
                 setBookList(bookTitleFromFile.get(i), bookIsbnFromFile.get(i), authorFromFile.get(i), publisherFromFile.get(i), yearPublishedFromFile.get(i), genreFromFile.get(i), bookAvailabilityFromFile.get(i));  
             } 
+            loadArchiveList();
         }
         
         sortBookList();
@@ -451,6 +452,11 @@ public class Catalog implements BookData, PatronData
         {
             bookAvailabilityFromFile.add(UtilitiesForSystem.readFile[6].nextLine());
         }
+    }
+
+    public void loadArchiveList() throws IOException, ClassNotFoundException
+    {
+        archiveList = UtilitiesForSystem.readArchiveFromFile();
     }
 
     public void dispArchiveList()

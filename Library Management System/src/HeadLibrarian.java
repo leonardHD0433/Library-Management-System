@@ -7,7 +7,7 @@ public class HeadLibrarian extends User
 {
     private String manageCatalogSelectionFromSession;
 
-    public HeadLibrarian(String userType, String userName, String userId, String password) throws IOException//Composition
+    public HeadLibrarian(String userType, String userName, String userId, String password) throws IOException, ClassNotFoundException//Composition
     {
         super(userType, userName, userId, password);
     }
@@ -152,15 +152,13 @@ public class HeadLibrarian extends User
 
     }
 
-
-
     //editBook() - Shaun
     public void editBook() throws IOException, InterruptedException
     {
         viewAllAvailable();  
     }
 
-    public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException //whatToDoWithBook() - Shaun
+    public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException //whatToDoWithBook() - [Shaun] Updates : Edwin
     {
         if(getManageCatalogSelectionFromSession().equals("2"))
         {
@@ -314,7 +312,6 @@ public class HeadLibrarian extends User
 
         }while(!flag);
     }
-
 
     // Book creation method - [Shaun] Updates : Edwin
     public void createBook() throws IOException, InterruptedException

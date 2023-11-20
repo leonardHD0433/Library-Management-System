@@ -211,7 +211,7 @@ public class Session
     {
         if(UtilitiesForSystem.checkIfFilesExist())
         {
-            UtilitiesForSystem.deleteFiles();
+            UtilitiesForSystem.deleteFiles(getArchiveListSizeFromCatalog(userSession));
         }
         UtilitiesForSystem.createFiles();
         UtilitiesForSystem.setWriter();
@@ -223,6 +223,12 @@ public class Session
         saveBookGenre(userSession);
         saveBookAvailability(userSession);
         saveLoanList();
+        if(userSession.equals("1"))
+        {
+            saveArchiveList();
+            saveArchiveListSize(getArchiveListSizeFromCatalog(userSession));
+        }
+        
         UtilitiesForSystem.closeFile();
     }
 
@@ -360,7 +366,27 @@ public class Session
         UtilitiesForSystem.writeLoanListToFile(librarian.loanList);
     }
 
+    public void saveArchiveListSize(int size) throws IOException
+    {
+        UtilitiesForSystem.storeArchiveListSize(size);
+    }
 
+    public void saveArchiveList() throws IOException
+    {
+        UtilitiesForSystem.writeArchiveToFile(headLibrarian.catalog.archiveList);
+    }
+
+    public int getArchiveListSizeFromCatalog(String userSession)
+    {
+        if(userSession.equals("1"))
+        {
+            return headLibrarian.catalog.getArchiveListSize();
+        }
+        else
+        {
+            return librarian.catalog.getArchiveListSize();
+        }
+    }
 
 
 

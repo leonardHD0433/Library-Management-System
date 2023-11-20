@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Librarian extends User 
 {
-    Loan[] loanList = new Loan[5];
+    protected Loan[] loanList = new Loan[5];
 
     public Librarian(String userType, String userName, String userId, String password) throws IOException, ClassNotFoundException//Composition
     {

@@ -126,11 +126,25 @@ public class UtilitiesForSystem
         }
     }
 
-    public static void deleteFiles() throws IOException
+    public static void deleteFiles(int archiveListSize) throws IOException
     {
         for(int i = 0; i < fileName.size(); i++)
         {
             file[i].delete();
+            if(!(i > 4))
+            {
+                File loan = new File("loan[" + (i+1) + "].txt" );
+                loan.delete();
+            }
+        }
+
+        if(archiveListSize != 0)
+        {
+            for(int i = 1; i <= archiveListSize; i++)
+            {
+                File archive = new File("archive" + i + ".txt");
+                archive.delete();
+            }
         }
     }
 
@@ -191,6 +205,58 @@ public class UtilitiesForSystem
         loan = (Loan) ois.readObject();
         ois.close();
         return loan;        
+    }
+
+    public static void storeArchiveListSize(int archiveListSize) throws IOException
+    {
+        FileOutputStream fos = new FileOutputStream("archiveListSize.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(archiveListSize);
+        oos.close();
+    }
+
+    public static int readArchiveListSize() throws IOException, ClassNotFoundException
+    {
+        FileInputStream fis = new FileInputStream("archiveListSize.txt");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        int archiveListSize = (int) ois.readObject();
+        ois.close();
+        return archiveListSize;
+    }
+
+    public static void writeArchiveToFile(ArrayList <Book> archiveList) throws IOException
+    {
+        int count = 1;
+        for (Book book : archiveList) 
+        {
+            try
+            {
+                FileOutputStream fos = new FileOutputStream("archive" + count + ".txt");  
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(book);
+                oos.close();
+            }
+            finally
+            {
+                count++;
+            }
+        }
+    }
+
+    public static ArrayList<Book> readArchiveFromFile() throws IOException, ClassNotFoundException
+    {
+        ArrayList<Book> archiveList = new ArrayList<>();
+        
+        for (int i = 0; i < UtilitiesForSystem.readArchiveListSize(); i++) 
+        {
+            FileInputStream fis = new FileInputStream("archive" + (i + 1) + ".txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Book book = (Book) ois.readObject();
+            ois.close();
+            archiveList.add(book);
+        }
+        
+        return archiveList;       
     }
 }
 
