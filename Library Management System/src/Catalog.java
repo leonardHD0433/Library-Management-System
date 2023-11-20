@@ -299,10 +299,21 @@ public class Catalog implements BookData, PatronData
         System.out.println(bookList.get(i));
     }
 
+    public void getBookFromArchive(int i)
+    {
+        System.out.println(archiveList.get(i));
+    }
+
     //Method to get size of book list
     public int getBookListSize()
     {
         return bookList.size();
+    }
+
+    //Method to get size of archive list
+    public int getArchiveListSize()
+    {
+        return archiveList.size();
     }
 
     //[SHAUN] Method to add book to list

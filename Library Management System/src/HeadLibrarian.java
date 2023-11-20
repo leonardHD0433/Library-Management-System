@@ -20,13 +20,7 @@ public class HeadLibrarian extends User
         switch (getManageCatalogSelectionFromSession()) 
         {
             case "1":
-                System.out.println("You have chosen to add a book..."); 
-                TimeUnit.MILLISECONDS.sleep(500);
-                System.out.println("..");
-                TimeUnit.MILLISECONDS.sleep(500);
-                System.out.println(".");
-                TimeUnit.MILLISECONDS.sleep(500);
-                createBook();
+                addBook();
                 break;
 
             case "2":
@@ -51,34 +45,110 @@ public class HeadLibrarian extends User
     //addBook
     public void addBook() throws IOException, InterruptedException
     {
+        boolean flag = true;
         String selection;
+        UtilitiesForSystem.clearScreen();
         do
         {
-        System.out.println("1. Add from archive");
-        System.out.println("2. Add new book");
-        selection = UtilitiesForSystem.reader.readLine();
-        switch (selection) {
-            case "1":
-                
-                break;
-        
-            case "2":
-                createBook();
-                break;
+            System.out.println(toString());
+            System.out.println("\n\n\n1. Add from archive");
+            System.out.println("2. Add new book");
+            System.out.println("3.Back ");
+            selection = UtilitiesForSystem.reader.readLine();
+            switch (selection) 
+            {
+                case "1":
+                    addFromArchive(); flag = false;
+                    break;
+            
+                case "2":
+                    createBook(); flag = false;
+                    break;
 
-            default:
-                System.out.println("Invalid choice. Please try again.");
-                TimeUnit.MILLISECONDS.sleep(500);
-                UtilitiesForSystem.clearScreen();
-        }
-        }while(!(selection.equals("1") || selection.equals("2")));
+                case "3":
+                    flag = false;
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+            }
+        }while(flag);
             
     }
 
-    public void addFromArchive()
+    public void addFromArchive() throws IOException, InterruptedException
     {
-        catalog.dispArchiveList();
-        
+        String index, selection;
+        int archiveIndex;
+        UtilitiesForSystem.clearScreen();
+
+        if(catalog.getArchiveListSize() == 0)
+        {
+            System.out.println("No books in archive.");
+            TimeUnit.MILLISECONDS.sleep(500);
+            UtilitiesForSystem.clearScreen();
+            return;
+        }
+
+        do
+        {
+            index = "";
+            do
+            {
+                catalog.dispArchiveList();
+                System.out.println("Book to add back to list: ");
+                index = UtilitiesForSystem.reader.readLine();
+                if(!UtilitiesForSystem.allCharacterAreDigits(index))
+                {
+                    System.out.println("Please enter a digit.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                }
+            }while(!UtilitiesForSystem.allCharacterAreDigits(index));
+
+            archiveIndex = Integer.parseInt(index);
+            if(archiveIndex < 0 || archiveIndex >= catalog.getArchiveListSize())
+            {
+                System.out.println("Please enter a valid index.");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+            }
+        }while(archiveIndex < 0 || archiveIndex >= catalog.getArchiveListSize());
+
+        do
+        {
+            catalog.getBookFromArchive(archiveIndex);
+            System.out.println("\n\nConfirmation to add this book from archive? (Y/N)");
+            selection = UtilitiesForSystem.reader.readLine().toLowerCase();
+            switch (selection) 
+            {
+                case "y":
+                    catalog.addFromArchiveToBookList(archiveIndex);
+                    catalog.removeFromArchiveList(archiveIndex);
+                    System.out.println("Book added successfully!");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    break;
+
+                case "n":
+                    System.out.println("Canceling book addition.....");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    break;
+            
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    break;
+            }
+        }while (!(selection.equals("y") || selection.equals("n")));
+
+
+
+
     }
 
 
@@ -245,27 +315,25 @@ public class HeadLibrarian extends User
     }
 
 
-    // Book creation method - [Shaun]
-    public void createBook() throws IOException
+    // Book creation method - [Shaun] Updates : Edwin
+    public void createBook() throws IOException, InterruptedException
     {
-        Boolean validIsbn = false;
-        Boolean validAuthor = false;
-        Boolean validPublisher = false;
-        Boolean validGenre = false;
-        String bIsbn = " ";
-        String bAuthor = " ";
-        String bPublisher = " ";
-        String bGenre = " ";
-        int bookYearPublished;
+        Boolean valid = false;
+        String bTitle = "", bIsbn = " ", bAuthor = " ", bPublisher = " ", bGenre = " ", bAvailability = "Available", confirm = ""; //BOOK AVAILABILITY will always be set to AVAILABLE after a new book creation
+        int bookYearPublished = 0;
 
+        UtilitiesForSystem.clearScreen();
+        System.out.println("-------------------------------------------------");
+        System.out.println("ADDING NEW BOOK");
+        System.out.println("-------------------------------------------------\n");
         //-------------------TITLE---------------------------
-        System.out.println("Enter book TITLE: \n");
-        String bTitle = UtilitiesForSystem.reader.readLine();
+        System.out.print("Enter book TITLE: ");
+        bTitle = UtilitiesForSystem.reader.readLine();
+
         //-------------------ISBN----------------------------
         do
         {
-
-            System.out.println("Enter book ISBN: \n");
+            System.out.print("\nEnter book ISBN: ");
             String bookIsbn = UtilitiesForSystem.reader.readLine();
     
             if ((bookIsbn.length() == 13 && bookIsbn.startsWith("978") && UtilitiesForSystem.allCharacterAreDigits(bookIsbn)) || (bookIsbn.length() == 14 && bookIsbn.startsWith("978-") && UtilitiesForSystem.allCharacterAreDigits(bookIsbn.replace("-", ""))))
@@ -275,73 +343,257 @@ public class HeadLibrarian extends User
                         bIsbn = bookIsbn.substring(0, 3) + "-" + bookIsbn.substring(3, 13);
                     }
                     bIsbn = bookIsbn;
-                    validIsbn = true;
+                    valid = true;
                 }
                 else
                 {
                     System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
-                    continue;
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("-------------------------------------------------");
+                    System.out.println("ADDING NEW BOOK");
+                    System.out.println("-------------------------------------------------\n");
+                    System.out.print("Enter book TITLE: " + bTitle + "\n");
                 }  
-
-        }while(validIsbn == false);
+        }while(!valid);
+        
         //--------------------AUTHOR--------------------------
-        do {
+        do 
+        {
             System.out.println("Enter book AUTHOR: \n");
             String bookAuthor = UtilitiesForSystem.reader.readLine();
 
             if(UtilitiesForSystem.containsDigits(bookAuthor))
             {
                 System.out.println("Please ensure there are no digits in the name.");
-                continue;
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+                System.out.println("-------------------------------------------------");
+                System.out.println("ADDING NEW BOOK");
+                System.out.println("-------------------------------------------------\n");
+                System.out.print("Enter book TITLE: " + bTitle + "\n");
+                System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                valid = false;
             }
             else
             {
                 bAuthor = bookAuthor;
-                validAuthor = true;
+                valid = true;
             }
 
-        }while(validAuthor == false);
+        }while(!valid);
+
         //------------------PUBLISHER-------------------------
-        do {
+        do 
+        {
             System.out.println("Enter book PUBLISHER: \n");
              String bookPublisher = UtilitiesForSystem.reader.readLine();
             if(UtilitiesForSystem.containsDigits(bookPublisher))
             {
                 System.out.println("Please ensure there are no digits in your input.");
-                continue;
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+                System.out.println("-------------------------------------------------");
+                System.out.println("ADDING NEW BOOK");
+                System.out.println("-------------------------------------------------\n");
+                System.out.print("Enter book TITLE: " + bTitle + "\n");
+                System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
+                valid = false;
             }
             else
             {
                 bPublisher = bookPublisher;
-                validPublisher = true;
+                valid = true;
             }
-        }while(validPublisher == false);
-        //---------------YEAR OF PUBLISHING---------------------
-            System.out.println("Enter book's PUBLISHED YEAR: \n");
-            int bYearPublished = Integer.parseInt(UtilitiesForSystem.reader.readLine());
-            //bookYearPublished = String.valueOf(bYearPublished);
-        //--------------------GENRE-------------------------------
+        }while(!valid);
 
-        do {
-            System.out.println("Enter book GENRE: \n");
-            String bookGenre = UtilitiesForSystem.reader.readLine();
-            if(UtilitiesForSystem.containsDigits(bookGenre))
+        //---------------YEAR OF PUBLICATION---------------------
+        do 
+        {
+            String yearPublished;
+            System.out.println("Enter book's publication year (Publishing year limit: 2000-2023): \n");
+            yearPublished = UtilitiesForSystem.reader.readLine();
+            if(UtilitiesForSystem.allCharacterAreDigits(yearPublished) && yearPublished.length() == 4)
             {
-                System.out.println("Please ensure there are no digits in your input.");
-                continue;
+                bookYearPublished = Integer.parseInt(yearPublished);
+                if(bookYearPublished > 2000 && bookYearPublished < 2023)
+                {
+                    valid = true;
+                }
+                else
+                {
+                    System.out.println("The limits of publishing year is between 2000 - 2023!");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("-------------------------------------------------");
+                    System.out.println("ADDING NEW BOOK");
+                    System.out.println("-------------------------------------------------\n");
+                    System.out.print("Enter book TITLE: " + bTitle + "\n");
+                    System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                    System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
+                    System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
+                    valid = false;
+                }
             }
             else
             {
-                bGenre = bookGenre;
-                validGenre = true;
+                System.out.println("Please enter a valid year in the format: XXXX");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+                System.out.println("-------------------------------------------------");
+                System.out.println("ADDING NEW BOOK");
+                System.out.println("-------------------------------------------------\n");
+                System.out.print("Enter book TITLE: " + bTitle + "\n");
+                System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
+                System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
+                valid = false;
             }
-        }while(validGenre == false);
-        //BOOK AVAILABILITY will always be set to AVAILABLE after a new book creation.
-        String bAvailability = "Available";
+                
+        }while(!valid);
 
-        
-        
-        catalog.addBookToList(bTitle, bIsbn, bAuthor, bPublisher, bYearPublished, bGenre, bAvailability);
+        //--------------------GENRE-------------------------------
+        do 
+        {
+            String selection;
+            catalog.sortGenreTypes_inCatalog();
+            for(int i = 0; i < catalog.getGenreTypes_inCatalogSize(); i++)
+            {
+                System.out.println((i + 1) + ". " + catalog.getGenreTypes_inCatalog(i));
+            }
+            System.out.println(catalog.getGenreTypes_inCatalogSize() + ". " + "Add New Genre");
+            System.out.println("\nSelection: ");
+            selection = UtilitiesForSystem.reader.readLine();
+
+            if(selection.equals(String.valueOf(catalog.getGenreTypes_inCatalogSize())))
+            {
+                boolean flag = false;
+                
+                System.out.println("Enter new genre: ");
+                bGenre = UtilitiesForSystem.reader.readLine();
+
+                for (int i = 0; i < catalog.getGenreTypes_inCatalogSize(); i++) 
+                {
+                    if (catalog.getGenreTypes_inCatalog(i).equalsIgnoreCase(selection))
+                    {
+                        flag = true;
+                        break;
+                    } 
+                }
+
+                if(UtilitiesForSystem.containsDigits(bGenre))
+                {
+                    System.out.println("Please ensure there are no digits in your input.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("-------------------------------------------------");
+                    System.out.println("ADDING NEW BOOK");
+                    System.out.println("-------------------------------------------------\n");
+                    System.out.print("Enter book TITLE: " + bTitle + "\n");
+                    System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                    System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
+                    System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
+                    System.out.print("Enter book YEAR PUBLISHED: " + bookYearPublished + "\n");
+                    valid = false;
+                }
+                else if(flag)
+                {
+                    System.out.println("Genre already exist. Please choose from the existing genres.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("-------------------------------------------------");
+                    System.out.println("ADDING NEW BOOK");
+                    System.out.println("-------------------------------------------------\n");
+                    System.out.print("Enter book TITLE: " + bTitle + "\n");
+                    System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                    System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
+                    System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
+                    System.out.print("Enter book YEAR PUBLISHED: " + bookYearPublished + "\n");
+                    valid = false;
+                }
+            }
+            else
+            {
+                if(UtilitiesForSystem.allCharacterAreDigits(selection))
+                {
+                    int genreIndex = Integer.parseInt(selection) - 1;
+
+                    if(genreIndex >=0 && genreIndex < catalog.getGenreTypes_inCatalogSize())
+                    {
+                        bGenre = catalog.getGenreTypes_inCatalog(genreIndex);
+                        valid = true;
+                    }
+                    else
+                    {
+                        System.out.println("Please enter from the available options");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        UtilitiesForSystem.clearScreen();
+                        System.out.println("-------------------------------------------------");
+                        System.out.println("ADDING NEW BOOK");
+                        System.out.println("-------------------------------------------------\n");
+                        System.out.print("Enter book TITLE: " + bTitle + "\n");
+                        System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                        System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
+                        System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
+                        System.out.print("Enter book YEAR PUBLISHED: " + bookYearPublished + "\n");
+                        valid = false;
+                    }
+                }
+                else
+                {
+                    System.out.println("Please enter a digit.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("-------------------------------------------------");
+                    System.out.println("ADDING NEW BOOK");
+                    System.out.println("-------------------------------------------------\n");
+                    System.out.print("Enter book TITLE: " + bTitle + "\n");
+                    System.out.print("Enter book ISBN: " + bIsbn + "\n");
+                    System.out.print("Enter book AUTHOR: " + bAuthor + "\n");
+                    System.out.print("Enter book PUBLISHER: " + bPublisher + "\n");
+                    System.out.print("Enter book's publication year (Publishing year limit: 2000-2023): " + bookYearPublished + "\n");
+                    valid = false;
+                }
+            }
+        }while(!valid);
+
+        //confirm add book
+        do
+        {
+            System.out.println("-------------------------------------------------");
+            System.out.println("NEW BOOK");
+            System.out.println("-------------------------------------------------\n");
+            System.out.print("Book TITLE: " + bTitle + "\n");
+            System.out.print("Book ISBN: " + bIsbn + "\n");
+            System.out.print("Book AUTHOR: " + bAuthor + "\n");
+            System.out.print("Book PUBLISHER: " + bPublisher + "\n");
+            System.out.print("Book YEAR PUBLISHED: " + bookYearPublished + "\n");
+            System.out.print("Book GENRE: " + bGenre + "\n");
+            System.out.print("Book AVAILABILITY: " + bAvailability + "\n");
+            System.out.println("\n\nConfirm add book? (Y/N)");
+            confirm = UtilitiesForSystem.reader.readLine().toLowerCase();
+            
+            if(confirm.equals("y"))
+            {
+                catalog.addBookToList(bTitle, bIsbn, bAuthor, bPublisher, bookYearPublished, bGenre, bAvailability);
+                System.out.println("Book added successfully!");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+            }
+            else if(confirm.equals("n"))
+            {
+                System.out.println("Canceling book addition.....");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+            }
+            else
+            {
+                System.out.println("Invalid input. Please try again.");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+            }
+        }while(!(confirm.equals("y") || confirm.equals("n")));
     }
 
     public void removeBook() throws IOException, InterruptedException
