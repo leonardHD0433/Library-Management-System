@@ -54,7 +54,7 @@ public class Catalog implements BookData, PatronData
 
     public void setBookList(int i)
     {
-        bookList.add(new Book(BOOK_TITLE[i], BOOK_TITLE[i], AUTHOR[i], PUBLISHER[i], YEAR_PUBLISHED[i], GENRE[i], BOOK_AVAILABILITY[0]));
+        bookList.add(new Book(BOOK_TITLE[i], ISBN[i], AUTHOR[i], PUBLISHER[i], YEAR_PUBLISHED[i], GENRE[i], BOOK_AVAILABILITY[0]));
     }
 
     public void setBookList(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)

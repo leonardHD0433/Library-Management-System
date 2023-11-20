@@ -168,12 +168,9 @@ public class UtilitiesForSystem
         writer[i].write(str + System.lineSeparator());
     }
 
-    public static void closeFile() throws IOException
+    public static void closeWriter(int i) throws IOException
     {
-        for (int i = 0; i < fileName.size(); i++) 
-        {
-            writer[i].close();
-        }   
+        writer[i].close();
     }
 
     //check if files exist
@@ -243,7 +240,7 @@ public class UtilitiesForSystem
         What is transient variable in Java? Serialization Example. (n.d.). Java67. [Article]
         https://www.java67.com/2012/08/what-is-transient-variable-in-java.html#:~:text=transient%20variable%20in%20Java%20is,variable%20it%20would%20be%20null. (Date Accessed: 18/11/2023)
      */
-    
+
     public static int readArchiveListSize() throws IOException, ClassNotFoundException
     {
         FileInputStream fis = new FileInputStream("archiveListSize.txt");

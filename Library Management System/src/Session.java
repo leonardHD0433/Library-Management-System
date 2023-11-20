@@ -224,12 +224,10 @@ public class Session
         saveBookAvailability(userSession);
         saveLoanList();
         saveArchiveListSize(getArchiveListSizeFromCatalog(userSession));
-        if(userSession.equals("1"))
+        if(getArchiveListSizeFromCatalog(userSession) > 0)
         {
             saveArchiveList();
         }
-        
-        UtilitiesForSystem.closeFile();
     }
 
     public void saveBookTitle(String userSession) throws IOException
@@ -248,6 +246,7 @@ public class Session
                 UtilitiesForSystem.writeToFile(0, librarian.catalog.getBookListTitle(i));
             }
         }
+        UtilitiesForSystem.writer[0].close();
     }
 
     public void saveBookIsbn(String userSession) throws IOException
@@ -266,6 +265,7 @@ public class Session
                 UtilitiesForSystem.writeToFile(1, librarian.catalog.getBookListIsbn(i));
             }
         }
+        UtilitiesForSystem.writer[1].close();
     }
 
     public void saveBookAuthor(String userSession) throws IOException
@@ -284,6 +284,7 @@ public class Session
                 UtilitiesForSystem.writeToFile(2, librarian.catalog.getBookListAuthor(i));
             }
         }
+        UtilitiesForSystem.writer[2].close();
     }
 
     public void saveBookPublisher(String userSession) throws IOException
@@ -302,6 +303,7 @@ public class Session
                 UtilitiesForSystem.writeToFile(3, librarian.catalog.getBookListPublisher(i));
             }
         }
+        UtilitiesForSystem.writer[3].close();
     }
 
     public void saveBookYearPublished(String userSession) throws IOException
@@ -323,6 +325,7 @@ public class Session
                 UtilitiesForSystem.writeToFile(4, str);
             }
         }
+        UtilitiesForSystem.writer[4].close();
     }
 
     public void saveBookGenre(String userSession) throws IOException
@@ -341,6 +344,7 @@ public class Session
                 UtilitiesForSystem.writeToFile(5, librarian.catalog.getBookGenre(i));
             }
         }
+        UtilitiesForSystem.writer[5].close();
     }
 
     public void saveBookAvailability(String userSession) throws IOException
@@ -359,6 +363,7 @@ public class Session
                 UtilitiesForSystem.writeToFile(6, librarian.catalog.getBookListAvailability(i));
             }
         }
+        UtilitiesForSystem.writer[6].close();
     }
 
     public void saveLoanList() throws IOException, ClassNotFoundException
