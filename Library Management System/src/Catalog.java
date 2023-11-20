@@ -24,6 +24,7 @@ public class Catalog implements BookData, PatronData
         bookList = new ArrayList<Book>();
         bookPos_forFilteredList = new ArrayList<Integer>();
         genreTypes_inCatalog = new ArrayList<String>();
+        archiveList = new ArrayList<Book>();
         for (int i = 0; i < patronList.length; i++)
         {
             setPatronList(i);
@@ -346,6 +347,31 @@ public class Catalog implements BookData, PatronData
         bookList.get(bookListIndex).changeBookYearPublished(newBookYearPublished);
     }
 
+    public void addToArchiveList(int bookIndex)
+    {
+        archiveList.add(bookList.get(bookIndex));
+    }
+
+    public void removeFromArchiveList(int bookIndex)
+    {
+        archiveList.remove(bookIndex);
+    }
+
+    public void addFromArchiveToBookList(int bookIndex)
+    {
+        bookList.add(archiveList.get(bookIndex));
+    }
+
+    public void removeFromBookList(int bookIndex)
+    {
+        bookList.remove(bookIndex);
+    }
+
+
+
+
+
+
     public void loadBookTitle() throws IOException
     {
         bookTitleFromFile = new ArrayList<String>();
@@ -416,6 +442,19 @@ public class Catalog implements BookData, PatronData
         }
     }
 
+    public void dispArchiveList()
+    {
+        System.out.println("ARCHIVE LIST");
+        System.out.println("==============================================================================================================================================================");
+        System.out.println("NO. ");
+        for (int j = 0; j < archiveList.size(); j++) {
+            System.out.println("==============================================================================================================================================================");
+            System.out.println(" " + (j + 1));
+            System.out.println("==============================================================================================================================================================");
+            System.out.println(archiveList.get(j));
+            System.out.println("==============================================================================================================================================================\n");
+        }
+    }
     //search result after the respective filters
     public void dispSearchResult(int i)
     {

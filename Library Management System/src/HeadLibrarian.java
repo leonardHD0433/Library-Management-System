@@ -5,6 +5,7 @@ import java.util.concurrent.*;
 
 public class HeadLibrarian extends User 
 {
+    private String manageCatalogSelectionFromSession;
 
     public HeadLibrarian(String userType, String userName, String userId, String password) throws IOException//Composition
     {
@@ -14,9 +15,9 @@ public class HeadLibrarian extends User
     //provide selections to manage the catalog
     public boolean manageCatalog(String selection) throws IOException, InterruptedException
     {
-
         boolean backToHomePage = false;
-        switch (selection) 
+        setManageCatalogSelectionFromSession(selection);
+        switch (getManageCatalogSelectionFromSession()) 
         {
             case "1":
                 System.out.println("You have chosen to add a book..."); 
@@ -33,8 +34,7 @@ public class HeadLibrarian extends User
                 break;
 
             case "3":
-                //remove book 
-
+                removeBook(); 
                 break;
 
             case "4":
@@ -48,6 +48,41 @@ public class HeadLibrarian extends User
         return backToHomePage;
     }
 
+    //addBook
+    public void addBook() throws IOException, InterruptedException
+    {
+        String selection;
+        do
+        {
+        System.out.println("1. Add from archive");
+        System.out.println("2. Add new book");
+        selection = UtilitiesForSystem.reader.readLine();
+        switch (selection) {
+            case "1":
+                
+                break;
+        
+            case "2":
+                createBook();
+                break;
+
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
+        }
+        }while(!(selection.equals("1") || selection.equals("2")));
+            
+    }
+
+    public void addFromArchive()
+    {
+        catalog.dispArchiveList();
+        
+    }
+
+
+
     //editBook() - Shaun
     public void editBook() throws IOException, InterruptedException
     {
@@ -56,73 +91,106 @@ public class HeadLibrarian extends User
 
     public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException //whatToDoWithBook() - Shaun
     {
-        Boolean validOption = true;
-        //bookIndex will be my book chosen option - 1
-        do {
-            
-            dispOption_inBookPage(bookIndex); //Displays the options for what to edit
-            System.out.println("\nSelection: ");
-            String selectedOption = UtilitiesForSystem.reader.readLine();
-            
-            if(UtilitiesForSystem.allCharacterAreDigits(selectedOption) && selectedOption.length() == 1)
-            {
-                switch (selectedOption)
+        if(getManageCatalogSelectionFromSession().equals("2"))
+        {
+            Boolean validOption = true;
+            //bookIndex will be my book chosen option - 1
+            do {
+                
+                dispOption_inBookPage(bookIndex); //Displays the options for what to edit
+                System.out.println("\nSelection: ");
+                String selectedOption = UtilitiesForSystem.reader.readLine();
+                
+                if(UtilitiesForSystem.allCharacterAreDigits(selectedOption) && selectedOption.length() == 1)
                 {
-                    case "1":
+                    switch (selectedOption)
                     {
-                        editTitle(bookIndex);
-                        break;
+                        case "1":
+                        {
+                            editTitle(bookIndex);
+                            break;
+                        }
+                        case "2":
+                        {
+                            editAuthor(bookIndex);
+                            break;
+                        }
+                        case "3":
+                        {
+                            editPublisher(bookIndex);
+                            break;
+                        }
+                        case "4":
+                        {
+                            editIsbn(bookIndex);    
+                            break;
+                        }
+                        case "5":
+                        {
+                            editGenre(bookIndex);
+                            break;
+                        }
+                        case "6":
+                        {
+                            editYearPublished(bookIndex);
+                            break;
+                        }
+                        case "7":
+                        {
+                            validOption = false;
+                            System.out.println("Exiting..");
+                            TimeUnit.MILLISECONDS.sleep(1000);
+                            break;
+                        }
+                        default:
+                        {
+                            System.out.println("Please select only options from 1 - 7!");
+                            TimeUnit.MILLISECONDS.sleep(500);
+                            UtilitiesForSystem.clearScreen();
+                            System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
+                        }
                     }
-                    case "2":
-                    {
-                        editAuthor(bookIndex);
-                        break;
-                    }
-                    case "3":
-                    {
-                        editPublisher(bookIndex);
-                        break;
-                    }
-                    case "4":
-                    {
-                        editIsbn(bookIndex);    
-                        break;
-                    }
-                    case "5":
-                    {
-                        editGenre(bookIndex);
-                        break;
-                    }
-                    case "6":
-                    {
-                        editYearPublished(bookIndex);
-                        break;
-                    }
-                    case "7":
-                    {
-                        validOption = false;
-                        System.out.println("Exiting..");
-                        TimeUnit.MILLISECONDS.sleep(1000);
-                        break;
-                    }
-                    default:
-                    {
-                        System.out.println("Please select only options from 1 - 7!");
-                        TimeUnit.MILLISECONDS.sleep(500);
-                        UtilitiesForSystem.clearScreen();
-                        System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
-                    }
+                            
                 }
-                        
-            }
-            else
+                else
+                {
+                    System.out.println("Please enter a digit: ");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("Book chosen:\n" + catalog.getBookList(catalog.getChosenBookIndex()));
+                }
+            }while(validOption);
+        }
+        else if(getManageCatalogSelectionFromSession().equals("3"))
+        {
+            String selection;
+            do
             {
-                System.out.println("Please enter a digit: ");
-                TimeUnit.MILLISECONDS.sleep(500);
-                UtilitiesForSystem.clearScreen();
-                System.out.println("Book chosen:\n" + catalog.getBookList(catalog.getChosenBookIndex()));
-            }
-        }while(validOption);
+                System.out.println("\n\nAre you sure you want to remove this book? (Y/N)");
+                selection = UtilitiesForSystem.reader.readLine().toLowerCase();
+                if(selection.equals("y"))
+                {
+                    catalog.addToArchiveList(bookIndex);
+                    catalog.removeFromBookList(bookIndex);
+                    System.out.println("Book removed successfully!");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                }
+                else if(selection.equals("n"))
+                {
+                    System.out.println("Canceling book removal.....");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                }
+                else
+                {
+                    System.out.println("Invalid input. Please try again.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println(catalog.getBookList(bookIndex));
+                }
+            }while(!(selection.equals("y") || selection.equals("n")));
+        }
     }
 
     //view all "available" books, modified changes using viewAll() at User Class as template - [Edwin]
@@ -276,10 +344,22 @@ public class HeadLibrarian extends User
         catalog.addBookToList(bTitle, bIsbn, bAuthor, bPublisher, bYearPublished, bGenre, bAvailability);
     }
 
+    public void removeBook() throws IOException, InterruptedException
+    {
+        //remove book
+        viewAllAvailable();
+
+    }
     
-    
-    
-    
+    public void setManageCatalogSelectionFromSession(String selection)
+    {
+        manageCatalogSelectionFromSession = selection;
+    }
+
+    public String getManageCatalogSelectionFromSession()
+    {
+        return manageCatalogSelectionFromSession;
+    }
     
     
     
