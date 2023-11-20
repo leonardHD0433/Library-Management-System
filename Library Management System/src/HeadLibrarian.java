@@ -40,7 +40,7 @@ public class HeadLibrarian extends User
         return backToHomePage;
     }
 
-    //addBook
+    //[Shaun] Guide : Edwin
     public void addBook() throws IOException, InterruptedException
     {
         boolean flag = true;
@@ -77,6 +77,7 @@ public class HeadLibrarian extends User
             
     }
 
+    //[Shaun] Guide : Edwin
     public void addFromArchive() throws IOException, InterruptedException
     {
         String index, selection;
@@ -276,7 +277,7 @@ public class HeadLibrarian extends User
         }
     }
 
-    //view all "available" books, modified changes using viewAll() at User Class as template - [Edwin]
+    //view all "available" books, modified changes using viewAll() at User Class as template - [Shaun] [Edwin]
     public void viewAllAvailable() throws IOException, InterruptedException
     {
         boolean flag;
@@ -627,6 +628,7 @@ public class HeadLibrarian extends User
         }while(!(confirm.equals("y") || confirm.equals("n")));
     }
 
+    //Book deletion method - [Shaun]
     public void removeBook() throws IOException, InterruptedException
     {
         //remove book
@@ -641,10 +643,7 @@ public class HeadLibrarian extends User
     public String getManageCatalogSelectionFromSession()
     {
         return manageCatalogSelectionFromSession;
-    }
-    
-    
-    
+    }  
     
     // All book editing methods - [Shaun]
 
@@ -966,6 +965,4 @@ public class HeadLibrarian extends User
         
         }while(!validChange);
     }
-
-
 }

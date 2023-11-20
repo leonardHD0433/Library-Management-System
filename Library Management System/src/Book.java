@@ -29,7 +29,6 @@ public class Book implements Serializable
         this.bookAvailability = bookAvailability;
     }
 
-    //
     public void setBookTitle(String bookTitle)
     {
         this.bookTitle = bookTitle;
@@ -60,7 +59,7 @@ public class Book implements Serializable
         this.genre = genre;
     }
 
-    //edit the availability of the book
+    //edit the availability of the book - [Edwin] Updated by: Yu Kang
     public void setBookAvailability(boolean availability)
     {
         if(availability)

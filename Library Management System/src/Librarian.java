@@ -13,7 +13,7 @@ public class Librarian extends User
         setLoanList();
     }
 
-    //To view patron details - [Liew Zhen Nam] //add remove book need to be done to view book borrowed
+    //To view patron details - [Liew Zhen Nam] Guide : Edwin //add remove book need to be done to view book borrowed
     public boolean viewPatron() throws IOException, InterruptedException
     {
         String choosePatron, choice;
@@ -77,7 +77,7 @@ public class Librarian extends User
         return flag;
     }
 
-    //To view borrowed books - [Liew Zhen Nam]
+    //To view borrowed books - [Liew Zhen Nam] Guide : Edwin
     public void viewBorrowedBooks(int patronIndex) throws IOException, InterruptedException
     {
         String choice;
@@ -105,7 +105,7 @@ public class Librarian extends User
         }while(!(choice.equals("1")));
     }
 
-    //Set the patron to their respective loans - [Yu Kang]
+    //Set the patron to their respective loans - [Yu Kang] Guide : Edwin
     public void setLoanList() throws IOException, ClassNotFoundException
     {
         if(!UtilitiesForSystem.checkIfFilesExist())
@@ -304,34 +304,40 @@ public class Librarian extends User
            actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant().equals(loanList[loanIndex].getReturnDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant()))
         {
             System.out.println("Book Returned Successfully");
+            TimeUnit.MILLISECONDS.sleep(1000);
+            UtilitiesForSystem.clearScreen();
+            loanList[loanIndex].borrowedBooks.remove(borrowedBooksIndex);
         }
         else if(actualReturnDate.isAfter(loanList[loanIndex].getReturnDate(borrowedBooksIndex)))
         {
             daysOverdue = (int)Duration.between(loanList[loanIndex].getReturnDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant(), actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant()).toDays();
-            System.out.println("Book Returned Successfully");
-            System.out.println("Overdue by: " + daysOverdue + " days");
-            System.out.println("Calculating Fine.........");
-            TimeUnit.MILLISECONDS.sleep(1000);
-            System.out.print("Fine to be paid: RM ");
-            System.out.printf("%.2f", loanList[loanIndex].calculateFine(daysOverdue));
-            System.out.println();
-            System.out.println("1. Pay");
-            pay = UtilitiesForSystem.reader.readLine();
-            if(pay.equals("1"))
+            do
             {
-                System.out.println("Payment Successful");
-                loanList[loanIndex].displayFineReceipt(transactionNo, actualReturnDate.format(dtf), borrowedBooksIndex);
-                UtilitiesForSystem.pressEnterToContinue();
+                System.out.println("Book Returned Successfully");
+                System.out.println("Overdue by: " + daysOverdue + " days");
+                System.out.println("Calculating Fine.........");
                 TimeUnit.MILLISECONDS.sleep(1000);
-                UtilitiesForSystem.clearScreen();
-                loanList[loanIndex].borrowedBooks.remove(borrowedBooksIndex);
-            }
-            else
-            {
-                System.out.println("Select the above options.");
-                TimeUnit.MILLISECONDS.sleep(1000);
-                UtilitiesForSystem.clearScreen();
-            }
+                System.out.print("Fine to be paid: RM ");
+                System.out.printf("%.2f", loanList[loanIndex].calculateFine(daysOverdue));
+                System.out.println();
+                System.out.println("1. Pay");
+                pay = UtilitiesForSystem.reader.readLine();
+                if(pay.equals("1"))
+                {
+                    System.out.println("Payment Successful");
+                    loanList[loanIndex].displayFineReceipt(transactionNo, actualReturnDate.format(dtf), borrowedBooksIndex);
+                    UtilitiesForSystem.pressEnterToContinue();
+                    TimeUnit.MILLISECONDS.sleep(1000);
+                    UtilitiesForSystem.clearScreen();
+                    loanList[loanIndex].borrowedBooks.remove(borrowedBooksIndex);
+                }
+                else
+                {
+                    System.out.println("Select the above options.");
+                    TimeUnit.MILLISECONDS.sleep(1000);
+                    UtilitiesForSystem.clearScreen();
+                }
+            }while(!(pay.equals("1")));
         }
 
     }
