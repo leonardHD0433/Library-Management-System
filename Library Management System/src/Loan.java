@@ -144,8 +144,9 @@ public class Loan implements Serializable
         System.out.println("Patron: " + p.getPatronName() + " (" + p.getPatronID() + ")");
         System.out.println("Book Title: " + borrowedBooks.get(borrowedBooksIndex).getBookTitle());
         System.out.println("---------------------------------------");
-        System.out.println("Fine: RM" + fine);
-        System.out.println("---------------------------------------");
+        System.out.print("Fine: RM ");
+        System.out.printf("%.2f", fine);
+        System.out.println("\n---------------------------------------");
     }
 
     public void dispPatronDetails()

@@ -335,6 +335,11 @@ public class Librarian extends User
                     System.out.println("Select the above options.");
                     TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
+                    System.out.println("-----------------------------------------------------------------------------------------------------");
+                    System.out.println("Transaction Number: " + transactionNo);
+                    loanList[loanIndex].displayLoanDetails(borrowedBooksIndex);
+                    System.out.println("-----------------------------------------------------------------------------------------------------");
+                    System.out.println("Actual Return Date: " + actualReturnDate.format(dtf) + "\n");
                 }
             }while(!(pay.equals("1")));
         }
