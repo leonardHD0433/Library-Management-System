@@ -151,7 +151,7 @@ public class Librarian extends User
             }
         }while(!(borrow_or_back.equals("1") || borrow_or_back.equals("2")));
 
-        if(catalog.getBackTo_ChooseBook() == true)
+        if(catalog.getBackTo_ChooseBook())
         {
             return;
         }

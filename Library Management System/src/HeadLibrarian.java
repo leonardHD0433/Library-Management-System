@@ -150,15 +150,15 @@ public class HeadLibrarian extends User
 
             System.out.println("\n\nChoose Book: (Enter \"back\" to return to previous page)");
             chooseBook("0");
-            if(catalog.getRejectChooseBook() == true)
+            if(catalog.getRejectChooseBook())
             {
                 flag = true;
             }
             else
             {
-                if(catalog.isBookIndexInteger() == true)
+                if(catalog.isBookIndexInteger())
                 {
-                    if(catalog.getBackTo_ChooseBook() == true)
+                    if(catalog.getBackTo_ChooseBook())
                     {
                         flag = false;
                     }
@@ -276,6 +276,14 @@ public class HeadLibrarian extends User
         catalog.addBookToList(bTitle, bIsbn, bAuthor, bPublisher, bYearPublished, bGenre, bAvailability);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
     // All book editing methods - [Shaun]
 
     public void editTitle(int bookIndex) throws IOException, InterruptedException

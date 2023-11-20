@@ -184,15 +184,15 @@ public abstract class User
 
             System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
             chooseBook("1");
-            if(catalog.getRejectChooseBook() == true)
+            if(catalog.getRejectChooseBook())
             {
                 flag = true;
             }
             else
             {
-                if(catalog.isBookIndexInteger() == true)
+                if(catalog.isBookIndexInteger())
                 {
-                    if(catalog.getBackTo_ChooseBook() == true)
+                    if(catalog.getBackTo_ChooseBook())
                     {
                         flag = false;
                     }
@@ -253,15 +253,15 @@ public abstract class User
             {
                 System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
                 chooseBook("0");
-                if(catalog.getRejectChooseBook() == true)
+                if(catalog.getRejectChooseBook())
                 {
                     flag = true;
                 }
                 else
                 {
-                    if(catalog.isBookIndexInteger() == true)
+                    if(catalog.isBookIndexInteger())
                     {
-                        if(catalog.getBackTo_ChooseBook() == true)
+                        if(catalog.getBackTo_ChooseBook())
                         {
                             flag = false;
                         }
@@ -329,15 +329,15 @@ public abstract class User
             {
                 System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
                 chooseBook("0");
-                if(catalog.getRejectChooseBook() == true)
+                if(catalog.getRejectChooseBook())
                 {
                     flag = true;
                 }
                 else
                 {
-                    if(catalog.isBookIndexInteger() == true)
+                    if(catalog.isBookIndexInteger())
                     {
-                        if(catalog.getBackTo_ChooseBook() == true)
+                        if(catalog.getBackTo_ChooseBook())
                         {
                             flag = false;
                         }
@@ -405,15 +405,15 @@ public abstract class User
             {
                 System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
                 chooseBook("0");
-                if(catalog.getRejectChooseBook() == true)
+                if(catalog.getRejectChooseBook())
                 {
                     flag = true;
                 }
                 else
                 {
-                    if(catalog.isBookIndexInteger() == true)
+                    if(catalog.isBookIndexInteger())
                     {
-                        if(catalog.getBackTo_ChooseBook() == true)
+                        if(catalog.getBackTo_ChooseBook())
                         {
                             flag = false;
                         }
@@ -492,15 +492,15 @@ public abstract class User
             {
                 System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
                 chooseBook("0");
-                if(catalog.getRejectChooseBook() == true)
+                if(catalog.getRejectChooseBook())
                 {
                     flag = true;
                 }
                 else
                 {
-                    if(catalog.isBookIndexInteger() == true)
+                    if(catalog.isBookIndexInteger())
                     {
-                        if(catalog.getBackTo_ChooseBook() == true)
+                        if(catalog.getBackTo_ChooseBook())
                         {
                             flag = false;
                         }
@@ -610,15 +610,15 @@ public abstract class User
                     {
                         System.out.println("\n\nChoose Book: (Enter \"back\" to return to prevous page)");
                         chooseBook("0");
-                        if(catalog.getRejectChooseBook() == true)
+                        if(catalog.getRejectChooseBook())
                         {
                             flag = true;
                         }
                         else
                         {
-                            if(catalog.isBookIndexInteger() == true)
+                            if(catalog.isBookIndexInteger())
                             {
-                                if(catalog.getBackTo_ChooseBook() == true)
+                                if(catalog.getBackTo_ChooseBook())
                                 {
                                     flag = false;
                                 }
