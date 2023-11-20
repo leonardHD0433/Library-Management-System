@@ -52,7 +52,7 @@ public class Loan implements Serializable
             if(flag)
             {
                 System.out.println("Return date must be minimum of 1 day and maximum of 1 week after borrow date.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1500);
                 UtilitiesForSystem.clearScreen();
             }
         }while(flag);
