@@ -214,14 +214,14 @@ public class Librarian extends User
         if(confirmBorrow())
         {
             System.out.println("Book Borrowed.");
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.MILLISECONDS.sleep(1000);
             UtilitiesForSystem.clearScreen();
             catalog.setBookListAvailability(bookIndex, false); //change to "borrowed"
         }
         else
         {
             System.out.println("Book not borrowed.");
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.MILLISECONDS.sleep(1000);
             UtilitiesForSystem.clearScreen();
             loanList[patronIndex].borrowedBooks.remove(borrowedBooks_index);
         }
@@ -271,7 +271,7 @@ public class Librarian extends User
                 if(actualReturnDate.atStartOfDay(ZoneId.systemDefault()).toInstant().isBefore(loanList[loanIndex].getBorrowedDate(borrowedBooksIndex).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 {
                     System.out.println("Actual return date cannot be before borrow date.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     flag = true;
                 }
@@ -281,7 +281,7 @@ public class Librarian extends User
                 }
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date. Try again");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 flag = true;
             }
@@ -323,14 +323,14 @@ public class Librarian extends User
                 System.out.println("Payment Successful");
                 loanList[loanIndex].displayFineReceipt(transactionNo, actualReturnDate.format(dtf), borrowedBooksIndex);
                 UtilitiesForSystem.pressEnterToContinue();
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 loanList[loanIndex].borrowedBooks.remove(borrowedBooksIndex);
             }
             else
             {
                 System.out.println("Select the above options.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
             }
         }

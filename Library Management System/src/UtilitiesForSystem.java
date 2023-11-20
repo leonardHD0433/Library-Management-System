@@ -23,7 +23,7 @@ public class UtilitiesForSystem
     public static void selectionErrorMsg() throws InterruptedException
     {
         System.out.println("Invalid Selection. Try again.");
-        TimeUnit.MILLISECONDS.sleep(500);
+        TimeUnit.MILLISECONDS.sleep(1000);
         clearScreen();
     }
 

@@ -72,7 +72,7 @@ public class Loan implements Serializable
                 flag = false;
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date. Try again");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 System.out.println(borrowedBooks.get(i) + "\n");
                 System.out.print("Borrowed by: " + p.getPatronName() + " (" + p.getPatronID() + ")\n\n");
@@ -96,7 +96,7 @@ public class Loan implements Serializable
             catch (DateTimeParseException e) 
             {
                 System.out.println("Invalid date. Try again");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 System.out.println(borrowedBooks.get(i) + "\n");
                 System.out.print("Borrowed by: " + p.getPatronName() + " (" + p.getPatronID() + ")\n\n");

@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.concurrent.*;
 
-//TimeUnit.MILLISECONDS.sleep(500);
-
 public class HeadLibrarian extends User 
 {
     private String manageCatalogSelectionFromSession;
@@ -36,7 +34,7 @@ public class HeadLibrarian extends User
 
             default:
                 System.out.println("Invalid choice. Please try again.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
         }
         UtilitiesForSystem.clearScreen();
         return backToHomePage;
@@ -72,7 +70,7 @@ public class HeadLibrarian extends User
 
                 default:
                     System.out.println("Invalid choice. Please try again.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
             }
         }while(flag);
@@ -88,7 +86,7 @@ public class HeadLibrarian extends User
         if(catalog.getArchiveListSize() == 0)
         {
             System.out.println("No books in archive.");
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.MILLISECONDS.sleep(1000);
             UtilitiesForSystem.clearScreen();
             return;
         }
@@ -104,7 +102,7 @@ public class HeadLibrarian extends User
                 if(!UtilitiesForSystem.allCharacterAreDigits(index))
                 {
                     System.out.println("Please enter a digit.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                 }
             }while(!UtilitiesForSystem.allCharacterAreDigits(index));
@@ -113,7 +111,7 @@ public class HeadLibrarian extends User
             if(archiveIndex < 0 || archiveIndex >= catalog.getArchiveListSize())
             {
                 System.out.println("Please enter a valid index.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
             }
         }while(archiveIndex < 0 || archiveIndex >= catalog.getArchiveListSize());
@@ -129,19 +127,19 @@ public class HeadLibrarian extends User
                     catalog.addFromArchiveToBookList(archiveIndex);
                     catalog.removeFromArchiveList(archiveIndex);
                     System.out.println("Book added successfully!");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     break;
 
                 case "n":
                     System.out.println("Canceling book addition.....");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     break;
             
                 default:
                     System.out.println("Invalid choice. Please try again.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     break;
             }
@@ -214,7 +212,7 @@ public class HeadLibrarian extends User
                         default:
                         {
                             System.out.println("Please select only options from 1 - 7!");
-                            TimeUnit.MILLISECONDS.sleep(500);
+                            TimeUnit.MILLISECONDS.sleep(1000);
                             
                         }    
                     }       
@@ -225,7 +223,7 @@ public class HeadLibrarian extends User
                 else
                 {
                     System.out.println("Please enter a digit: ");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     System.out.println("Book chosen:\n" + catalog.getBookList(catalog.getChosenBookIndex()));
                 }
@@ -251,20 +249,20 @@ public class HeadLibrarian extends User
                         catalog.addToArchiveList(bookIndex);
                         catalog.removeFromBookList(bookIndex);
                         System.out.println("Book removed successfully!");
-                        TimeUnit.MILLISECONDS.sleep(500);
+                        TimeUnit.MILLISECONDS.sleep(1000);
                         UtilitiesForSystem.clearScreen();
                     }
                 }
                 else if(selection.equals("n"))
                 {
                     System.out.println("Canceling book removal.....");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                 }
                 else
                 {
                     System.out.println("Invalid input. Please try again.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     System.out.println(catalog.getBookList(bookIndex));
                 }
@@ -292,6 +290,13 @@ public class HeadLibrarian extends User
                     catalog.setBookPos(i);
                     catalog.dispSearchResult(i);
                     catalog.incrementSearchResultNo();        
+                }
+                else if((i == catalog.getBookListSize() - 1) && catalog.getSearchResultNo() == 0)
+                {
+                    System.out.println("No books available.");
+                    TimeUnit.MILLISECONDS.sleep(1000);
+                    UtilitiesForSystem.clearScreen();
+                    return;
                 }
             }
 
@@ -359,7 +364,7 @@ public class HeadLibrarian extends User
                 else
                 {
                     System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.pressEnterToContinue();
                     UtilitiesForSystem.clearScreen();
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
@@ -377,7 +382,7 @@ public class HeadLibrarian extends User
             if(UtilitiesForSystem.containsDigits(bookAuthor))
             {
                 System.out.println("Please ensure there are no digits in the name.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 System.out.println("-------------------------------------------------");
                 System.out.println("ADDING NEW BOOK");
@@ -402,7 +407,7 @@ public class HeadLibrarian extends User
             if(UtilitiesForSystem.containsDigits(bookPublisher))
             {
                 System.out.println("Please ensure there are no digits in your input.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 System.out.println("-------------------------------------------------");
                 System.out.println("ADDING NEW BOOK");
@@ -435,7 +440,7 @@ public class HeadLibrarian extends User
                 else
                 {
                     System.out.println("The limits of publishing year is between 2000 - 2023!");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
@@ -450,7 +455,7 @@ public class HeadLibrarian extends User
             else
             {
                 System.out.println("Please enter a valid year in the format: XXXX");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 System.out.println("-------------------------------------------------");
                 System.out.println("ADDING NEW BOOK");
@@ -504,7 +509,7 @@ public class HeadLibrarian extends User
                 if(UtilitiesForSystem.containsDigits(bGenre))
                 {
                     System.out.println("Please ensure there are no digits in your input.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
@@ -519,7 +524,7 @@ public class HeadLibrarian extends User
                 else if(flag)
                 {
                     System.out.println("Genre already exist. Please choose from the existing genres.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
@@ -546,7 +551,7 @@ public class HeadLibrarian extends User
                     else
                     {
                         System.out.println("Please enter from the available options");
-                        TimeUnit.MILLISECONDS.sleep(500);
+                        TimeUnit.MILLISECONDS.sleep(1000);
                         UtilitiesForSystem.clearScreen();
                         System.out.println("-------------------------------------------------");
                         System.out.println("ADDING NEW BOOK");
@@ -562,7 +567,7 @@ public class HeadLibrarian extends User
                 else
                 {
                     System.out.println("Please enter a digit.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     System.out.println("-------------------------------------------------");
                     System.out.println("ADDING NEW BOOK");
@@ -599,19 +604,19 @@ public class HeadLibrarian extends User
             {
                 catalog.addBookToList(bTitle, bIsbn, bAuthor, bPublisher, bookYearPublished, bGenre, bAvailability);
                 System.out.println("Book added successfully!");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
             }
             else if(confirm.equals("n"))
             {
                 System.out.println("Canceling book addition.....");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
             }
             else
             {
                 System.out.println("Invalid input. Please try again.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
         }while(!(confirm.equals("y") || confirm.equals("n")));
     }
@@ -651,19 +656,19 @@ public class HeadLibrarian extends User
             if(newTitle.equals(oldTitle)) //Ensures the new title is not the same as the old title.
             {
                 System.out.println("Please do not enter the same title.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else if("-999".equals(newTitle)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit Title]..");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
             else if(newTitle.isBlank()) //Ensures the title is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else
             {
@@ -675,7 +680,7 @@ public class HeadLibrarian extends User
                     }
                 }
                 System.out.println("Edited Succesfully!");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 validChange = true;
                 break;
             }
@@ -697,24 +702,24 @@ public class HeadLibrarian extends User
             if(newAuthor.equals(oldAuthor)) //Ensures the new author is not the same as the old author.
             {
                 System.out.println("Please do not enter the same Author.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else if("-999".equals(newAuthor)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit Author]..");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
             else if(newAuthor.isBlank()) //Ensures the author is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else if(UtilitiesForSystem.containsDigits(newAuthor))
             {
                 System.out.println("Please ensure there are no digits in the name.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else
             {
@@ -726,7 +731,7 @@ public class HeadLibrarian extends User
                     }
                 }
                 System.out.println("Edited Succesfully!");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 validChange = true;
                 break;
             }
@@ -748,24 +753,24 @@ public class HeadLibrarian extends User
             if(newPublisher.equals(oldPublisher)) //Ensures the new publisher is not the same as the old publisher.
             {
                 System.out.println("Please do not enter the same publisher.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else if("-999".equals(newPublisher)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit Publisher]..");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
             else if(newPublisher.isBlank()) //Ensures the publisher is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else if(UtilitiesForSystem.containsDigits(newPublisher))
             {
                 System.out.println("Please ensure there are no digits in the name.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else
             {
@@ -777,7 +782,7 @@ public class HeadLibrarian extends User
                     }
                 }
                 System.out.println("Edited Succesfully!");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 validChange = true;
                 break;
             }
@@ -799,19 +804,19 @@ public class HeadLibrarian extends User
             if(newGenre.equals(oldGenre))//Ensures the new genre is not the same as the old genre.
             {
                 System.out.println("Please do not enter the same genre.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else if("-999".equals(newGenre)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit Genre]..");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
             else if(newGenre.isBlank()) //Ensures the genre is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else
             {
@@ -823,7 +828,7 @@ public class HeadLibrarian extends User
                     }
                 }
                 System.out.println("Edited Succesfully!");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 validChange = true;
                 break;
             }
@@ -845,19 +850,19 @@ public class HeadLibrarian extends User
             if(newIsbn.equals(oldIsbn)) //Ensures the new ISBN is not the same as the old ISBN.
             {
                 System.out.println("Please do not enter the same ISBN.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else if("-999".equals(newIsbn)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit ISBN]..");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
                 UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
             else if(newIsbn.isBlank()) //Ensures the ISBN is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             else
             {
@@ -874,7 +879,7 @@ public class HeadLibrarian extends User
                             }
                         }
                         System.out.println("Edited Succesfully!");
-                        TimeUnit.MILLISECONDS.sleep(500);
+                        TimeUnit.MILLISECONDS.sleep(1000);
                         validChange = true;
                         break;
                     }
@@ -882,7 +887,7 @@ public class HeadLibrarian extends User
                 else
                 {
                     System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                 } 
             }
 
@@ -907,12 +912,12 @@ public class HeadLibrarian extends User
                 if(yearPublishedToInt == oldYearPublished) //Ensures the new publishing year is not the same as the old publishing year.
                 {
                     System.out.println("Please do not enter the same publishing year.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                 }
                 else if(yearPublishedToInt == -999) //Exit using "-999".
                 {
                     System.out.println("Exiting [Edit Publishing Year]..");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                     UtilitiesForSystem.clearScreen();
                     validChange = true;
                 }
@@ -928,7 +933,7 @@ public class HeadLibrarian extends User
                             }
                         }
                         System.out.println("Edited Succesfully!");
-                        TimeUnit.MILLISECONDS.sleep(500);
+                        TimeUnit.MILLISECONDS.sleep(1000);
                         validChange = true;
                         break;
                 
@@ -949,7 +954,7 @@ public class HeadLibrarian extends User
             else
             {
                 System.out.println("Please enter a digit.");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
         
         }while(!validChange);

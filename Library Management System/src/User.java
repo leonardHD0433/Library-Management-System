@@ -34,7 +34,7 @@ public abstract class User
         if(readUserId.equals(userId) && readPassword.equals(password))
         { 
             System.out.println("Login Successful");
-            TimeUnit.MILLISECONDS.sleep(500);           /*
+            TimeUnit.MILLISECONDS.sleep(1000);           /*
                                                                     GeeksforGeeks. (2021, September 29). TimeUnit Class in Java with Examples. [Article] 
                                                                     https://www.geeksforgeeks.org/timeunit-class-in-java-with-examples/ (Date Accessed: 9/10/2023)
 
@@ -50,7 +50,7 @@ public abstract class User
         else
         {   
             System.out.println("Invalid user Id or password. Please try again");
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.MILLISECONDS.sleep(1000);
             UtilitiesForSystem.clearScreen();
             return false;
         }
@@ -107,7 +107,7 @@ public abstract class User
         if(!UtilitiesForSystem.allCharacterAreDigits(chooseBook) && !chooseBook.equals("back"))
         {
             System.out.println("Please enter a digit or enter back.");
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.MILLISECONDS.sleep(1000);
             UtilitiesForSystem.clearScreen();
         }
         else if(chooseBook.equals("back"))
@@ -118,7 +118,7 @@ public abstract class User
         else if ((Integer.parseInt(chooseBook) - 1) > catalog.getBookListSize() || Integer.parseInt(chooseBook) - 1 < 0)
         {
             System.out.println("Invalid choice. Please try again.");
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.MILLISECONDS.sleep(1000);
             UtilitiesForSystem.clearScreen();
         }
         else if((Integer.parseInt(chooseBook) - 1) < catalog.getBookListSize() && Integer.parseInt(chooseBook) - 1 >= 0)
@@ -141,7 +141,7 @@ public abstract class User
                     else
                     {
                         System.out.println("Invalid choice. Please try again.");
-                        TimeUnit.MILLISECONDS.sleep(500);
+                        TimeUnit.MILLISECONDS.sleep(1000);
                     }
                     break;
             
@@ -158,7 +158,7 @@ public abstract class User
                     else
                     {
                         System.out.println("Invalid choice. Please try again.");
-                        TimeUnit.MILLISECONDS.sleep(500);
+                        TimeUnit.MILLISECONDS.sleep(1000);
                     }
                     break;
             }   
@@ -585,7 +585,7 @@ public abstract class User
                 if (index > (catalog.getGenreTypes_inCatalogSize() - 1) || index < 0)
                 {
                     System.out.println("Invalid choice. Please try again.");
-                    TimeUnit.MILLISECONDS.sleep(500);
+                    TimeUnit.MILLISECONDS.sleep(1000);
                 }
                 else
                 {
@@ -663,7 +663,7 @@ public abstract class User
             else
             {
                 System.out.println("\nPlease choose from the available genres");
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }  
         }while(index < catalog.getGenreTypes_inCatalogSize() && index >= 0 && catalog.getRejectChooseBook() == false); 
     } 
