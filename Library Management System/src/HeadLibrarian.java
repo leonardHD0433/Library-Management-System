@@ -215,11 +215,12 @@ public class HeadLibrarian extends User
                         {
                             System.out.println("Please select only options from 1 - 7!");
                             TimeUnit.MILLISECONDS.sleep(500);
-                            UtilitiesForSystem.clearScreen();
-                            System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
-                        }
-                    }
                             
+                        }    
+                    }       
+
+                    UtilitiesForSystem.clearScreen();
+                    System.out.println("Book chosen:\n\n" + catalog.getBookList(catalog.getChosenBookIndex()));
                 }
                 else
                 {
@@ -632,6 +633,7 @@ public class HeadLibrarian extends User
         Boolean validChange = false;
                     
         do {
+            UtilitiesForSystem.clearScreen();
             System.out.println("[Current Book Title]: "+catalog.getBookListTitle(bookIndex));
             String oldTitle = catalog.getBookListTitle(bookIndex);
             TimeUnit.MILLISECONDS.sleep(1000);
@@ -641,19 +643,18 @@ public class HeadLibrarian extends User
             {
                 System.out.println("Please do not enter the same title.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
             }
             else if("-999".equals(newTitle)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit Title]..");
                 TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
-            else if(newTitle.trim().isEmpty()) //Ensures the title is not left into a blank space.
+            else if(newTitle.isBlank()) //Ensures the title is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
             }
             else
             {
@@ -670,7 +671,7 @@ public class HeadLibrarian extends User
                 break;
             }
         
-        }while(validChange == false);
+        }while(!validChange);
     } 
 
     public void editAuthor(int bookIndex) throws IOException, InterruptedException
@@ -678,6 +679,7 @@ public class HeadLibrarian extends User
         Boolean validChange = false;
                     
         do {
+            UtilitiesForSystem.clearScreen();
             System.out.println("[Current Book Author]: "+catalog.getBookListAuthor(bookIndex));
             String oldAuthor = catalog.getBookListAuthor(bookIndex);
             TimeUnit.MILLISECONDS.sleep(1000);
@@ -687,19 +689,23 @@ public class HeadLibrarian extends User
             {
                 System.out.println("Please do not enter the same Author.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
             }
             else if("-999".equals(newAuthor)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit Author]..");
                 TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
-            else if(newAuthor.trim().isEmpty()) //Ensures the author is not left into a blank space.
+            else if(newAuthor.isBlank()) //Ensures the author is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
+            }
+            else if(UtilitiesForSystem.containsDigits(newAuthor))
+            {
+                System.out.println("Please ensure there are no digits in the name.");
+                TimeUnit.MILLISECONDS.sleep(500);
             }
             else
             {
@@ -716,7 +722,7 @@ public class HeadLibrarian extends User
                 break;
             }
         
-        }while(validChange == false);
+        }while(!validChange);
     }
 
     public void editPublisher(int bookIndex) throws IOException, InterruptedException
@@ -724,6 +730,7 @@ public class HeadLibrarian extends User
         Boolean validChange = false;
                     
         do {
+            UtilitiesForSystem.clearScreen();
             System.out.println("[Current Book Publisher]: "+catalog.getBookListPublisher(bookIndex));
             String oldPublisher = catalog.getBookListPublisher(bookIndex);
             TimeUnit.MILLISECONDS.sleep(1000);
@@ -733,19 +740,23 @@ public class HeadLibrarian extends User
             {
                 System.out.println("Please do not enter the same publisher.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
             }
             else if("-999".equals(newPublisher)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit Publisher]..");
                 TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
-            else if(newPublisher.trim().isEmpty()) //Ensures the publisher is not left into a blank space.
+            else if(newPublisher.isBlank()) //Ensures the publisher is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
+            }
+            else if(UtilitiesForSystem.containsDigits(newPublisher))
+            {
+                System.out.println("Please ensure there are no digits in the name.");
+                TimeUnit.MILLISECONDS.sleep(500);
             }
             else
             {
@@ -762,7 +773,7 @@ public class HeadLibrarian extends User
                 break;
             }
         
-        }while(validChange == false);
+        }while(!validChange);
     }
 
     public void editGenre(int bookIndex) throws IOException, InterruptedException
@@ -770,6 +781,7 @@ public class HeadLibrarian extends User
         Boolean validChange = false;
                     
         do {
+            UtilitiesForSystem.clearScreen();
             System.out.println("[Current Book Genre]: "+catalog.getBookGenre(bookIndex));
             String oldGenre = catalog.getBookGenre(bookIndex);
             TimeUnit.MILLISECONDS.sleep(1000);
@@ -779,19 +791,18 @@ public class HeadLibrarian extends User
             {
                 System.out.println("Please do not enter the same genre.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
             }
             else if("-999".equals(newGenre)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit Genre]..");
                 TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
-            else if(newGenre.trim().isEmpty()) //Ensures the genre is not left into a blank space.
+            else if(newGenre.isBlank()) //Ensures the genre is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
             }
             else
             {
@@ -808,7 +819,7 @@ public class HeadLibrarian extends User
                 break;
             }
         
-        }while(validChange == false);
+        }while(!validChange);
     }
 
     public void editIsbn(int bookIndex) throws IOException, InterruptedException
@@ -816,6 +827,7 @@ public class HeadLibrarian extends User
         Boolean validChange = false;
                     
         do {
+            UtilitiesForSystem.clearScreen();
             System.out.println("[Current Book ISBN]: "+catalog.getBookListIsbn(bookIndex));
             String oldIsbn = catalog.getBookListIsbn(bookIndex);
             TimeUnit.MILLISECONDS.sleep(1000);
@@ -825,19 +837,18 @@ public class HeadLibrarian extends User
             {
                 System.out.println("Please do not enter the same ISBN.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
             }
             else if("-999".equals(newIsbn)) //Exit using "-999".
             {
                 System.out.println("Exiting [Edit ISBN]..");
                 TimeUnit.MILLISECONDS.sleep(500);
+                UtilitiesForSystem.clearScreen();
                 validChange = true;
             }
-            else if(newIsbn.trim().isEmpty()) //Ensures the ISBN is not left into a blank space.
+            else if(newIsbn.isBlank()) //Ensures the ISBN is not left into a blank space.
             {
                 System.out.println("Please do not enter a blank change.");
                 TimeUnit.MILLISECONDS.sleep(500);
-                continue;
             }
             else
             {
@@ -863,75 +874,76 @@ public class HeadLibrarian extends User
                 {
                     System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
                     TimeUnit.MILLISECONDS.sleep(500);
-                    continue;
                 } 
             }
 
-        }while(validChange == false);
+        }while(!validChange);
     }
 
     public void editYearPublished(int bookIndex) throws IOException, InterruptedException
     {
         Boolean validChange = false;
                     
-        do {
-            System.out.println("[Current Book Publishing Year]: "+catalog.getBookListYearPublished(bookIndex));
-            int oldYearPublished = catalog.getBookListYearPublished(bookIndex);
+        do {   
+            UtilitiesForSystem.clearScreen();  
+            System.out.println("[Current Book Publishing Year]: "+ catalog.getBookListYearPublished(bookIndex));
+            int oldYearPublished = catalog.getBookListYearPublished(bookIndex), yearPublishedToInt;
             TimeUnit.MILLISECONDS.sleep(1000);
-            System.out.println("\nPlease enter the new publishing year for the book (1800 - 2023), or enter '-999' to exit: ");
+            System.out.println("\nPlease enter the new publishing year for the book (2000 - 2023), or enter '-999' to exit: ");
             String newBookYearPublished = UtilitiesForSystem.reader.readLine(); //Have to place into string for error checking later
-            int yearPublishedToInt = Integer.parseInt(newBookYearPublished);
-            if(yearPublishedToInt == oldYearPublished) //Ensures the new publishing year is not the same as the old publishing year.
+            if(UtilitiesForSystem.allCharacterAreDigits(newBookYearPublished))
             {
-                System.out.println("Please do not enter the same publishing year.");
-                TimeUnit.MILLISECONDS.sleep(500);
-                continue;
-            }
-            else if("-999".equals(newBookYearPublished)) //Exit using "-999".
-            {
-                System.out.println("Exiting [Edit Publishing Year]..");
-                TimeUnit.MILLISECONDS.sleep(500);
-                validChange = true;
-            }
-            else if(newBookYearPublished.trim().isEmpty()) //Ensures the publishing year is not left into a blank space.
-            {
-                System.out.println("Please do not enter a blank change.");
-                TimeUnit.MILLISECONDS.sleep(500);
-                continue;
-            }
-            else if (newBookYearPublished.length() == 4) //Ensures user can only input a year in 4 digits (XXXX).
-            {
-                if(yearPublishedToInt > 1800 && yearPublishedToInt < 2023) //Checks to see if the publishing year is more than the 1800s and below 2023.
-                {
-                    for(int i = 0; i < catalog.getBookListSize(); i++)
-                    {
-                        if(i == bookIndex)
-                        {
-                            catalog.setBookListYearPublished(i, yearPublishedToInt);
-                        }
-                    }
-                    System.out.println("Edited Succesfully!");
-                    TimeUnit.MILLISECONDS.sleep(500);
-                    validChange = true;
-                    break;
+                yearPublishedToInt = Integer.parseInt(newBookYearPublished);
             
-                } 
+                if(yearPublishedToInt == oldYearPublished) //Ensures the new publishing year is not the same as the old publishing year.
+                {
+                    System.out.println("Please do not enter the same publishing year.");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                }
+                else if(yearPublishedToInt == -999) //Exit using "-999".
+                {
+                    System.out.println("Exiting [Edit Publishing Year]..");
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    UtilitiesForSystem.clearScreen();
+                    validChange = true;
+                }
+                else if (newBookYearPublished.length() == 4) //Ensures user can only input a year in 4 digits (XXXX).
+                {
+                    if(yearPublishedToInt >= 2000 && yearPublishedToInt <= 2023) //Checks to see if the publishing year is more than the 1800s and below 2023.
+                    {
+                        for(int i = 0; i < catalog.getBookListSize(); i++)
+                        {
+                            if(i == bookIndex)
+                            {
+                                catalog.setBookListYearPublished(i, yearPublishedToInt);
+                            }
+                        }
+                        System.out.println("Edited Succesfully!");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        validChange = true;
+                        break;
+                
+                    } 
+                    else
+                    {
+                        System.out.println("The limits of publishing year is between 2000 - 2023!");
+                        TimeUnit.MILLISECONDS.sleep(1000);
+                    }
+                    
+                }      
                 else
                 {
-                    System.out.println("The limits of publishing year is between 1800 - 2023!");
+                    System.out.println("Please enter a valid year in the format: XXXX");
                     TimeUnit.MILLISECONDS.sleep(1000);
-                    continue;
                 }
-                
-            }      
+            }
             else
             {
-                System.out.println("Please enter a valid year in the format: XXXX");
-                TimeUnit.MILLISECONDS.sleep(1000);
-                continue;
+                System.out.println("Please enter a digit.");
+                TimeUnit.MILLISECONDS.sleep(500);
             }
         
-        }while(validChange == false);
+        }while(!validChange);
     }
 
 
