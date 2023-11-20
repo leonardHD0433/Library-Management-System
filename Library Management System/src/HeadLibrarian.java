@@ -240,11 +240,20 @@ public class HeadLibrarian extends User
                 selection = UtilitiesForSystem.reader.readLine().toLowerCase();
                 if(selection.equals("y"))
                 {
-                    catalog.addToArchiveList(bookIndex);
-                    catalog.removeFromBookList(bookIndex);
-                    System.out.println("Book removed successfully!");
-                    TimeUnit.MILLISECONDS.sleep(500);
-                    UtilitiesForSystem.clearScreen();
+                    if(catalog.getBookListSize() == 5)
+                    {
+                        System.out.println("There must be at least 5 books in the catalog.");
+                        TimeUnit.MILLISECONDS.sleep(1000);
+                        UtilitiesForSystem.clearScreen();
+                    }
+                    else
+                    {
+                        catalog.addToArchiveList(bookIndex);
+                        catalog.removeFromBookList(bookIndex);
+                        System.out.println("Book removed successfully!");
+                        TimeUnit.MILLISECONDS.sleep(500);
+                        UtilitiesForSystem.clearScreen();
+                    }
                 }
                 else if(selection.equals("n"))
                 {
