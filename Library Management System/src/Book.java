@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.time.*;
-import java.util.*;
 
 /*
     Pankaj. (2022, August 3). Serialization in java - Java serialization. DigitalOcean. [Article]
