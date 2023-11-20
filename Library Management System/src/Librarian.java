@@ -66,7 +66,7 @@ public class Librarian extends User
                 choice = UtilitiesForSystem.reader.readLine();
                 switch (choice) 
                 {
-                    case "1": viewBorrowedBooks(patronIndex); break;
+                    case "1": viewBorrowedBooks(patronIndex); flag = true; break;
                 
                     case "2": flag = true; break;
 

@@ -1,5 +1,18 @@
-https://www.geeksforgeeks.org/timeunit-class-in-java-with-examples/
-https://stackoverflow.com/questions/2663419/sleep-from-main-thread-is-throwing-interruptedexception
+REFERENCE
+
+1.
+------------------------------------------------------------------------------------------------
+GeeksforGeeks. (2021, September 29). TimeUnit Class in Java with Examples. [Article] 
+https://www.geeksforgeeks.org/timeunit-class-in-java-with-examples/ (Date Accessed: 2/11/2023)
+------------------------------------------------------------------------------------------------
+
+2.
+------------------------------------------------------------------------------------------------------------------------------------------------
+(Asked by: Chris)(Answered by: Eyal Schneider) sleep from main thread is throwing InterruptedException. (n.d.). Stack Overflow. [Source Code]
+https://stackoverflow.com/questions/2663419/sleep-from-main-thread-is-throwing-interruptedexception (Date Accessed: 3/11/2023)
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+3.
 https://www.javatpoint.com/how-to-clear-screen-in-java
 https://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property 
 https://www.javatpoint.com/how-to-sort-arraylist-in-java
