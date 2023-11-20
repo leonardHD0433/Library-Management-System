@@ -1,9 +1,10 @@
 import java.io.*;
 public class Main  
 {   
+    static Session session;
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException
     {
-        Session session = new Session();
+        session = new Session();
         boolean exit = false;
         do
         {

@@ -4,7 +4,7 @@ import java.util.concurrent.*;
 
 public abstract class User
 {
-    Catalog catalog;
+    protected Catalog catalog;
     protected String userType, userName, userId, password, readUserId, readPassword;
     
 
