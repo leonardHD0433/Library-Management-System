@@ -137,20 +137,20 @@ public class Loan implements Serializable
 
     public void displayFineReceipt(String transactionNo, String date, int borrowedBooksIndex)
     {
-        System.out.println("---------------------------------------");
-        System.out.println("            PAYMENT RECEIPT"            );
-        System.out.println("---------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("                                                                       PAYMENT RECEIPT"                                                                        );
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Date: " + date);
-        System.out.println("---------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Transaction No: " + transactionNo);
         System.out.println("Patron: " + p.getPatronName() + " (" + p.getPatronID() + ")");
         System.out.println("Book Title: " + borrowedBooks.get(borrowedBooksIndex).getBookTitle());
         System.out.println("Borrowed Date: " + getBorrowedDate(borrowedBooksIndex).format(dtf));
         System.out.println("Return Date: " + getReturnDate(borrowedBooksIndex).format(dtf));
-        System.out.println("---------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.print("Fine: RM ");
         System.out.printf("%.2f", fine);
-        System.out.println("\n---------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
     public void dispPatronDetails()
