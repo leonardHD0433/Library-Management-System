@@ -1,21 +1,41 @@
 REFERENCE
 
 1.
-------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
 GeeksforGeeks. (2021, September 29). TimeUnit Class in Java with Examples. [Article] 
-https://www.geeksforgeeks.org/timeunit-class-in-java-with-examples/ (Date Accessed: 2/11/2023)
-------------------------------------------------------------------------------------------------
+https://www.geeksforgeeks.org/timeunit-class-in-java-with-examples/ (Date Accessed: 9/10/2023)
+------------------------------------------------------------------------------------------------------------------------------------------------
 
 2.
 ------------------------------------------------------------------------------------------------------------------------------------------------
 (Asked by: Chris)(Answered by: Eyal Schneider) sleep from main thread is throwing InterruptedException. (n.d.). Stack Overflow. [Source Code]
-https://stackoverflow.com/questions/2663419/sleep-from-main-thread-is-throwing-interruptedexception (Date Accessed: 3/11/2023)
+https://stackoverflow.com/questions/2663419/sleep-from-main-thread-is-throwing-interruptedexception (Date Accessed: 9/10/2023)
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 3.
-https://www.javatpoint.com/how-to-clear-screen-in-java
-https://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property 
-https://www.javatpoint.com/how-to-sort-arraylist-in-java
+------------------------------------------------------------------------------------------------------------------------------------------------
+How to clear screen in Java - Javatpoint. (n.d.). www.javatpoint.com. [Article] 
+https://www.javatpoint.com/how-to-clear-screen-in-java (Date Accessed : 10/10/2023)
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+4.
+------------------------------------------------------------------------------------------------------------------------------------------------
+(Asked by: Samuel) (Answered by: Michael Myers)Sort ArrayList of custom Objects by property. (n.d.). Stack Overflow. [Source Code]
+https://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property (Date Accessed: 30/10/2023)
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+5.
+------------------------------------------------------------------------------------------------------------------------------------------------
+How to Sort ArrayList in Java - JavatPoint. (n.d.). www.javatpoint.com. [Article]
+https://www.javatpoint.com/how-to-sort-arraylist-in-java (Date Accessed: 30/10/2023)
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+6.
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 https://www.javatpoint.com/java-string-valueof
 https://www.geeksforgeeks.org/arraylist-contains-java/
 https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java
