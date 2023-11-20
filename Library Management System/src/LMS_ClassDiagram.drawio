@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="8YS385IrpmPssAD0AtMK" name="Page-1">
-        <mxGraphModel dx="1633" dy="1018" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="11000" pageHeight="5000" background="none" math="0" shadow="0">
+        <mxGraphModel dx="1153" dy="476" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="11000" pageHeight="5000" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -243,6 +243,18 @@
                 </mxCell>
                 <mxCell id="112" value="1" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1" vertex="1" parent="1">
                     <mxGeometry x="1200" y="2485" width="30" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="113" value="Main" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=15;" vertex="1" parent="1">
+                    <mxGeometry x="1380" y="2630" width="240" height="294" as="geometry"/>
+                </mxCell>
+                <mxCell id="114" value="#loanList: Loan[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="113">
+                    <mxGeometry y="30" width="240" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="115" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="113">
+                    <mxGeometry y="104" width="240" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="116" value="+ Librarian(userType: String, &#10;userName: String,userId: String, &#10;password: String )                  &#10;+ viewPatron(): void&#10;+viewBorrowedBooks(patronIndex:int):void &#10;+ setLoanList(): void &#10;+ whatToDoWithBook( bookIndex: int)&#10;: void  &#10;+ borrowBook( bookIndex: int): void  &#10;+ returnBook( bookIndex: int ): void    &#10;+ confirmBorrow(): boolean " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="113">
+                    <mxGeometry y="112" width="240" height="182" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

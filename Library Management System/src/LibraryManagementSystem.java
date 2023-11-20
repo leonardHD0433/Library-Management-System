@@ -1,5 +1,5 @@
 import java.io.*;
-public class Main  
+public class LibraryManagementSystem  
 {   
     static Session session;
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException
