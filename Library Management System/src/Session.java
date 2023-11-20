@@ -200,12 +200,9 @@ public class Session
     {
         return manageCatalogSelection;
     }
-
-    public void borrow_returnPage()
-    {
-
-    }
   
+    //FILE PROCESSING
+
     public void logout(String userSession) throws IOException, InterruptedException, ClassNotFoundException//save sessions and data updates using files
     {
         if(UtilitiesForSystem.checkIfFilesExist())
@@ -392,13 +389,8 @@ public class Session
         }
     }
 
-
-
-
-
-
-
-
+//----------------------------------------------------//
+//                    DISPLAY METHODS                 //
 
     // Display Login Page
     public void dispLoginPage()

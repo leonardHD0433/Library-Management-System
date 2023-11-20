@@ -128,7 +128,6 @@ public class Librarian extends User
 
     //Borrow and Return Book Methods Should be Here, 
     //these methods will be used to call the catalogs' methods that manipulate data or display 
-
     
     public void whatToDoWithBook(int bookIndex) throws IOException, InterruptedException
     {
@@ -342,7 +341,7 @@ public class Librarian extends User
 
     }
 
-    // Method to confirm when a book is borrowed - [Yu Kang]
+    // Method to confirm when a book is borrowed - [Yu Kang] Guide : Edwin
     public boolean confirmBorrow() throws IOException, InterruptedException
     {
         String confirm;
