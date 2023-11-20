@@ -107,7 +107,7 @@ public class HeadLibrarian extends User
                 }
             }while(!UtilitiesForSystem.allCharacterAreDigits(index));
 
-            archiveIndex = Integer.parseInt(index);
+            archiveIndex = Integer.parseInt(index) - 1;
             if(archiveIndex < 0 || archiveIndex >= catalog.getArchiveListSize())
             {
                 System.out.println("Please enter a valid index.");
@@ -118,6 +118,7 @@ public class HeadLibrarian extends User
 
         do
         {
+            UtilitiesForSystem.clearScreen();
             catalog.getBookFromArchive(archiveIndex);
             System.out.println("\n\nConfirmation to add this book from archive? (Y/N)");
             selection = UtilitiesForSystem.reader.readLine().toLowerCase();
@@ -871,18 +872,19 @@ public class HeadLibrarian extends User
                     if((newIsbn.length() == 13 && newIsbn.startsWith("978")))
                     {
                         newIsbn = newIsbn.substring(0, 3) + "-" + newIsbn.substring(3, 13);
-                        for(int i = 0; i < catalog.getBookListSize(); i++)
-                        {
-                            if(i == bookIndex)
-                            {
-                                catalog.setBookListIsbn(bookIndex, newIsbn);
-                            }
-                        }
-                        System.out.println("Edited Succesfully!");
-                        TimeUnit.MILLISECONDS.sleep(1000);
-                        validChange = true;
-                        break;
                     }
+
+                    for(int i = 0; i < catalog.getBookListSize(); i++)
+                    {
+                        if(i == bookIndex)
+                        {
+                            catalog.setBookListIsbn(bookIndex, newIsbn);
+                        }
+                    }
+                    System.out.println("Edited Succesfully!");
+                    TimeUnit.MILLISECONDS.sleep(1000);
+                    validChange = true;
+                    break;  
                 }
                 else
                 {
