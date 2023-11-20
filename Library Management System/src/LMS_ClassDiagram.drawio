@@ -1,16 +1,16 @@
 <mxfile host="65bd71144e">
     <diagram id="8YS385IrpmPssAD0AtMK" name="Page-1">
-        <mxGraphModel dx="3944" dy="1548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="5000" pageHeight="5000" math="0" shadow="0">
+        <mxGraphModel dx="2450" dy="1528" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="5000" pageHeight="5000" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;endArrow=diamondThin;endFill=1;endSize=17;startArrow=openThin;startFill=0;entryX=-0.018;entryY=0.961;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="6" target="11" edge="1">
+                <mxCell id="22" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;endArrow=diamondThin;endFill=1;endSize=30;startArrow=openThin;startFill=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;startSize=25;" parent="1" source="6" target="11" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="1640" y="1850" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="6" value="Book" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="1030" y="2360" width="460" height="750" as="geometry"/>
+                    <mxGeometry x="2860" y="2400" width="460" height="750" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="-borrowDate:LocalDate&#10;-returnDate:LocalDate&#10;-bookTitle:String&#10;-bookIsbn:String&#10;-author:String&#10;-publisher:String&#10;-genre:String&#10;-bookAvailability:String&#10;-yearPublished:int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="6" vertex="1">
                     <mxGeometry y="26" width="460" height="224" as="geometry"/>
@@ -55,11 +55,11 @@
                 <mxCell id="17" value="+ Loan(PatronName: String, &#10;PatronID:String, &#10;PatronContactNumber: String )&#10;+ addBook(bookTitle: String,&#10; bookIsbn: String,author: String, &#10;publisher: String,yearPublished: int,&#10;genre: String, bookAvailability: String):&#10; void            &#10;+ setDate( bI: int): void &#10;+ setBorrowedDate( i: int): void &#10;+ setReturnDate( i: int): void                                            &#10;+ getBorrowedDate( i: int ): LocalDate &#10;+ getReturnDate(  i: int ): LocalDate &#10;+calculateFine(daysOverdue:int):double&#10;+ displayLoanDetails( i: int ): void&#10;+displayFineReceipt(transactionNo:String,date:String,&#10;borrowedBookIndex:int):void&#10;+ dispPatronDetails(): void    " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="14" vertex="1">
                     <mxGeometry y="138" width="340" height="322" as="geometry"/>
                 </mxCell>
-                <mxCell id="24" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1.007;entryY=0.808;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=diamondThin;endFill=1;endSize=17;startArrow=openThin;startFill=0;" parent="1" source="18" target="11" edge="1">
+                <mxCell id="24" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1.007;entryY=0.808;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=diamondThin;endFill=1;endSize=30;startArrow=openThin;startFill=0;startSize=23;" parent="1" source="18" target="11" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" value="Patron" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="2500" y="2430" width="340" height="270" as="geometry"/>
+                    <mxGeometry x="2400" y="1880" width="340" height="270" as="geometry"/>
                 </mxCell>
                 <mxCell id="19" value="-patronName:String&#10;-patronID:String&#10;-contactNumber:String&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="18" vertex="1">
                     <mxGeometry y="26" width="340" height="74" as="geometry"/>
@@ -139,7 +139,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="47" style="edgeStyle=elbowEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;endArrow=diamondThin;endFill=0;endSize=22;startArrow=openThin;startFill=0;" parent="1" source="9" target="14" edge="1">
+                <mxCell id="47" style="edgeStyle=elbowEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1.011;entryY=0.048;entryDx=0;entryDy=0;endArrow=diamondThin;endFill=0;endSize=30;startArrow=openThin;startFill=0;entryPerimeter=0;startSize=23;" parent="1" source="9" target="17" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="48" style="edgeStyle=elbowEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;endSize=17;startArrow=open;startFill=0;startSize=17;" parent="1" source="21" target="15" edge="1">
@@ -157,7 +157,7 @@
                 <mxCell id="52" value="+ Session()           &#10;+ loginPage(): boolean&#10;+ homePage(): void     &#10;+ loginPageSelection(String): boolean &#10;+ setLoginPageSelection(): void &#10;+ getLoginPageSelection(): String &#10;+ homePageSelection(String): boolean &#10;+ setHomePageSelection(): void &#10;+ getHomePageSelection(): String &#10;+ setBrowseCatalogSelection(): void &#10;+ getBrowseCatalogSelection(): String &#10;+ setBorrowReturnSelection(): void &#10;+ getBorrowReturnSelection(): String &#10;+ setManageCatalogSelection(): void &#10;+ getManageCatalogSelection(): String &#10;+ borrow_returnPage(): void &#10;+ logout(userSession:String):void&#10;+ saveBookTitle(userSession:String):void&#10;+ saveBookIsbn(userSession:String):void&#10;+ saveBookAuthor(userSession:String):void&#10;+ saveBookPublisher(userSession:String):void&#10;+ saveBookYearPublished(userSession:String):void&#10;+ saveBookGenre(userSession:String):void&#10;+ saveBookAvailability(userSession:String):void&#10;+saveLoanList():void&#10;+saveArchiveListSize(size:int):void&#10;+saveArchiveList():void&#10;+getArchiveListSizeFromCatalog(userSession:String:int&#10;+ dispLoginPage(): void &#10;+ dispHomePage(): void &#10;+ dispBrowseCatalog(): void&#10;+ dispManageCatalog(): void&#10;+ dispBorrowReturn(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="49" vertex="1">
                     <mxGeometry y="178" width="320" height="492" as="geometry"/>
                 </mxCell>
-                <mxCell id="54" style="edgeStyle=orthogonalEdgeStyle;html=1;startArrow=none;startFill=0;endArrow=open;endFill=0;startSize=17;endSize=22;exitX=1.013;exitY=0.704;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="50" target="36" edge="1">
+                <mxCell id="54" style="edgeStyle=orthogonalEdgeStyle;html=1;startArrow=none;startFill=0;endArrow=open;endFill=0;startSize=17;endSize=22;exitX=1.013;exitY=0.704;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="50" edge="1" target="36">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="1600" y="1350" as="targetPoint"/>
                         <Array as="points">

@@ -223,10 +223,10 @@ public class Session
         saveBookGenre(userSession);
         saveBookAvailability(userSession);
         saveLoanList();
+        saveArchiveListSize(getArchiveListSizeFromCatalog(userSession));
         if(userSession.equals("1"))
         {
             saveArchiveList();
-            saveArchiveListSize(getArchiveListSizeFromCatalog(userSession));
         }
         
         UtilitiesForSystem.closeFile();
