@@ -97,9 +97,14 @@ public class HeadLibrarian extends User
             do
             {
                 catalog.dispArchiveList();
-                System.out.println("Book to add back to list: ");
+                System.out.println("Book to add back to list: (press \"back\" to return) ");
                 index = UtilitiesForSystem.reader.readLine();
-                if(!UtilitiesForSystem.allCharacterAreDigits(index))
+                if(index.equalsIgnoreCase("back"))
+                {
+                    UtilitiesForSystem.clearScreen();
+                    return;
+                }
+                else if(!UtilitiesForSystem.allCharacterAreDigits(index))
                 {
                     System.out.println("Please enter a digit.");
                     TimeUnit.MILLISECONDS.sleep(1000);
@@ -889,7 +894,7 @@ public class HeadLibrarian extends User
                 else
                 {
                     System.out.println("Invalid ISBN. ISBN must be in 13 digit format. \nExample 1: 978-1119803782\nExample 2: 9781119803782");
-                    TimeUnit.MILLISECONDS.sleep(1000);
+                    UtilitiesForSystem.pressEnterToContinue();
                 } 
             }
 

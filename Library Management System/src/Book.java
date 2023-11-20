@@ -11,13 +11,13 @@ public class Book implements Serializable
     private String bookTitle, bookIsbn, author, publisher, genre, bookAvailability;
     private int yearPublished;
 
-    //parameterized constructor
+    //parameterized constructor - [Edwin]
     public Book(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)
     {
         setDefaultDetail(bookTitle, bookIsbn, author, publisher, yearPublished, genre, bookAvailability);
     }
 
-    //USE THIS to add book
+    //USE THIS to add book - [Edwin] 
     public void setDefaultDetail(String bookTitle, String bookIsbn, String author, String publisher, int yearPublished, String genre, String bookAvailability)
     {
         this.bookTitle = bookTitle;
@@ -29,7 +29,7 @@ public class Book implements Serializable
         this.bookAvailability = bookAvailability;
     }
 
-
+    //
     public void setBookTitle(String bookTitle)
     {
         this.bookTitle = bookTitle;
